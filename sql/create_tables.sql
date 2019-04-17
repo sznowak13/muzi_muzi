@@ -1,17 +1,23 @@
-drop table if exists user_band;
+
 drop table if exists user_genre;
 drop table if exists user_profession;
 drop table if exists user_video;
 drop table if exists band_genre;
 drop table if exists private_messages;
 drop table if exists advert;
+drop table if exists user_band;
 drop table if exists users;
 drop table if exists role;
 drop table if exists band;
 drop table if exists genre;
 drop table if exists profession;
 drop table if exists videos;
+drop table if exists city;
 
+create table city (
+    city_id serial primary key,
+    name VARCHAR(50) not null
+)
 
 create table role (
     role_id serial primary key,
@@ -21,7 +27,7 @@ create table role (
 create table band (
     band_id serial primary key,
     name varchar(50) not null,
-    city varchar(50) not null,
+    city_id integer references city(city_id),
     year_founded date,
     photo varchar(255) default 'random_band.png',
     homepage varchar(100),
@@ -36,7 +42,7 @@ create table users (
     nickname varchar(30),
     email varchar(100) unique not null,
     password varchar(100) not null,
-    city varchar(40) not null,
+    city_id integer references city(city_id),
     photo_url varchar(255) default 'random_photo.png',
     description text
 );
@@ -45,9 +51,10 @@ create table private_messages (
     msg_id serial primary key,
     user_to integer references users (user_id) on delete cascade,
     user_from integer references users (user_id) on delete cascade,
-    sent_time timestamp default now(),
+    sent_time timestamp ,
     title varchar(100),
-    body text
+    body text,
+    read boolean default false
 );
 
 create table profession (
@@ -62,8 +69,13 @@ create table genre (
 
 create table advert (
     advert_id serial primary key,
-    user_id integer references users(user_id) on delete cascade,
-    description text not null
+    user_id integer references users(user_id) on delete cascade not null ,
+    band_id integer references band(band_id) on delete cascade,
+    title varchar(100) not null,
+    description text not null,
+    posted_on timestamp not null default now(),
+    profession_id integer references profession(prof_id) on delete cascade not null,
+    genre_id integer references genre(genre_id) on delete cascade
 );
 
 create table videos (

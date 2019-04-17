@@ -4,7 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.6 (muzi_muzi)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.6.5 virtualenv at ~/adv/muzi/muzi_muzi/venv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">

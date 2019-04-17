@@ -29,7 +29,7 @@ def generate_user_data() -> tuple:
     nickname = f"{first_name[:3]}{last_name[:3]}{random.randint(1000, 9999)}"
     password = generate_random_text_value(min_len=10, max_len=40)
     email = generate_email()
-    city = random.choice(cities)
+    city = random.randint(1, len(cities))
     desc = resources.get_description(random.randint(50, 200))
 
     return first_name, last_name, nickname, email, password, city, desc
@@ -42,9 +42,9 @@ def user_data_generator(amount):
 
 def generate_band_data() -> tuple:
     name = f"{random.choice(adjectives)} {random.choice(nouns)}"
-    city = random.choice(cities)
+    city = random.randint(1, len(cities))
     year_founded = datetime.date(random.randint(1990, 2019), random.randint(1,12), random.randint(1, 28))
-    homepage = f"http://{''.join(name.split(' ')).lower()}.{'-'.join(city.split()).lower()}.pl"
+    homepage = f"http://{''.join(name.split(' ')).lower()}.com.pl"
     description = resources.get_description(random.randint(20, 150))
 
     return name, city, year_founded, homepage, description
@@ -80,3 +80,8 @@ def band_user_tuple_generator(bands_ids, users_ids):
 def band_data_generator(amount):
     for _ in range(amount):
         yield generate_band_data()
+
+
+def city_data_generator(amount):
+    for i in range(amount):
+        yield (cities[i],)

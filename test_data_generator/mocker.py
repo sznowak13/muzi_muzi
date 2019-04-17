@@ -12,22 +12,27 @@ def main():
     users_to_generate = int(input("Input number of users to generate: "))
     bands_to_generate = int(input("Input number of bands to generate (Approx. half the users is best): "))
 
+    populate_cities(50)
     populate_users(users_to_generate)
     populate_bands(bands_to_generate)
     assign_users_to_bands()
 
 
 def populate_users(row_number):
-    statement = ("INSERT INTO users (first_name, last_name, nickname, email, password, city, description) "
+    statement = ("INSERT INTO users (first_name, last_name, nickname, email, password, city_id, description) "
                  "VALUES (%s, %s, %s, %s, %s, %s, %s);")
     populate_table("users", row_number, statement, generator.user_data_generator)
 
 
 def populate_bands(row_number):
-    statement = ("INSERT INTO band (name, city, year_founded, homepage, description) "
+    statement = ("INSERT INTO band (name, city_id, year_founded, homepage, description) "
                  "VALUES (%s, %s, %s, %s, %s);")
     populate_table("band", row_number, statement, generator.band_data_generator)
 
+def populate_cities(row_number):
+    statement = ("INSERT INTO city (name) "
+                 "VALUES (%s);")
+    populate_table("city", row_number, statement, generator.city_data_generator)
 
 def assign_users_to_bands():
     print("Assigning users to random bands...")
