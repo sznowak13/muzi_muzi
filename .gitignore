@@ -88,7 +88,9 @@ fabric.properties
 venv/
 test_data_generator/__pycache__/
 test_data_generator/connection/__pycache__/
-
+test_data_generator/connection/dburi.py
 .idea/vcs.xml
+.idea/misc.xml
+.idea/muzi_muzi.iml
 sql/.idea/
 

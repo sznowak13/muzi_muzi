@@ -27,3 +27,9 @@ def get_all_bands_ids(cursor):
 def get_all_users_ids(cursor):
     cursor.execute("SELECT user_id from users;")
     return cursor.fetchall()
+
+
+@db_execute
+def get_city_name_by_id(cursor, city_id):
+    cursor.execute("SELECT name FROM city where city_id = %s", (city_id,))
+    return cursor.fetchone()

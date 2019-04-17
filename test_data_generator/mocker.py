@@ -29,32 +29,28 @@ def populate_bands(row_number):
                  "VALUES (%s, %s, %s, %s, %s);")
     populate_table("band", row_number, statement, generator.band_data_generator)
 
+
 def populate_cities(row_number):
     statement = ("INSERT INTO city (name) "
                  "VALUES (%s);")
     populate_table("city", row_number, statement, generator.city_data_generator)
 
+
 def assign_users_to_bands():
-    print("Assigning users to random bands...")
+    statement = "INSERT INTO user_band VALUES (%s, %s);"
     bands_ids = db_manager.get_all_bands_ids()
     users_ids = db_manager.get_all_users_ids()
-    sql = []
-    query_params = ()
-    for band_id in bands_ids:
-        for member in generator.generate_random_members(users_ids):
-            sql.append("INSERT INTO user_band VALUES (%s, %s);")
-            query_params += (member, band_id)
-    db_manager.execute_with_params("".join(sql), query_params)
+    populate_table("user_band", bands_ids, statement, generator.band_user_tuple_generator, gnrt_sources=[users_ids])
 
 
-def populate_table(table_name, row_number, statement: str, param_generator, to_clear: bool = True):
+def populate_table(table_name, row_number, statement: str, param_gnrt, to_clear: bool = True, gnrt_sources: list = None):
     print(f"-- Populating {table_name} --")
     if to_clear:
         print(f"Clearing the data from {table_name}...")
         db_manager.clear_table(table_name)
 
     print("Preparing sql...")
-    sql, params = sql_gen.generate_sql_with_params(row_number, statement, param_generator)
+    sql, params = sql_gen.generate_sql_with_params(row_number, statement, param_gnrt, gnrt_sources)
     print("Executing inserts...")
     db_manager.execute_with_params(sql, params)
 

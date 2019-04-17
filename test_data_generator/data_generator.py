@@ -2,6 +2,7 @@ import random
 from string import ascii_lowercase, ascii_uppercase, ascii_letters
 import datetime
 import test_data_generator.resources_handler as resources
+from test_data_generator.db_manager import get_city_name_by_id
 
 casing_map = {
     "mixed": ascii_letters,
@@ -16,7 +17,7 @@ adjectives = resources.get_adjectives()
 nouns = resources.get_nouns()
 
 
-def generate_user_data() -> tuple:
+def generate_user_data(cities_ids) -> tuple:
     """
     Generates data for a random user.
     Creates tuple of values for every column of the database table users
@@ -29,25 +30,26 @@ def generate_user_data() -> tuple:
     nickname = f"{first_name[:3]}{last_name[:3]}{random.randint(1000, 9999)}"
     password = generate_random_text_value(min_len=10, max_len=40)
     email = generate_email()
-    city = random.randint(1, len(cities))
+    city_id = random.choice(cities_ids)
     desc = resources.get_description(random.randint(50, 200))
 
-    return first_name, last_name, nickname, email, password, city, desc
+    return first_name, last_name, nickname, email, password, city_id, desc
 
 
-def user_data_generator(amount):
+def user_data_generator(amount, cities_ids):
     for _ in range(amount):
-        yield generate_user_data()
+        yield generate_user_data(cities_ids)
 
 
-def generate_band_data() -> tuple:
+def generate_band_data(cities_ids) -> tuple:
     name = f"{random.choice(adjectives)} {random.choice(nouns)}"
-    city = random.randint(1, len(cities))
-    year_founded = datetime.date(random.randint(1990, 2019), random.randint(1,12), random.randint(1, 28))
-    homepage = f"http://{''.join(name.split(' ')).lower()}.com.pl"
+    city_id = random.choice(cities_ids)
+    year_founded = datetime.date(random.randint(1990, 2019), random.randint(1, 12), random.randint(1, 28))
+    city_name = get_city_name_by_id(city_id)
+    homepage = f"http://{''.join(name.split(' ')).lower()}.{''.join(city_name.split(' ')).lower()}.pl"
     description = resources.get_description(random.randint(20, 150))
 
-    return name, city, year_founded, homepage, description
+    return name, city_id, year_founded, homepage, description
 
 
 def generate_email():
@@ -77,9 +79,9 @@ def band_user_tuple_generator(bands_ids, users_ids):
             yield member, band_id
 
 
-def band_data_generator(amount):
+def band_data_generator(amount, cities_ids):
     for _ in range(amount):
-        yield generate_band_data()
+        yield generate_band_data(cities_ids)
 
 
 def city_data_generator(amount):
