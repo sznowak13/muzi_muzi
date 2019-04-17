@@ -1,0 +1,50 @@
+Boleslawiec
+Glogow
+Jelenia Gora
+Wroclaw
+Bydgoszcz
+Rypin
+Lodz
+Tomaszow Mazowiecki
+Zielona Gora
+Lublin
+Torun
+Gorzow Wielkopolski
+Krakow
+Slomniki
+Tarnow
+Lomianki
+Milanowek
+Plock
+Pultusk
+Warsaw
+Wolomin
+Wawelno
+Lubno
+Ropczyce
+Rzeszow
+Stalowa Wola
+Bialystok
+Lomza
+Suwalki
+Chojnice
+Gdansk
+Gdask
+Gdynia
+Bielsko-Biala
+Czestochowa
+Gliwice
+Katowice
+Olsztyn
+Tychy
+Zabrze
+Zawiercie
+Kielce
+Elblag
+Elk
+Olsztyn
+Boleslawiec
+Gulcz
+Poznan
+Koszalin
+Szczecin
