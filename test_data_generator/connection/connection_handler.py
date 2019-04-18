@@ -1,7 +1,12 @@
+from functools import wraps
+
 import psycopg2
 
-from functools import wraps
-from test_data_generator.connection.dburi import DBURI
+try:
+    from connection.dburi import DBURI
+except ImportError as e:
+    print("No database credentials found! Be sure to create your own DBURI class in connection module.")
+    raise e
 
 
 def get_connection(db_uri: str):
