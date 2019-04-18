@@ -1,4 +1,4 @@
-from test_data_generator.connection.connection_handler import db_execute
+from connection.connection_handler import db_execute
 
 
 @db_execute
@@ -32,4 +32,22 @@ def get_all_users_ids(cursor):
 @db_execute
 def get_city_name_by_id(cursor, city_id):
     cursor.execute("SELECT name FROM city where city_id = %s", (city_id,))
-    return cursor.fetchone()
+    return cursor.fetchone()[0]
+
+
+@db_execute
+def get_all_cities_ids(cursor):
+    cursor.execute("SELECT city_id from city;")
+    return cursor.fetchall()
+
+
+@db_execute
+def get_all_genres_ids(cursor):
+    cursor.execute("SELECT genre_id from genre;")
+    return cursor.fetchall()
+
+
+@db_execute
+def get_all_professions_ids(cursor):
+    cursor.execute("SELECT prof_id FROM profession;")
+    return cursor.fetchall()

@@ -1,8 +1,9 @@
-def generate_sql_with_params(row_amount: int, statement: str, param_generator, gnrt_sources):
+def generate_sql_with_params(statement: str, param_generator, gnrt_sources: list):
+    if gnrt_sources is None:
+        gnrt_sources = []
     sql = []
     query_params = ()
-    generator = param_generator(row_amount, gnrt_sources) if gnrt_sources else param_generator(row_amount)
-    for param in generator:
+    for param in param_generator(*gnrt_sources):
         sql.append(statement)
         query_params += param
     return "".join(sql), query_params

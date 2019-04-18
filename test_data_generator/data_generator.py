@@ -1,8 +1,9 @@
+import datetime
 import random
 from string import ascii_lowercase, ascii_uppercase, ascii_letters
-import datetime
-import test_data_generator.resources_handler as resources
-from test_data_generator.db_manager import get_city_name_by_id
+
+import resources_handler as resources
+from db_manager import get_city_name_by_id
 
 casing_map = {
     "mixed": ascii_letters,
@@ -69,13 +70,13 @@ def generate_random_text_value(min_len: int, max_len: int, casing: str = "mixed"
     return "".join(letters)
 
 
-def generate_random_members(users_ids):
-    return [random.choice(users_ids) for _ in range(random.randint(1, 4))]
+def generate_random_ids(ids, min_num=1, max_num=4):
+    return [random.choice(ids) for _ in range(random.randint(min_num, max_num))]
 
 
 def band_user_tuple_generator(bands_ids, users_ids):
     for band_id in bands_ids:
-        for member in generate_random_members(users_ids):
+        for member in generate_random_ids(users_ids):
             yield member, band_id
 
 
@@ -87,3 +88,21 @@ def band_data_generator(amount, cities_ids):
 def city_data_generator(amount):
     for i in range(amount):
         yield (cities[i],)
+
+
+def user_genre_data_generator(users_ids, genres_ids):
+    for user_id in users_ids:
+        for genre_id in generate_random_ids(genres_ids, max_num=3):
+            yield user_id, genre_id
+
+
+def band_genre_data_generator(bands_ids, genre_ids):
+    for band_id in bands_ids:
+        for genre_id in generate_random_ids(genre_ids, max_num=1):
+            yield band_id, genre_id
+
+
+def user_prof_data_generator(user_ids, prof_ids):
+    for user_id in user_ids:
+        for prof_id in generate_random_ids(prof_ids, max_num=2):
+            yield user_id, prof_id
