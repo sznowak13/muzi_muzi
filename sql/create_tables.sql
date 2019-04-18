@@ -1,6 +1,9 @@
-drop view if exists user_messages;
-drop view if exists band_members;
-drop view if exists advert_data;
+drop view if exists user_messages_view;
+drop view if exists band_members_view;
+drop view if exists advert_view;
+drop view if exists user_list_view;
+drop view if exists user_profile_view;
+drop view if exists advert_list_view;
 
 drop table if exists user_genre;
 drop table if exists user_profession;
