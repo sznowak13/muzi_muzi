@@ -4,7 +4,6 @@ drop view if exists advert_data;
 
 drop table if exists user_genre;
 drop table if exists user_profession;
-drop table if exists user_video;
 drop table if exists band_genre;
 drop table if exists private_messages;
 drop table if exists advert;
@@ -20,7 +19,7 @@ drop table if exists city;
 create table city (
     city_id serial primary key,
     name VARCHAR(50) not null
-)
+);
 
 create table role (
     role_id serial primary key,
@@ -37,6 +36,11 @@ create table band (
     description text
 );
 
+create table videos (
+    video_id serial primary key,
+    url varchar(255) not null
+);
+
 create table users (
     user_id serial primary key,
     role_id integer references role(role_id) on delete cascade default 1,
@@ -47,6 +51,7 @@ create table users (
     password varchar(100) not null,
     city_id integer references city(city_id),
     photo_url varchar(255) default 'random_photo.png',
+    video_id integer references videos (video_id) on delete cascade,
     description text
 );
 
@@ -81,11 +86,6 @@ create table advert (
     genre_id integer references genre(genre_id) on delete cascade
 );
 
-create table videos (
-    video_id serial primary key,
-    url varchar(255) not null
-);
-
 create table user_profession (
     user_id integer references users(user_id) on delete cascade,
     prof_id integer references profession(prof_id) on delete cascade
@@ -99,11 +99,6 @@ create table user_band (
 create table user_genre (
     user_id integer references users(user_id) on delete cascade,
     genre_id integer references genre(genre_id) on delete cascade
-);
-
-create table user_video (
-    user_id integer references users(user_id) on delete cascade,
-    video_id integer references videos(video_id) on delete cascade
 );
 
 create table band_genre (
