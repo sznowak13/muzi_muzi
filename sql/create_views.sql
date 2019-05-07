@@ -32,10 +32,10 @@ group by b.band_id;
 
 create view advert_view as (
     select first_name,
-           c.name city,
+           c.name     city,
            a.title,
            a.description,
-           g.name     ganre,
+           g.name     genre,
            p.name     profession,
            case
                when a.band_id is not null then (
@@ -43,7 +43,7 @@ create view advert_view as (
                    from band b
                             join advert a2 on b.band_id = a2.band_id
                )
-               else '---'
+               else null
                end as band_name
     from users
              join advert a on users.user_id = a.user_id
@@ -53,11 +53,12 @@ create view advert_view as (
 );
 
 create view advert_list_view as (
-     select case when a.band_id is not null then 'band advert'
-           else 'musician advert'
-           end as advert_type,
+    select case
+               when a.band_id is not null then 'band advert'
+               else 'musician advert'
+               end as advert_type,
            first_name,
-           c.name city,
+           c.name     city,
            a.title,
            a.posted_on,
            g.name     ganre,
@@ -68,7 +69,7 @@ create view advert_list_view as (
                    from band b
                             join advert a2 on b.band_id = a2.band_id
                )
-               else '---'
+               else null
                end as band_name
     from users
              join advert a on users.user_id = a.user_id
@@ -78,83 +79,44 @@ create view advert_list_view as (
 );
 
 create view user_list_view as (
-    with user_proffesions as (
-        select u2.user_id as id, string_agg(p2.name, ', ') as prof
-        from profession p2
-                 join user_profession up2 on p2.prof_id = up2.prof_id
-                 join users u2 on up2.user_id = u2.user_id
-        group by u2.user_id
-    ),
-         user_genres as (
-             select u3.user_id as id, string_agg(g2.name, ', ') as genres
-             from genre g2
-                      join user_genre ug2 on g2.genre_id = ug2.genre_id
-                      join users u3 on ug2.user_id = u3.user_id
-             group by u3.user_id
-         )
-
     select u.user_id,
            u.first_name,
            u.email,
            u.photo_url,
-           c.name                    city,
-           (select prof
-            from user_proffesions
-            where u.user_id = id) as profession,
-           (select genres
-            from user_genres
-            where u.user_id = id) as genre
+           c.name                               city,
+           string_agg(distinct p.name, ', ') as prof,
+           string_agg(distinct g.name, ', ') as genre
     from users u
              join city c on u.city_id = c.city_id
+             join user_profession up on u.user_id = up.user_id
+             join profession p on up.prof_id = p.prof_id
+             join user_genre ug on u.user_id = ug.user_id
+             join genre g on ug.genre_id = g.genre_id
     group by u.first_name, u.email, u.photo_url, c.name, u.user_id
 );
 
 create view user_profile_view as (
-        with user_proffesions as (
-        select u2.user_id as id, string_agg(p2.name, ', ') as prof
-        from profession p2
-                 join user_profession up2 on p2.prof_id = up2.prof_id
-                 join users u2 on up2.user_id = u2.user_id
-        group by u2.user_id
-    ),
-         user_genres as (
-             select u3.user_id as id, string_agg(g2.name, ', ') as genres
-             from genre g2
-                      join user_genre ug2 on g2.genre_id = ug2.genre_id
-                      join users u3 on ug2.user_id = u3.user_id
-             group by u3.user_id
-         ),
-         user_bands as (
-             select u4.user_id as id, string_agg(b2.name, ', ') as bands
-             from band b2
-             join user_band ub2 on b2.band_id = ub2.band_id
-             join users u4 on ub2.user_id = u4.user_id
-             group by u4.user_id
-         ),
-         user_video as (
-             select u5.user_id as id, v.url as video
-             from videos v
-             join users u5 on u5.video_id = v.video_id
-         )
     select u.user_id,
            u.first_name,
            u.last_name,
            u.nickname,
            u.email,
            u.description,
-           u.photo_url,
-           c.name                    city,
-           (select prof
-            from user_proffesions
-            where u.user_id = id) as profession,
-           (select genres
-            from user_genres
-            where u.user_id = id) as genre,
-        (select bands from user_bands
-        where  u.user_id = id) as bands,
-        (select video from user_video
-        where u.user_id = id) as video
+           u.photo_url                          photo,
+           c.name                               city,
+           (select v.url from videos v where u.video_id = v.video_id)
+           video,
+           string_agg(distinct p.name, ', ') as prof,
+           string_agg(distinct g.name, ', ') as genre,
+           (select string_agg(b.name, ', ')
+                     from band b
+                              join user_band ub on b.band_id = ub.band_id
+                     where ub.user_id = u.user_id)                      as bands
     from users u
              join city c on u.city_id = c.city_id
-    group by u.first_name, u.email, u.photo_url, c.name, u.user_id
-)
+             join user_profession up on u.user_id = up.user_id
+             join profession p on up.prof_id = p.prof_id
+             join user_genre ug on u.user_id = ug.user_id
+             join genre g on ug.genre_id = g.genre_id
+    group by u.user_id, u.first_name, u.email, u.photo_url, c.name, video
+);
