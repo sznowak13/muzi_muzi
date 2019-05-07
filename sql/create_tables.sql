@@ -39,6 +39,8 @@ create table band (
     description text
 );
 
+create index on band (city_id);
+
 create table videos (
     video_id serial primary key,
     url varchar(255) not null
@@ -58,6 +60,9 @@ create table users (
     description text
 );
 
+create index on users (role_id);
+create index on users (city_id);
+
 create table private_messages (
     msg_id serial primary key,
     user_to integer references users (user_id) on delete cascade,
@@ -67,6 +72,9 @@ create table private_messages (
     body text,
     read boolean default false
 );
+
+create index on private_messages (user_to);
+create index on private_messages (user_from);
 
 create table profession (
     prof_id serial primary key,
@@ -89,25 +97,42 @@ create table advert (
     genre_id integer references genre(genre_id) on delete cascade
 );
 
+create index on advert (user_id);
+create index on advert (band_id);
+create index on advert (profession_id);
+create index on advert (genre_id);
+
 create table user_profession (
     user_id integer references users(user_id) on delete cascade,
     prof_id integer references profession(prof_id) on delete cascade
 );
+
+create index on user_profession (user_id);
+create index on user_profession (prof_id);
 
 create table user_band (
     user_id integer references users(user_id) on delete cascade,
     band_id integer references band(band_id) on delete cascade
 );
 
+create index on user_band (user_id);
+create index on user_band (band_id);
+
 create table user_genre (
     user_id integer references users(user_id) on delete cascade,
     genre_id integer references genre(genre_id) on delete cascade
 );
 
+create index on user_genre (user_id);
+create index on user_genre (genre_id);
+
 create table band_genre (
     band_id integer references band(band_id) on delete cascade,
     genre_id integer references genre(genre_id) on delete cascade
 );
+
+create index on band_genre (band_id);
+create index on band_genre (genre_id);
 
 insert into role (name) values ('USER');
 insert into role (name) values ('ADMIN');
