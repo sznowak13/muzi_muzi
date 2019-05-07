@@ -93,4 +93,5 @@ test_data_generator/connection/dburi.py
 .idea/misc.xml
 .idea/muzi_muzi.iml
 sql/.idea/
+sql/dont_executeXD.sql
 
