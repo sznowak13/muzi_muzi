@@ -14,8 +14,8 @@ def get_connection(db_uri: str):
         conn = psycopg2.connect(db_uri)
         conn.autocommit = True
         return conn
-    except psycopg2.DatabaseError as e:
-        print("Cannot connect to database: " + e)
+    except psycopg2.DatabaseError as err:
+        print("Cannot connect to database: " + str(err))
 
 
 def db_execute(func):
