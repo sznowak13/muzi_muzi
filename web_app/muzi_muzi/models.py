@@ -143,3 +143,49 @@ class Videos(models.Model):
     class Meta:
         managed = False
         db_table = 'videos'
+
+
+#  --- Views ---
+
+class AdvertListView(models.Model):
+    advert_type = models.TextField()
+    first_name = models.CharField(max_length=40)
+    city = models.CharField(max_length=50)
+    title = models.CharField(max_length=100)
+    posted_on = models.DateTimeField(primary_key=True)
+    genre = models.CharField(max_length=50)
+    profession = models.CharField(max_length=50)
+    band_name = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = "advert_list_view"
+
+
+class AdvertView(models.Model):
+    advert_id = models.IntegerField(primary_key=True)
+    first_name = models.CharField(max_length=40)
+    city = models.CharField(max_length=50)
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    genre = models.CharField(max_length=50)
+    profession = models.CharField(max_length=50)
+    band_name = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = "advert_view"
+
+
+class UserListView(models.Model):
+    user_id = models.IntegerField(primary_key=True)
+    first_name = models.CharField(max_length=40)
+    email = models.CharField(max_length=100)
+    photo_url = models.CharField(max_length=255)
+    city = models.CharField(max_length=50)
+    prof = models.TextField()
+    genre = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = "user_list_view"
