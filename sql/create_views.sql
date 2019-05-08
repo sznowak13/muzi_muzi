@@ -17,14 +17,14 @@ create view user_messages_view as (
                       join users u3 on pm.user_from = u3.user_id
          )
 
-    select email_from, email_to, pm.title, pm.msg_id message, pm.read
+    select email_from, email_to, pm.title, pm.msg_id, pm.read
     from private_messages pm,
          emails_from,
          emails_to
 );
 
 create view band_members_view as
-select b.name, string_agg(u.first_name || ' ' || u.last_name, ', ') as members
+select b.band_id, b.name, string_agg(u.first_name || ' ' || u.last_name, ', ') as members
 from band b
          join user_band ub on b.band_id = ub.band_id
          join users u on ub.user_id = u.user_id
@@ -54,7 +54,8 @@ create view advert_view as (
 );
 
 create view advert_list_view as (
-    select case
+    select a.advert_id,
+           case
                when a.band_id is not null then 'band advert'
                else 'musician advert'
                end as advert_type,
