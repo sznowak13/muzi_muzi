@@ -32,6 +32,7 @@ group by b.band_id;
 
 create view advert_view as (
     select first_name,
+           a.advert_id as advert_id,
            c.name     city,
            a.title,
            a.description,
@@ -61,7 +62,7 @@ create view advert_list_view as (
            c.name     city,
            a.title,
            a.posted_on,
-           g.name     ganre,
+           g.name     genre,
            p.name     profession,
            case
                when a.band_id is not null then (
