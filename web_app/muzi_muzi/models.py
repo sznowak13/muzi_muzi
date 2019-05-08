@@ -148,11 +148,12 @@ class Videos(models.Model):
 #  --- Views ---
 
 class AdvertListView(models.Model):
+    advert_id = models.IntegerField(primary_key=True)
     advert_type = models.TextField()
     first_name = models.CharField(max_length=40)
     city = models.CharField(max_length=50)
     title = models.CharField(max_length=100)
-    posted_on = models.DateTimeField(primary_key=True)
+    posted_on = models.DateTimeField()
     genre = models.CharField(max_length=50)
     profession = models.CharField(max_length=50)
     band_name = models.CharField(max_length=100)
@@ -177,6 +178,16 @@ class AdvertView(models.Model):
         db_table = "advert_view"
 
 
+class BandMemberView(models.Model):
+    band_id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=50)
+    members = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = "band_members_view"
+
+
 class UserListView(models.Model):
     user_id = models.IntegerField(primary_key=True)
     first_name = models.CharField(max_length=40)
@@ -189,3 +200,34 @@ class UserListView(models.Model):
     class Meta:
         managed = False
         db_table = "user_list_view"
+
+
+class UserMessageView(models.Model):
+    msg_id = models.IntegerField(primary_key=True)
+    email_from = models.CharField(max_length=100)
+    email_to = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    read = models.BooleanField()
+
+    class Meta:
+        managed = False
+        db_table = 'user_message_view'
+
+
+class UserProfileView(models.Model):
+    user_id = models.IntegerField(primary_key=True)
+    first_name = models.CharField(max_length=40)
+    last_name = models.CharField(max_length=50)
+    nickname = models.CharField(max_length=30)
+    email = models.CharField(max_length=100)
+    description = models.TextField()
+    photo = models.CharField(max_length=255)
+    city = models.CharField(max_length=50)
+    video = models.CharField(max_length=255)
+    prof = models.TextField()
+    genre = models.TextField()
+    bands = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'user_profile_view'
