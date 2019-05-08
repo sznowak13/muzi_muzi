@@ -86,12 +86,10 @@ fabric.properties
 # End of https://www.gitignore.io/api/pycharm
 
 venv/
-test_data_generator/__pycache__/
-test_data_generator/connection/__pycache__/
 test_data_generator/connection/dburi.py
 .idea/vcs.xml
 .idea/misc.xml
 .idea/muzi_muzi.iml
 sql/.idea/
 sql/dont_executeXD.sql
-
+__pycache__/
