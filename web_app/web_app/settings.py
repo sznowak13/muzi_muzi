@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from .DBURI import DBURI
+
+# Check for db credentials
+
+if not (DBURI.host and DBURI.password and DBURI.username and DBURI.db_name):
+    raise EnvironmentError(f"Environment variables are not set! Please configure your DB credentials")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -76,7 +82,12 @@ WSGI_APPLICATION = 'web_app.wsgi.application'
 
 DATABASES = {
     'default': {
-
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': DBURI.db_name,
+        'USER': DBURI.username,
+        'PASSWORD': DBURI.password,
+        'HOST': DBURI.host,
+        'PORT': '5432',
     }
 }
 
