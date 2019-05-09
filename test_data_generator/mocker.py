@@ -24,8 +24,8 @@ def main():
 
 
 def populate_users(row_number, cities_ids):
-    statement = ("INSERT INTO users (first_name, last_name, nickname, email, password, city_id, description) "
-                 "VALUES (%s, %s, %s, %s, %s, %s, %s);")
+    statement = ("INSERT INTO users (first_name, last_name, username, email, password, city_id, description, is_superuser, is_staff, is_active, date_joined) "
+                 "VALUES (%s, %s, %s, %s, %s, %s, %s, FALSE, FALSE, TRUE, %s);")
     populate_table("users", statement, generator.user_data_generator, gnrt_sources=[row_number, cities_ids])
 
 

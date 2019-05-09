@@ -33,8 +33,9 @@ def generate_user_data(cities_ids) -> tuple:
     email = generate_email()
     city_id = random.choice(cities_ids)
     desc = resources.get_description(random.randint(50, 200))
+    date_joined = datetime.datetime.now()
 
-    return first_name, last_name, nickname, email, password, city_id, desc
+    return first_name, last_name, nickname, email, password, city_id, desc, date_joined
 
 
 def user_data_generator(amount, cities_ids):
