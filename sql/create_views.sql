@@ -27,7 +27,7 @@ create view band_members_view as
 select b.band_id, b.name, string_agg(u.first_name || ' ' || u.last_name, ', ') as members
 from band b
          join user_band ub on b.band_id = ub.band_id
-         join users u on ub.user_id = u.user_id
+         join users u on ub.users_id = u.user_id
 group by b.band_id;
 
 create view advert_view as (
@@ -90,9 +90,9 @@ create view user_list_view as (
            string_agg(distinct g.name, ', ') as genre
     from users u
              join city c on u.city_id = c.city_id
-             join user_profession up on u.user_id = up.user_id
-             join profession p on up.prof_id = p.prof_id
-             join user_genre ug on u.user_id = ug.user_id
+             join users_professions up on u.user_id = up.users_id
+             join profession p on up.profession_id = p.prof_id
+             join users_genres ug on u.user_id = ug.users_id
              join genre g on ug.genre_id = g.genre_id
     group by u.first_name, u.email, u.photo_url, c.name, u.user_id
 );
@@ -101,7 +101,7 @@ create view user_profile_view as (
     select u.user_id,
            u.first_name,
            u.last_name,
-           u.nickname,
+           u.username,
            u.email,
            u.description,
            u.photo_url                          photo,
@@ -113,12 +113,12 @@ create view user_profile_view as (
            (select string_agg(b.name, ', ')
                      from band b
                               join user_band ub on b.band_id = ub.band_id
-                     where ub.user_id = u.user_id)                      as bands
+                     where ub.users_id = u.user_id)                      as bands
     from users u
              join city c on u.city_id = c.city_id
-             join user_profession up on u.user_id = up.user_id
-             join profession p on up.prof_id = p.prof_id
-             join user_genre ug on u.user_id = ug.user_id
+             join users_professions up on u.user_id = up.users_id
+             join profession p on up.profession_id = p.prof_id
+             join users_genres ug on u.user_id = ug.users_id
              join genre g on ug.genre_id = g.genre_id
     group by u.user_id, u.first_name, u.email, u.photo_url, c.name, video
 );

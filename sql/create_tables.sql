@@ -5,19 +5,19 @@ drop view if exists user_list_view;
 drop view if exists user_profile_view;
 drop view if exists advert_list_view;
 
-drop table if exists user_genre;
-drop table if exists user_profession;
-drop table if exists band_genre;
+drop table if exists users_genres;
+drop table if exists users_professions;
+drop table if exists bands_genres;
 drop table if exists private_messages;
 drop table if exists advert;
-drop table if exists user_band;
+drop table if exists users_bands;
 drop table if exists users;
 drop table if exists role;
 drop table if exists band;
 drop table if exists genre;
 drop table if exists profession;
-drop table if exists videos;
 drop table if exists city;
+drop table if exists videos;
 
 create table city (
     city_id serial primary key,
@@ -51,7 +51,7 @@ create table users (
     role_id integer references role(role_id) on delete cascade default 1,
     first_name varchar(40),
     last_name varchar(50),
-    nickname varchar(30),
+    username varchar(30),
     email varchar(100) unique not null,
     password varchar(100) not null,
     city_id integer references city(city_id),
@@ -102,37 +102,37 @@ create index on advert (band_id);
 create index on advert (profession_id);
 create index on advert (genre_id);
 
-create table user_profession (
+create table users_professions (
     user_id integer references users(user_id) on delete cascade,
     prof_id integer references profession(prof_id) on delete cascade
 );
 
-create index on user_profession (user_id);
-create index on user_profession (prof_id);
+create index on users_professions (user_id);
+create index on users_professions (prof_id);
 
-create table user_band (
+create table users_bands (
     user_id integer references users(user_id) on delete cascade,
     band_id integer references band(band_id) on delete cascade
 );
 
-create index on user_band (user_id);
-create index on user_band (band_id);
+create index on users_bands (user_id);
+create index on users_bands (band_id);
 
-create table user_genre (
+create table users_genres (
     user_id integer references users(user_id) on delete cascade,
     genre_id integer references genre(genre_id) on delete cascade
 );
 
-create index on user_genre (user_id);
-create index on user_genre (genre_id);
+create index on users_genres (user_id);
+create index on users_genres (genre_id);
 
-create table band_genre (
+create table bands_genres (
     band_id integer references band(band_id) on delete cascade,
     genre_id integer references genre(genre_id) on delete cascade
 );
 
-create index on band_genre (band_id);
-create index on band_genre (genre_id);
+create index on bands_genres (band_id);
+create index on bands_genres (genre_id);
 
 insert into role (name) values ('USER');
 insert into role (name) values ('ADMIN');
