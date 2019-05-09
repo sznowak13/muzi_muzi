@@ -86,8 +86,8 @@ def band_data_generator(amount, cities_ids):
         yield generate_band_data(cities_ids)
 
 
-def city_data_generator(amount):
-    for i in range(amount):
+def city_data_generator():
+    for i in range(len(cities)):
         yield (cities[i],)
 
 
