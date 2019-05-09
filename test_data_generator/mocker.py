@@ -8,6 +8,7 @@ def main():
 
     users_to_generate = int(input("Input number of users to generate: "))
     bands_to_generate = int(input("Input number of bands to generate (Approx. half the users is best): "))
+    adverts_to_generate = int(input("Input number of adverts to create: "))
 
     populate_cities()
     profession_ids = db_manager.get_all_professions_ids()
@@ -21,18 +22,20 @@ def main():
     bands_ids = db_manager.get_all_bands_ids()
     assign_genres_to_bands(bands_ids, genres_ids)
     assign_users_to_bands(bands_ids, users_ids)
+    populate_adverts(adverts_to_generate, profession_ids, users_ids)
 
 
 def populate_users(row_number, cities_ids):
-    statement = ("INSERT INTO users (first_name, last_name, username, email, password, city_id, description, is_superuser, is_staff, is_active, date_joined) "
-                 "VALUES (%s, %s, %s, %s, %s, %s, %s, FALSE, FALSE, TRUE, %s);")
+    statement = (
+        "INSERT INTO users (first_name, last_name, username, email, password, city_id, description, is_superuser, is_staff, is_active, date_joined) "
+        "VALUES (%s, %s, %s, %s, %s, %s, %s, FALSE, FALSE, TRUE, %s);")
     populate_table("users", statement, generator.user_data_generator, gnrt_sources=[row_number, cities_ids])
 
 
 def populate_bands(row_number, cities_ids):
     statement = ("INSERT INTO band (name, city_id, year_founded, homepage, description) "
                  "VALUES (%s, %s, %s, %s, %s);")
-    
+
     populate_table("band", statement, generator.band_data_generator, gnrt_sources=[row_number, cities_ids])
 
 
@@ -40,6 +43,16 @@ def populate_cities():
     statement = ("INSERT INTO city (name) "
                  "VALUES (%s);")
     populate_table("city", statement, generator.city_data_generator)
+
+
+def populate_adverts(amount, prof_ids, user_ids):
+    statement = ("INSERT INTO advert (title, description, posted_on, band_id, genre_id, profession_id, user_id) "
+                 "VALUES (%s, %s, %s, %s, %s, %s, %s);")
+    populate_table("advert",
+                   statement, generator.advert_data_generator,
+                   gnrt_sources=[
+                       amount, prof_ids, user_ids
+                   ])
 
 
 def assign_users_to_bands(bands_ids, users_ids):
@@ -59,7 +72,8 @@ def assign_genres_to_bands(bands_ids, genres_ids):
 
 def assign_profession_to_users(users_ids, prof_ids):
     statement = "INSERT INTO users_professions (users_id, profession_id) VALUES (%s, %s);"
-    populate_table("users_professions", statement, generator.user_prof_data_generator, gnrt_sources=[users_ids, prof_ids])
+    populate_table("users_professions", statement, generator.user_prof_data_generator,
+                   gnrt_sources=[users_ids, prof_ids])
 
 
 def populate_table(table_name, statement: str, param_gnrt, clear: bool = True, gnrt_sources: list = None):

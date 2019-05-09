@@ -3,8 +3,12 @@ import random
 from string import ascii_lowercase, ascii_uppercase, ascii_letters
 
 import resources_handler as resources
-from db_manager import get_city_name_by_id
-
+from db_manager import (
+    get_city_name_by_id, get_genre_by_band_id,
+    get_band_by_user_id, get_profession_name_by_id,
+    get_genre_by_user_id, get_profession_by_user_id,
+    get_username_by_id
+)
 casing_map = {
     "mixed": ascii_letters,
     "upper": ascii_uppercase,
@@ -107,3 +111,33 @@ def user_prof_data_generator(user_ids, prof_ids):
     for user_id in user_ids:
         for prof_id in generate_random_ids(prof_ids, max_num=3):
             yield user_id, prof_id
+
+
+def advert_data_generator(amount, prof_ids, user_ids):
+    for _ in range(amount):
+        if random.random() < 0.5:
+            yield generate_band_advert_data(prof_ids, user_ids)
+        else:
+            yield generate_musician_advert_data(user_ids)
+
+
+def generate_band_advert_data(prof_ids, user_ids):
+    user_posting = random.choice(user_ids)
+    print(user_posting)
+    band_id, band_name = get_band_by_user_id(user_posting)
+    genre_id, genre_name = get_genre_by_band_id(band_id)
+    profession_searched = random.choice(prof_ids)
+    prof_name = get_profession_name_by_id(profession_searched)
+    title = f"{band_name} ({genre_name}) looking for {prof_name}"
+    description = resources.get_description(100)
+    return title, description, datetime.datetime.now(), band_id, genre_id, profession_searched, user_posting
+
+
+def generate_musician_advert_data(user_ids):
+    user_posting = random.choice(user_ids)
+    username = get_username_by_id(user_posting)
+    genre_id, genre_name = get_genre_by_user_id(user_posting)
+    prof_id, prof_name = get_profession_by_user_id(user_posting)
+    title = f"{username} ({prof_name}) looking for band playing in {genre_name}"
+    description = resources.get_description(60)
+    return title, description, datetime.datetime.now(), None, genre_id, prof_id, user_posting

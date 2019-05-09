@@ -51,3 +51,58 @@ def get_all_genres_ids(cursor):
 def get_all_professions_ids(cursor):
     cursor.execute("SELECT prof_id FROM profession;")
     return cursor.fetchall()
+
+
+@db_execute
+def get_genre_by_band_id(cursor, band_id):
+    cursor.execute(("select g.genre_id, g.name "
+                    "from band b "
+                    "join band_genre bg on b.band_id = bg.band_id "
+                    "join genre g on bg.genre_id = g.genre_id "
+                    "where b.band_id = %s;"), (band_id,))
+    return cursor.fetchone()
+
+
+@db_execute
+def get_genre_by_user_id(cursor, user_id):
+    cursor.execute(("select g.genre_id, g.name "
+                    "from users u "
+                    "join users_genres ug on u.user_id = ug.users_id "
+                    "join genre g on ug.genre_id = g.genre_id "
+                    "where u.user_id = %s;"), (user_id,))
+    return cursor.fetchone()
+
+
+@db_execute
+def get_band_by_user_id(cursor, user_id):
+    cursor.execute(("select b.band_id, b.name "
+                    "from users u "
+                    "join user_band ub on ub.users_id = u.user_id "
+                    "join band b on ub.band_id = b.band_id "
+                    "where u.user_id = %s;"), (user_id,))
+    return cursor.fetchone()
+
+
+@db_execute
+def get_profession_name_by_id(cursor, prof_id):
+    cursor.execute("SELECT name from profession where prof_id = %s;", (prof_id,))
+    return cursor.fetchone()[0]
+
+
+@db_execute
+def get_profession_by_user_id(cursor, user_id):
+    cursor.execute("SELECT p.prof_id, p.name from profession p "
+                   "join users_professions up on p.prof_id = up.profession_id "
+                   "join users u on up.users_id = u.user_id "
+                   "where u.user_id = %s;", (user_id,))
+    return cursor.fetchone()
+
+
+@db_execute
+def get_username_by_id(cursor, user_id):
+    cursor.execute("select u.username from users u where user_id = %s", (user_id,))
+    return cursor.fetchone()[0]
+
+
+if __name__ == '__main__':
+    print(get_band_by_user_id(2))
