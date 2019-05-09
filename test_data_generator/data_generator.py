@@ -78,7 +78,7 @@ def generate_random_ids(ids, min_num=1, max_num=4):
 def band_user_tuple_generator(bands_ids, users_ids):
     for band_id in bands_ids:
         for member in generate_random_ids(users_ids):
-            yield member, band_id
+            yield band_id, member
 
 
 def band_data_generator(amount, cities_ids):
