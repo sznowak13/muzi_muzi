@@ -105,5 +105,5 @@ def band_genre_data_generator(bands_ids, genre_ids):
 
 def user_prof_data_generator(user_ids, prof_ids):
     for user_id in user_ids:
-        for prof_id in generate_random_ids(prof_ids, max_num=2):
+        for prof_id in generate_random_ids(prof_ids, max_num=3):
             yield user_id, prof_id

@@ -1,4 +1,3 @@
-Boleslawiec
 Glogow
 Jelenia Gora
 Wroclaw
@@ -35,7 +34,6 @@ Bielsko-Biala
 Czestochowa
 Gliwice
 Katowice
-Olsztyn
 Tychy
 Zabrze
 Zawiercie
