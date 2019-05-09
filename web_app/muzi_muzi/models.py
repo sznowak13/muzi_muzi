@@ -1,44 +1,21 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
 
 class Advert(models.Model):
     advert_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey('Users', models.DO_NOTHING)
+    user = models.ForeignKey('Users', models.DO_NOTHING, null=True)
     band = models.ForeignKey('Band', models.DO_NOTHING, blank=True, null=True)
     title = models.CharField(max_length=100)
     description = models.TextField()
     posted_on = models.DateTimeField()
-    profession = models.ForeignKey('Profession', models.DO_NOTHING)
+    profession = models.ForeignKey('Profession', models.DO_NOTHING, null=True)
     genre = models.ForeignKey('Genre', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'advert'
-
-
-class Band(models.Model):
-    band_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
-    city = models.ForeignKey('City', models.DO_NOTHING, blank=True, null=True)
-    year_founded = models.DateField(blank=True, null=True)
-    photo = models.CharField(max_length=255, blank=True, null=True)
-    homepage = models.CharField(max_length=100, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'band'
-
-
-class BandGenre(models.Model):
-    band = models.ForeignKey(Band, models.DO_NOTHING, blank=True, null=True)
-    genre = models.ForeignKey('Genre', models.DO_NOTHING, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'band_genre'
 
 
 class City(models.Model):
@@ -46,7 +23,6 @@ class City(models.Model):
     name = models.CharField(max_length=50)
 
     class Meta:
-        managed = False
         db_table = 'city'
 
 
@@ -55,7 +31,6 @@ class Genre(models.Model):
     name = models.CharField(max_length=50)
 
     class Meta:
-        managed = False
         db_table = 'genre'
 
 
@@ -69,7 +44,6 @@ class PrivateMessages(models.Model):
     read = models.BooleanField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'private_messages'
 
 
@@ -78,7 +52,6 @@ class Profession(models.Model):
     name = models.CharField(max_length=50)
 
     class Meta:
-        managed = False
         db_table = 'profession'
 
 
@@ -87,53 +60,36 @@ class Role(models.Model):
     name = models.CharField(max_length=20)
 
     class Meta:
-        managed = False
         db_table = 'role'
 
 
-class UserBand(models.Model):
-    user = models.ForeignKey('Users', models.DO_NOTHING, blank=True, null=True)
-    band = models.ForeignKey(Band, models.DO_NOTHING, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'user_band'
-
-
-class UserGenre(models.Model):
-    user = models.ForeignKey('Users', models.DO_NOTHING, blank=True, null=True)
-    genre = models.ForeignKey(Genre, models.DO_NOTHING, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'user_genre'
-
-
-class UserProfession(models.Model):
-    user = models.ForeignKey('Users', models.DO_NOTHING, blank=True, null=True)
-    prof = models.ForeignKey(Profession, models.DO_NOTHING, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'user_profession'
-
-
-class Users(models.Model):
+class Users(AbstractUser):
     user_id = models.AutoField(primary_key=True)
     role = models.ForeignKey(Role, models.DO_NOTHING, blank=True, null=True)
-    first_name = models.CharField(max_length=40, blank=True, null=True)
-    last_name = models.CharField(max_length=50, blank=True, null=True)
-    nickname = models.CharField(max_length=30, blank=True, null=True)
-    email = models.CharField(unique=True, max_length=100)
-    password = models.CharField(max_length=100)
     city = models.ForeignKey(City, models.DO_NOTHING, blank=True, null=True)
     photo_url = models.CharField(max_length=255, blank=True, null=True)
     video = models.ForeignKey('Videos', models.DO_NOTHING, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    genres = models.ManyToManyField(Genre)
+    professions = models.ManyToManyField(Profession)
 
     class Meta:
-        managed = False
         db_table = 'users'
+
+
+class Band(models.Model):
+    band_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    city = models.ForeignKey('City', models.DO_NOTHING, blank=True, null=True)
+    year_founded = models.DateField(blank=True, null=True)
+    photo = models.CharField(max_length=255, blank=True, null=True)
+    homepage = models.CharField(max_length=100, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    members = models.ManyToManyField(Users, db_table='user_band')
+    genres = models.ManyToManyField(Genre, db_table='band_genre')
+
+    class Meta:
+        db_table = 'band'
 
 
 class Videos(models.Model):
@@ -141,7 +97,6 @@ class Videos(models.Model):
     url = models.CharField(max_length=255)
 
     class Meta:
-        managed = False
         db_table = 'videos'
 
 
