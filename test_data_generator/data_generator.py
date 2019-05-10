@@ -123,8 +123,10 @@ def advert_data_generator(amount, prof_ids, user_ids):
 
 def generate_band_advert_data(prof_ids, user_ids):
     user_posting = random.choice(user_ids)
-    print(user_posting)
     band_id, band_name = get_band_by_user_id(user_posting)
+    while not band_id:
+        user_posting = random.choice(user_ids)
+        band_id, band_name = get_band_by_user_id(user_posting)
     genre_id, genre_name = get_genre_by_band_id(band_id)
     profession_searched = random.choice(prof_ids)
     prof_name = get_profession_name_by_id(profession_searched)

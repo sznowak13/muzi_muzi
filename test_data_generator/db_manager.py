@@ -80,7 +80,8 @@ def get_band_by_user_id(cursor, user_id):
                     "join user_band ub on ub.users_id = u.user_id "
                     "join band b on ub.band_id = b.band_id "
                     "where u.user_id = %s;"), (user_id,))
-    return cursor.fetchone()
+    result = cursor.fetchone()
+    return result if result else (None, None)
 
 
 @db_execute
