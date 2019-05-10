@@ -42,7 +42,7 @@ create view advert_view as (
                when a.band_id is not null then (
                    select b.name
                    from band b
-                            join advert a2 on b.band_id = a2.band_id
+                            where b.band_id = a.band_id
                )
                else null
                end as band_name
@@ -69,7 +69,7 @@ create view advert_list_view as (
                when a.band_id is not null then (
                    select b.name
                    from band b
-                            join advert a2 on b.band_id = a2.band_id
+                            where b.band_id = a.band_id
                )
                else null
                end as band_name
