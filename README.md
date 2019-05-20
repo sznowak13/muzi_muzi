@@ -14,9 +14,12 @@ and start playing immediately.
 
 First you will need Python version 3.6+ instaled on your machine, you can download latest Python here:
 https://www.python.org/downloads/
+
 Next, you will need PostgreSQL database engine for handling database. You can download and setup it here:
 http://www.postgresqltutorial.com/install-postgresql/ -- Windows
+
 https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04 -- Ubuntu
+
 
 Having python installed, open the terminal and go to the directory you cloned the repository.
 ```
