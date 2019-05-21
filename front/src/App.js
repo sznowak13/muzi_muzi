@@ -4,7 +4,7 @@ import Table from "./Table";
 class App extends Component {
   state = {
     advert: [],
-    data: "http://127.0.0.1:8000/muzi-muzi/get_adverts?limit=10"
+    data: "http://127.0.0.1:8000/adverts/"
   };
 
   componentDidMount() {
