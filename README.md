@@ -14,9 +14,12 @@ and start playing immediately.
 
 First you will need Python version 3.6+ instaled on your machine, you can download latest Python here:
 https://www.python.org/downloads/
+
 Next, you will need PostgreSQL database engine for handling database. You can download and setup it here:
 http://www.postgresqltutorial.com/install-postgresql/ -- Windows
+
 https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04 -- Ubuntu
+
 
 Having python installed, open the terminal and go to the directory you cloned the repository.
 ```
@@ -63,7 +66,17 @@ CREATE DATABASE
 postgres=# \q
 (venv) user@your_laptop: ~/path/to/muzi_muzi$
 ```
-Thats all you need to do with psql. Next thing is to run migrations from the repository.
+Thats all you need to do with psql. We need to add some environment variables to our system. 
+How to:
+Windows - https://www.computerhope.com/issues/ch000549.htm
+Linux - https://askubuntu.com/questions/58814/how-do-i-add-environment-variables
+We need 4 variables:
+PSQL_USER_NAME,
+PSQL_HOST,
+PSQL_PASSWORD,
+MUZI_MUZI_DB
+
+After environment varibles are set next thing is to run migrations from the repository.
 In the 'web_app' folder run:
 ```
 (venv) user@your_laptop: ~/path/to/muzi_muzi$ python manage.py migrate
