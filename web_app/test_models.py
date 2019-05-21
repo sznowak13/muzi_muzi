@@ -75,7 +75,7 @@ class PrivateMessages(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'private_messages'
+        db_table = 'messages'
 
 
 class Profession(models.Model):

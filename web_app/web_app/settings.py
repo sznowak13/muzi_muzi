@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'muzi_muzi.apps.MuziMuziConfig',
+    'adverts.apps.AdvertsConfig',
+    'bands.apps.BandsConfig',
+    'users.apps.UsersConfig',
+    'private_messages.apps.PrivateMessagesConfig',
     'corsheaders',
 ]
 
@@ -112,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'muzi_muzi.Users'
+AUTH_USER_MODEL = 'users.Users'
 
 
 # Internationalization
