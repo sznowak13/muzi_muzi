@@ -13,7 +13,7 @@ class App extends Component {
       .then(result => result.json())
       .then(result => {
         this.setState({
-          advert: result.fields
+          advert: result
         });
         console.log(this.state);
       });
@@ -23,7 +23,7 @@ class App extends Component {
     const { advert } = this.state;
     return (
       <div>
-        <Table adverts={advert} />
+        <Table advertData={advert} />
       </div>
     );
   }
