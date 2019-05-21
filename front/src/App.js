@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import Table from "./Table";
+import Header from "./Header";
 
 class App extends Component {
   state = {
     advert: [],
-    data: "http://127.0.0.1:8000/adverts/"
+    adress: "http://127.0.0.1:8000/adverts/"
   };
 
   componentDidMount() {
-    const url = this.state.data;
+    const url = this.state.adress;
     fetch(url)
       .then(result => result.json())
       .then(result => {
@@ -23,6 +24,7 @@ class App extends Component {
     const { advert } = this.state;
     return (
       <div>
+        <Header />
         <Table advertData={advert} />
       </div>
     );
