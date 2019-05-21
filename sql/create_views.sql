@@ -65,14 +65,9 @@ create view advert_list_view as (
            a.posted_on,
            g.name     genre,
            p.name     profession,
-           case
-               when a.band_id is not null then (
-                   select b.name
-                   from band b
-                            where b.band_id = a.band_id
-               )
-               else null
-               end as band_name
+           (select b.name
+            from band b
+            where b.band_id = a.band_id) as band_name
     from users
              join advert a on users.user_id = a.user_id
              join profession p on a.profession_id = p.prof_id
