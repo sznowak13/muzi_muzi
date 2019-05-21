@@ -66,7 +66,17 @@ CREATE DATABASE
 postgres=# \q
 (venv) user@your_laptop: ~/path/to/muzi_muzi$
 ```
-Thats all you need to do with psql. Next thing is to run migrations from the repository.
+Thats all you need to do with psql. We need to add some environment variables to our system. 
+How to:
+Windows - https://www.computerhope.com/issues/ch000549.htm
+Linux - https://askubuntu.com/questions/58814/how-do-i-add-environment-variables
+We need 4 variables:
+PSQL_USER_NAME,
+PSQL_HOST,
+PSQL_PASSWORD,
+MUZI_MUZI_DB
+
+After environment varibles are set next thing is to run migrations from the repository.
 In the 'web_app' folder run:
 ```
 (venv) user@your_laptop: ~/path/to/muzi_muzi$ python manage.py migrate
