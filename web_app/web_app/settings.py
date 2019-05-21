@@ -43,7 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'muzi_muzi.apps.MuziMuziConfig'
+    'muzi_muzi.apps.MuziMuziConfig',
+    'adverts.apps.AdvertsConfig',
+    'bands.apps.BandsConfig',
+    'users.apps.UsersConfig',
+    'private_messages.apps.PrivateMessagesConfig',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'muzi_muzi.Users'
+AUTH_USER_MODEL = 'users.Users'
 
 
 # Internationalization
