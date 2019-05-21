@@ -6,7 +6,7 @@ from .models import AdvertListView
 
 def adverts(request):
     limit = request.GET.get('limit', 20)
-    if not limit.isdigit():
+    if not isinstance(limit, int) and not limit.isdigit():
         response = {'error': f'requested with incorrect query param limit: {limit}',
                     'description': f'Endpoint {request.path} with query params {request.GET.dict()}'}
         return JsonResponse(response)
