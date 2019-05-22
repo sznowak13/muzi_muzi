@@ -2,12 +2,12 @@ import React, { Component } from "react";
 
 class Table extends Component {
   render() {
-    const { adverts } = this.props;
+    const { advertData } = this.props;
 
     return (
       <table>
         <TableHeader />
-        <TableBody adverts={adverts} />
+        <TableBody advertData={advertData} />
       </table>
     );
   }
@@ -29,14 +29,14 @@ const TableHeader = () => {
 };
 
 const TableBody = props => {
-  const rows = props.adverts.map((row, index) => {
+  const rows = props.advertData.map((row, index) => {
     return (
       <tr key={index}>
-        <td>{row.first_name}</td>
-        <td>{row.city}</td>
-        <td>{row.title}</td>
-        <td>{row.posted_on}</td>
-        <td>{row.band_name}</td>
+        <td>{row.fields.first_name}</td>
+        <td>{row.fields.city}</td>
+        <td>{row.fields.title}</td>
+        <td>{row.fields.posted_on}</td>
+        <td>{row.fields.band_name}</td>
       </tr>
     );
   });
