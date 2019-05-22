@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
+import { Container } from "react-bootstrap";
 
 class Adverts extends Component {
   render() {
     const { advertData } = this.props;
 
     return (
-      <Table stripped bordered hover>
-        <TableHeader />
-        <TableBody advertData={advertData} />
-      </Table>
+      <Container>
+        <Table stripped bordered hover responsive="sm" variant="warning">
+          <TableHeader />
+          <TableBody advertData={advertData} />
+        </Table>
+      </Container>
     );
   }
 }
@@ -19,7 +22,7 @@ const TableHeader = () => {
     <thead>
       <tr>
         <th>Title</th>
-        <th>First Name</th>
+        <th>Author</th>
         <th>City</th>
         <th>Genre</th>
         <th>Profession</th>
