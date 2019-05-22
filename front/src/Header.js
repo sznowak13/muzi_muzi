@@ -11,8 +11,17 @@ import {
 class Header extends Component {
   render() {
     return (
-      <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">Muzi Muzi</Navbar.Brand>
+      <Navbar bg="warning" expand="lg">
+        <Navbar.Brand href="#home">
+          <img
+            alt=""
+            src="/logo.png"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />
+          {" MuziMuzi "}
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -24,14 +33,25 @@ class Header extends Component {
             <Nav.Link href="#link">Messages</Nav.Link>
           </Nav>
           <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-success">Search</Button>
+            <FormControl type="text" placeholder="Search" />
+            <Button className="ml-1" variant="success">
+              Search
+            </Button>
           </Form>
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
+          {/* <Navbar.Text>
             Signed in as: <a href="#login">Mark Otto</a>
-          </Navbar.Text>
+          </Navbar.Text> */}
+          <Button className="ml-2" variant="success">
+            Register
+          </Button>
+          <Button className="ml-2" variant="success">
+            Log in
+          </Button>
+          {/* <Button className="ml-2" variant="danger">
+            Log out
+          </Button> */}
         </Navbar.Collapse>
       </Navbar>
     );
