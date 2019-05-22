@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Table from "./Table";
+import Adverts from "./Adverts";
 import Header from "./Header";
 
 class App extends Component {
@@ -25,7 +25,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Table advertData={advert} />
+        <Adverts advertData={advert} />
       </div>
     );
   }

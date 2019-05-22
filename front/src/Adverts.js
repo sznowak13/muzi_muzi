@@ -1,14 +1,15 @@
 import React, { Component } from "react";
+import Table from "react-bootstrap/Table";
 
-class Table extends Component {
+class Adverts extends Component {
   render() {
     const { advertData } = this.props;
 
     return (
-      <table>
+      <Table stripped bordered hover>
         <TableHeader />
         <TableBody advertData={advertData} />
-      </table>
+      </Table>
     );
   }
 }
@@ -17,12 +18,12 @@ const TableHeader = () => {
   return (
     <thead>
       <tr>
+        <th>Title</th>
         <th>First Name</th>
         <th>City</th>
-        <th>Title</th>
-        <th>Posted on</th>
         <th>Genre</th>
-        <th>Band name</th>
+        <th>Profession</th>
+        <th>Posted on</th>
       </tr>
     </thead>
   );
@@ -32,11 +33,12 @@ const TableBody = props => {
   const rows = props.advertData.map((row, index) => {
     return (
       <tr key={index}>
+        <td>{row.fields.title}</td>
         <td>{row.fields.first_name}</td>
         <td>{row.fields.city}</td>
-        <td>{row.fields.title}</td>
+        <td>{row.fields.genre}</td>
+        <td>{row.fields.profession}</td>
         <td>{row.fields.posted_on}</td>
-        <td>{row.fields.band_name}</td>
       </tr>
     );
   });
@@ -44,4 +46,4 @@ const TableBody = props => {
   return <tbody>{rows}</tbody>;
 };
 
-export default Table;
+export default Adverts;
