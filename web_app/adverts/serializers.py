@@ -27,4 +27,5 @@ class AdvertSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Advert
-        fields = ('advert_id', 'user', 'username', 'band', 'band_name', 'title', 'description', 'posted_on', 'profession', 'genre')
+        fields = ('advert_id', 'user', 'username', 'band', 'band_name', 'title', 'description', 'posted_on',
+                  'profession', 'genre')
