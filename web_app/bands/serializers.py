@@ -5,8 +5,8 @@ from adverts.models import Advert
 
 class BandsSerializer(serializers.ModelSerializer):
     # adverts = serializers.PrimaryKeyRelatedField(many=True, queryset=Advert.objects.all())
-    members = serializers.StringRelatedField()
-    genres = serializers.StringRelatedField()
+    members = serializers.HyperlinkedIdentityField(view_name='users:users-detail', many=True)
+    genres = serializers.StringRelatedField(many=True)
     city = serializers.StringRelatedField()
 
     class Meta:

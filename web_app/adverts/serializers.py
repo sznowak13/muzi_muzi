@@ -19,8 +19,8 @@ class PKFilteredRelatedFiled(serializers.PrimaryKeyRelatedField):
 class AdvertSerializer(serializers.ModelSerializer):
     user = serializers.HyperlinkedIdentityField(view_name='users:users-detail', read_only=True)
     username = serializers.ReadOnlyField(source='user.username')
-    band_name = serializers.StringRelatedField(source='band.name')
-    band = PKFilteredRelatedFiled(Band)
+    band_name = serializers.StringRelatedField(source='band.name', read_only=True)
+    band = serializers.HyperlinkedIdentityField(view_name='bands:band-detail')
     profession = serializers.SlugRelatedField(slug_field='name', queryset=Profession.objects.all())
     genre = serializers.SlugRelatedField(slug_field='name', queryset=Genre.objects.all())
     posted_on = serializers.DateTimeField(read_only=True)
