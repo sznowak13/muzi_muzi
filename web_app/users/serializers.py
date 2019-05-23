@@ -4,9 +4,9 @@ from adverts.models import Advert
 from bands.models import Band
 
 
-class UsersSerializer(serializers.ModelSerializer):
-    adverts = serializers.PrimaryKeyRelatedField(many=True, queryset=Advert.objects.all())
-    bands = serializers.PrimaryKeyRelatedField(many=True, queryset=Band.objects.all())
+class UsersSerializer(serializers.HyperlinkedModelSerializer):
+    adverts = serializers.HyperlinkedRelatedField(view_name='advert-detail', many=True, queryset=Advert.objects.all())
+    bands = serializers.HyperlinkedRelatedField(view_name='band-detail', many=True, queryset=Band.objects.all())
     professions = serializers.StringRelatedField(many=True)
     genres = serializers.StringRelatedField(many=True)
     city = serializers.StringRelatedField()
@@ -14,6 +14,6 @@ class UsersSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Users
-        fields = ('user_id', 'first_name', 'last_name', 'username', 'role', 'city', 'photo_url', 'video', 'description',
+        fields = ('user_id', 'url', 'first_name', 'last_name', 'username', 'role', 'city', 'photo_url', 'video', 'description',
                   'genres', 'professions', 'bands', 'adverts')
 

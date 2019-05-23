@@ -10,7 +10,3 @@ app_name = 'bands'
 urlpatterns = [
     path('', include(router.urls))
 ]
-# app_name = 'bands'
-# urlpatterns = [
-#     path('', views.bands, name='bands')
-#     ]
