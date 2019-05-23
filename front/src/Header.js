@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import logo from "./logo.png";
 import {
   Navbar,
   NavDropdown,
@@ -15,9 +16,9 @@ class Header extends Component {
         <Navbar.Brand href="#home">
           <img
             alt=""
-            src="/logo.png"
-            width="130"
-            height="30"
+            src={logo}
+            width="90"
+            height="40"
             className="d-inline-block align-top"
           />
           {" MuziMuzi "}
