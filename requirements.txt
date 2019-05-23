@@ -5,6 +5,7 @@ colorama==0.4.1
 decorator==4.4.0
 Django==2.2.1
 django-cors-headers==3.0.1
+djangorestframework==3.9.4
 ipython==7.5.0
 ipython-genutils==0.2.0
 jedi==0.13.3

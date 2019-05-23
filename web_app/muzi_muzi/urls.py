@@ -1,10 +1,15 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+from rest_framework.routers import SimpleRouter
+
+
+router = SimpleRouter()
+router.register('professions', views.ProfessionList)
+router.register('genres', views.GenreList)
+router.register('cities', views.CityList)
+
 
 app_name = 'muzi_muzi'
-
 urlpatterns = [
-    path('get_adverts', views.adverts, name='adverts'),
-    path('get_users', views.users, name='users'),
-    path('get_bands', views.bands, name='bands'),
+    path('', include(router.urls)),
 ]

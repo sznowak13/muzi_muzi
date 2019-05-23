@@ -4,7 +4,7 @@ from django.utils import timezone
 
 class Advert(models.Model):
     advert_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey('users.Users', models.DO_NOTHING, null=True)
+    user = models.ForeignKey('users.Users', models.DO_NOTHING, related_name='adverts')
     band = models.ForeignKey('bands.Band', models.DO_NOTHING, blank=True, null=True)
     title = models.CharField(max_length=100)
     description = models.TextField()

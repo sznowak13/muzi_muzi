@@ -9,7 +9,7 @@ class Band(models.Model):
     photo = models.CharField(max_length=255, blank=True, null=True)
     homepage = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    members = models.ManyToManyField('users.Users', db_table='user_band')
+    members = models.ManyToManyField('users.Users', db_table='user_band', related_name='bands')
     genres = models.ManyToManyField('muzi_muzi.Genre', db_table='band_genre')
 
     def __str__(self):

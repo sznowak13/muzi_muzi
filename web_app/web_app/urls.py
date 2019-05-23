@@ -15,10 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from adverts.urls import router as adverts_router
+from bands.urls import router as bands_router
+from muzi_muzi.urls import router as muzi_muzi_router
+from users.urls import router as users_router
+
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.registry.extend(adverts_router.registry)
+router.registry.extend(bands_router.registry)
+router.registry.extend(muzi_muzi_router.registry)
+router.registry.extend(users_router.registry)
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('adverts/', include('adverts.urls')),
-    path('users/', include('users.urls')),
-    path('bands/', include('bands.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 ]
