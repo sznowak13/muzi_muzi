@@ -1,5 +1,9 @@
 .container {
-  margin: 100px 50px 30px 50px;
+  margin: 20px 50px 20px 50px;
+}
+
+.navbar {
+  margin-bottom: 150px;
 }
 
 .form-inline {
@@ -11,10 +15,59 @@
   width: 60% !important;
 }
 
-thead {
-  background-color: rgb(255, 207, 74);
+.item1 {
+  grid-area: title;
+}
+.item2 {
+  grid-area: photo;
+}
+.item3 {
+  grid-area: description;
+}
+.item4 {
+  grid-area: city;
+}
+.item5 {
+  grid-area: footer;
+}
+.item6 {
+  grid-area: date;
 }
 
-tr {
-  text-align: center !important;
+.grid-container {
+  display: grid;
+  grid-template-columns: 180px auto 450px auto;
+  grid-template-rows: max-content;
+  grid-template-areas:
+    "photo title title title date"
+    "photo description description description city"
+    "photo description description description footer";
+  grid-gap: 2px;
+  background-color: #ffc526;
+  padding: 4px;
+}
+
+.grid-container > div {
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  font-size: 15px;
+}
+
+div.item1,
+div.item6,
+div.item3,
+div.item4,
+div.item5 {
+  padding: 15px;
+}
+
+.boxes {
+  transition: box-shadow 0.3s;
+  min-width: 1000px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.boxes:hover {
+  box-shadow: 0 0 19px rgba(33, 33, 33, 0.2);
 }

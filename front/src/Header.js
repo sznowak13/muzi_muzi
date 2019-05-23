@@ -16,7 +16,7 @@ class Header extends Component {
           <img
             alt=""
             src="/logo.png"
-            width="30"
+            width="130"
             height="30"
             className="d-inline-block align-top"
           />
