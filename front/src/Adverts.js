@@ -16,23 +16,23 @@ export default class Adverts extends Component {
 const AdvBody = props => {
   const rows = props.advertData.map((row, index) => {
     return (
-      <div class="boxes" key={index}>
-        <div class="grid-container">
-          <div class="item1">{row.fields.title}</div>
-          <div class="item2">
+      <div className="boxes" key={index}>
+        <div className="grid-container">
+          <div className="item1">{row.title}</div>
+          <div className="item2">
             <img src={userphoto} alt="ph" width="180" height="180" />
           </div>
-          <div class="item3">
+          <div className="item3">
             Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
             Ipsum Lorem Ipsum
           </div>
-          <div class="item4">{row.fields.city}</div>
-          <div class="item5">{row.fields.genre}</div>
-          <div class="item6">{row.fields.posted_on.substring(0, 10)}</div>
+          <div className="item4">{row.username}</div>
+          <div className="item5">{row.genre}</div>
+          <div className="item6">{row.posted_on.substring(0, 10)}</div>
         </div>
       </div>
     );
   });
 
-  return <tbody>{rows}</tbody>;
+  return <div>{rows}</div>;
 };
