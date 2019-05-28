@@ -22,7 +22,8 @@ class UsersSerializer(serializers.HyperlinkedModelSerializer):
 
 class UsersRegisterSerializer(serializers.ModelSerializer):
     email2 = serializers.EmailField(label='Confirm Email')
-    password2 = serializers.CharField(label='Confirm Password')
+    password = serializers.CharField(write_only=True, required=True)
+    password2 = serializers.CharField(label='Confirm Password', write_only=True, required=True)
 
     class Meta:
         model = Users
