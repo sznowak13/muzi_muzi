@@ -39,7 +39,12 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Adverts advertData={adverts} />
+        <Adverts
+          advertData={adverts}
+          handlePage={this.handlePage}
+          next={this.next}
+          previous={this.previous}
+        />
       </div>
     );
   }

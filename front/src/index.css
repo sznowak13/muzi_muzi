@@ -1,5 +1,25 @@
-.container {
+#root {
+  background-color: rgb(231, 231, 231);
+}
+
+.section-title {
+  text-size-adjust: 0.3em;
+}
+
+.adverts-container::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+.adverts-box {
+  overflow: -moz-scrollbars-none;
+}
+
+.adverts-container {
   margin: 20px 50px 20px 50px;
+  width: 250px;
+  height: 700px;
+  overflow: auto;
+  background-color: rgb(255, 225, 142);
 }
 
 .navbar {

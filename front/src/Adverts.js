@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import userphoto from "./userphoto.png";
+import Pagination from "./Pagination.js";
 
 export default class Adverts extends Component {
   render() {
-    const { advertData } = this.props;
+    const { advertData, handlePage, next, previous } = this.props;
     return (
-      <Container>
+      <Container className="adverts-container">
+        <h2 className="section-title">New adverts</h2>
+        <Pagination handlePage={handlePage} next={next} previous={previous} />
         <AdvBody advertData={advertData} />
       </Container>
     );
