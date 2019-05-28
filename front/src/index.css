@@ -4,6 +4,7 @@
 
 .section-title {
   text-size-adjust: 0.3em;
+  text-align: center;
 }
 
 .adverts-container::-webkit-scrollbar {
@@ -15,7 +16,7 @@
 }
 
 .adverts-container {
-  margin: 20px 50px 20px 50px;
+  margin: 0px 50px 20px 50px;
   width: 250px;
   height: 700px;
   overflow: auto;
