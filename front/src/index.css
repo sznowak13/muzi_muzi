@@ -4,7 +4,8 @@
 
 .section-title {
   text-size-adjust: 0.3em;
-  text-align: center;
+  text-align: left;
+  padding: 20px;
 }
 
 .adverts-container::-webkit-scrollbar {
@@ -16,7 +17,7 @@
 }
 
 .adverts-container {
-  margin: 0px 50px 20px 50px;
+  margin: 0px 30px 20px 50px;
   width: 250px;
   height: 700px;
   overflow: auto;
@@ -105,4 +106,24 @@ div.item5 {
 
 .boxes:hover {
   box-shadow: 0 0 19px rgba(33, 33, 33, 0.2);
+}
+
+.card-deck {
+  display: -webkit-inline-box !important;
+  flex-direction: column;
+}
+
+.card-deck {
+  margin-right: 5px !important;
+  margin-left: 0px !important;
+}
+
+.bandsbox {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  min-height: 408px;
+}
+
+.card-header {
+  min-height: 73px;
 }
