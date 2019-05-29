@@ -23,6 +23,20 @@
   background-color: rgb(255, 225, 142);
 }
 
+.ant-tabs-bar {
+  margin: 0 0 0 0 !important;
+}
+
+.ant-tabs-nav .ant-tabs-tab-active {
+  background-color: rgb(255, 225, 142) !important;
+}
+
+.ant-tabs-tab {
+  box-sizing: content-box !important;
+  margin: 0 3px 0 0 !important;
+  background-color: rgb(221, 196, 127) !important;
+}
+
 .navbar {
   margin-bottom: 150px;
 }
