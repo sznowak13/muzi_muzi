@@ -20,7 +20,7 @@ drop table if exists city;
 drop table if exists videos;
 
 create table city (
-    city_id serial primary key,
+    city_id serial primary key default 0,
     name VARCHAR(50) not null
 );
 
