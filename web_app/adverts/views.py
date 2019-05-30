@@ -5,7 +5,7 @@ from .permissions import IsOwnerOrReadOnly
 
 
 class AdvertViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
+    permission_classes = (IsOwnerOrReadOnly,)
     queryset = Advert.objects.all()
     serializer_class = AdvertSerializer
 
