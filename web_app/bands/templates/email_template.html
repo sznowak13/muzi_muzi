@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Muzi muzi message</title>
 </head>
 <body>
-$END$
+    <h1>Hello!</h1>
+    <p>Your buddy, {% if user.first_name %} {{ user.first_name }} {% else %} {{ user.username }}{% endif %} from a band {{ band.name }} send you a message:</p>
+
+    <p>{{ message }}</p>
+
+    <p>
+        If you wanna reply to this message, you can reach him under this email: {{ user.email }}
+        or on muzi_muzi!
+    </p>
 </body>
 </html>
