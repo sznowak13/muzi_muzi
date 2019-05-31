@@ -1,9 +1,25 @@
 import data_generator as generator
 import db_manager
 import sql_generator as sql_gen
-from record_generators import BaseGenerator, UserGenerator, CityGenerator, GenresUsersGenerator, UserProfessionGenerator
+from record_generators import *
+from functools import wraps
+from time import time
+import datetime
 
 CONFIRMS = ['y', 'yes']
+
+
+def time_it(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time()
+        res = func(*args, **kwargs)
+        end = time()
+        seconds = end - start
+        print(f"Time: {str(datetime.timedelta(seconds=seconds)):3} sec")
+        return res
+
+    return wrapper
 
 
 def get_bool_from_input(inpt: str, valid_confirms):
