@@ -1,14 +1,32 @@
 import data_generator as generator
 import db_manager
 import sql_generator as sql_gen
+from record_generators import BaseGenerator, UserGenerator
+
+CONFIRMS = ['y', 'yes']
+
+
+def get_bool_from_input(inpt: str, valid_confirms):
+    inpt = inpt.strip().lower()
+    for confirm in valid_confirms:
+        if inpt == confirm:
+            return True
+    return False
 
 
 def main():
     print("Welcome to test data mocker for muzi_muzi database!")
 
     users_to_generate = int(input("Input number of users to generate: "))
+    user_clear = False if users_to_generate < 1 else get_bool_from_input(input("Clear table first? (y/N) "), CONFIRMS)
+    print(user_clear)
     bands_to_generate = int(input("Input number of bands to generate (Approx. half the users is best): "))
+    band_clear = False if bands_to_generate < 1 else get_bool_from_input(input("Clear table first? (y/N) "), CONFIRMS)
+    print(band_clear)
     adverts_to_generate = int(input("Input number of adverts to create: "))
+    advert_clear = False if adverts_to_generate < 1 else get_bool_from_input(input("Clear table first? (y/N) "),
+                                                                             CONFIRMS)
+    print(advert_clear)
 
     populate_cities()
     profession_ids = db_manager.get_all_professions_ids()
