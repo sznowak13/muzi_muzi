@@ -15,6 +15,6 @@ class BandViewSet(viewsets.ReadOnlyModelViewSet):
         latest_num = request.query_params.get('num', self.latest_num)
         if not isinstance(latest_num, int) and not latest_num.isdigit():
             return Response({'error': f'Wrong num parameter, was not a number. (num={latest_num})'})
-        queryset = self.get_queryset().order_by('created')[:int(latest_num)]
+        queryset = self.get_queryset().order_by('-created')[:int(latest_num)]
         serializer = BandsSerializer(queryset, many=True, context={'request': request})
         return Response(serializer.data)
