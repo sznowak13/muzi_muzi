@@ -1,7 +1,7 @@
 import data_generator as generator
 import db_manager
 import sql_generator as sql_gen
-from record_generators import BaseGenerator, UserGenerator
+from record_generators import BaseGenerator, UserGenerator, CityGenerator, GenresUsersGenerator, UserProfessionGenerator
 
 CONFIRMS = ['y', 'yes']
 
@@ -27,19 +27,22 @@ def main():
     advert_clear = False if adverts_to_generate < 1 else get_bool_from_input(input("Clear table first? (y/N) "),
                                                                              CONFIRMS)
     print(advert_clear)
+    repopulate_cities = get_bool_from_input(
+        input("Re-populate city table? (y/N) *enter 'yes' if this is first time* "), CONFIRMS
+    )
 
-    populate_cities()
+    cities_ids = populate_table_with_generator(CityGenerator(cities=generator.cities)) \
+        if repopulate_cities else db_manager.get_all_cities_ids()
     profession_ids = db_manager.get_all_professions_ids()
-    cities_ids = db_manager.get_all_cities_ids()
     users_ids = populate_table_with_generator(UserGenerator(amount=users_to_generate, cities_ids=cities_ids), clear=user_clear)
     genres_ids = db_manager.get_all_genres_ids()
-    assign_genres_to_users(users_ids, genres_ids)
-    assign_profession_to_users(users_ids, profession_ids)
+    populate_table_with_generator(GenresUsersGenerator(users_ids=users_ids, genre_ids=genres_ids))
+    populate_table_with_generator(UserProfessionGenerator(users_ids=users_ids, profession_ids=profession_ids))
     populate_bands(bands_to_generate, cities_ids)
-    bands_ids = db_manager.get_all_bands_ids()
-    assign_genres_to_bands(bands_ids, genres_ids)
-    assign_users_to_bands(bands_ids, users_ids)
-    populate_adverts(adverts_to_generate, profession_ids, users_ids)
+    # bands_ids = db_manager.get_all_bands_ids()
+    # assign_genres_to_bands(bands_ids, genres_ids)
+    # assign_users_to_bands(bands_ids, users_ids)
+    # populate_adverts(adverts_to_generate, profession_ids, users_ids)
 
 
 def populate_bands(row_number, cities_ids):
@@ -47,12 +50,6 @@ def populate_bands(row_number, cities_ids):
                  "VALUES (%s, %s, %s, %s, %s);")
 
     populate_table("band", statement, generator.band_data_generator, gnrt_sources=[row_number, cities_ids])
-
-
-def populate_cities():
-    statement = ("INSERT INTO city (name) "
-                 "VALUES (%s);")
-    populate_table("city", statement, generator.city_data_generator)
 
 
 def populate_adverts(amount, prof_ids, user_ids):
@@ -68,11 +65,6 @@ def populate_adverts(amount, prof_ids, user_ids):
 def assign_users_to_bands(bands_ids, users_ids):
     statement = "INSERT INTO user_band (band_id, users_id) VALUES (%s, %s);"
     populate_table("user_band", statement, generator.band_user_tuple_generator, gnrt_sources=[bands_ids, users_ids])
-
-
-def assign_genres_to_users(users_ids, genres_ids):
-    statement = "INSERT INTO users_genres (users_id, genre_id) VALUES (%s, %s);"
-    populate_table("users_genres", statement, generator.user_genre_data_generator, gnrt_sources=[users_ids, genres_ids])
 
 
 def assign_genres_to_bands(bands_ids, genres_ids):
@@ -96,7 +88,7 @@ def populate_table(table_name, statement: str, param_gnrt, clear: bool = True, g
     sql, params = sql_gen.generate_sql_with_params(statement, param_gnrt, gnrt_sources)
     print("Executing inserts...")
     returning_values = db_manager.execute_with_params(sql, params)
-    return returning_values
+    return [value[0] for value in returning_values]
 
 
 def populate_table_with_generator(record_generator: BaseGenerator, clear=False):
@@ -109,7 +101,7 @@ def populate_table_with_generator(record_generator: BaseGenerator, clear=False):
     sql, params = sql_gen.generate_sql_from_generator(record_generator)
     print("Executing inserts...")
     returning_values = db_manager.execute_with_params(sql, params)
-    return returning_values
+    return [value[0] for value in returning_values]
 
 
 if __name__ == '__main__':

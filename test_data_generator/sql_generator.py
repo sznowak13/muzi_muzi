@@ -34,11 +34,11 @@ def generate_sql_from_generator(generator: BaseGenerator):
             params_list.append(param)
         else:
             lost_count += 1
-            sql.remove(generator.values_statement)
+            values_params.remove(generator.values_statement)
     sql.append(", ".join(values_params))
     for param in params_list:
         query_params += param
-    sql_tail = f" RETURNING {generator.returning_value};" if generator.returning else ";"
+    sql_tail = f" RETURNING {generator.returning_column};" if generator.returning else ";"
     sql.append(sql_tail)
     print(f"Lost {lost_count} records")
     return "".join(sql), query_params
