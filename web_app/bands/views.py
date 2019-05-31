@@ -6,25 +6,7 @@ from rest_framework.response import Response
 from .permissions import IsMemberOrReadOnly
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-
-
-def generate_emails(subject, message, members):
-    text_message = strip_tags(message)
-    mails = [
-        EmailMultiAlternatives(subject, text_message, from_email='noreply@muzi.muzi', to=[member.email])
-        for member in members
-    ]
-    for msg in mails:
-        msg.attach_alternative(message, 'text/html')
-    return mails
-
-
-def send_mails(mails):
-    delivered = 0
-    for message in mails:
-        delivered += message.send()
-    return delivered
+from .utils.email import generate_emails, send_mails
 
 
 class BandViewSet(viewsets.ModelViewSet):
