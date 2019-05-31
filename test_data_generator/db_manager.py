@@ -15,6 +15,9 @@ def clear_table(cursor, table_name: str):
 @db_execute
 def execute_with_params(cursor, sql: str, parameters: tuple):
     cursor.execute(sql, parameters)
+    #  Checking if cursor has something to fetch
+    res = cursor.fetchall() if cursor.description else None
+    return res
 
 
 @db_execute
