@@ -2,7 +2,7 @@ from .models import Users
 from .serializers import UsersSerializer, UsersRegisterSerializer
 from rest_framework import generics, mixins, viewsets, filters
 from rest_framework.permissions import AllowAny
-from .permissions import IsUser
+from .permissions import IsUserOrReadOnly
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -10,7 +10,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UsersSerializer
     filter_backends = (filters.SearchFilter,)
     search_fields = ('username', 'email')
-    permission_classes = (IsUser,)
+    permission_classes = (IsUserOrReadOnly,)
 
 
 class UserRegisterView(mixins.CreateModelMixin,
