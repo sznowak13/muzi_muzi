@@ -31,8 +31,7 @@ def main():
     populate_cities()
     profession_ids = db_manager.get_all_professions_ids()
     cities_ids = db_manager.get_all_cities_ids()
-    populate_users(users_to_generate, cities_ids)
-    users_ids = db_manager.get_all_users_ids()
+    users_ids = populate_table_with_generator(UserGenerator(amount=users_to_generate, cities_ids=cities_ids), clear=user_clear)
     genres_ids = db_manager.get_all_genres_ids()
     assign_genres_to_users(users_ids, genres_ids)
     assign_profession_to_users(users_ids, profession_ids)
@@ -41,13 +40,6 @@ def main():
     assign_genres_to_bands(bands_ids, genres_ids)
     assign_users_to_bands(bands_ids, users_ids)
     populate_adverts(adverts_to_generate, profession_ids, users_ids)
-
-
-def populate_users(row_number, cities_ids):
-    statement = (
-        "INSERT INTO users (first_name, last_name, username, email, password, city_id, description, is_superuser, is_staff, is_active, date_joined) "
-        "VALUES (%s, %s, %s, %s, %s, %s, %s, FALSE, FALSE, TRUE, %s);")
-    populate_table("users", statement, generator.user_data_generator, gnrt_sources=[row_number, cities_ids])
 
 
 def populate_bands(row_number, cities_ids):
