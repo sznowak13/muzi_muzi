@@ -23,6 +23,7 @@ def generate_sql_with_params(statement: str, param_generator, gnrt_sources: list
 
 def generate_sql_from_generator(generator: BaseGenerator):
     lost_count = 0
+    added = 0
     sql = []
     query_params = ()
     params_list = []
@@ -32,6 +33,7 @@ def generate_sql_from_generator(generator: BaseGenerator):
         values_params.append(generator.values_statement)
         if params_list.count(param) < 1:
             params_list.append(param)
+            added += 1
         else:
             lost_count += 1
             values_params.remove(generator.values_statement)
@@ -41,4 +43,4 @@ def generate_sql_from_generator(generator: BaseGenerator):
     sql_tail = f" RETURNING {generator.returning_column};" if generator.returning else ";"
     sql.append(sql_tail)
     print(f"Lost {lost_count} records")
-    return "".join(sql), query_params
+    return "".join(sql), query_params, added

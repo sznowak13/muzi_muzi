@@ -1,5 +1,7 @@
-from data_generator import generate_user_data, generate_random_ids, generate_band_data
+from data_generator import generate_user_data, generate_random_ids, generate_band_data, generate_musician_advert_data, \
+    generate_band_advert_data
 from abc import ABC, abstractmethod
+import random
 
 
 class BaseGenerator(ABC):
@@ -47,8 +49,7 @@ class LinkRelationRecordGenerator(RecordGenerator):
         self.first_column = self.first_column or self.first_table + '_id'
         self.second_column = self.second_column or self.second_table + '_id'
         self.table_name = self.table_name or self.first_table + '_' + self.second_table
-        self.base_statement = f"INSERT INTO {self.table_name} ({self.first_column}, {self.second_column}) VALUES "
-        self.values_statement = "(%s, %s)"
+        self.fields = (f'{self.first_column}', f'{self.second_column}')
         super(LinkRelationRecordGenerator, self).__init__(**sources)
 
     def generate(self):
@@ -61,10 +62,11 @@ class LinkRelationRecordGenerator(RecordGenerator):
 
 class UserGenerator(RecordGenerator):
     table_name = "users"
-    base_statement = ("INSERT INTO users (first_name, last_name, username, "
-                      "email, password, city_id, description, is_superuser, is_staff, is_active, date_joined) "
-                      "VALUES ")
-    values_statement = "(%s, %s, %s, %s, %s, %s, %s, FALSE, FALSE, TRUE, %s)"
+    fields = (
+        "first_name", "last_name", "username", "email", "password", "city_id", "description", "is_superuser",
+        "is_staff", "is_active", "date_joined", "role_id"
+    )
+    values_statement = "(%s, %s, %s, %s, %s, %s, %s, FALSE, FALSE, TRUE, %s, %s)"
     returning_column = "user_id"
 
     def generate(self):
@@ -92,18 +94,45 @@ class GenresUsersGenerator(LinkRelationRecordGenerator):
     second_column = 'genre_id'
 
 
+class BandGenreGenerator(LinkRelationRecordGenerator):
+    first_table = 'band'
+    second_table = 'genre'
+
+
 class UserProfessionGenerator(LinkRelationRecordGenerator):
     first_table = 'users'
     second_table = 'professions'
     second_column = 'profession_id'
 
 
+class UserBandGenerator(LinkRelationRecordGenerator):
+    first_table = 'user'
+    second_table = 'band'
+    first_column = 'users_id'
+
+
 class BandGenerator(RecordGenerator):
     table_name = 'band'
-    fields = ('name', 'city_id', 'year_founded', 'homepage', 'description')
+    fields = ('name', 'city_id', 'year_founded', 'homepage', 'description', 'created')
+    returning_column = 'band_id'
 
     def generate(self):
         amount = self.generator_sources['amount']
         cities_ids = self.generator_sources['cities_ids']
         for _ in range(amount):
             yield generate_band_data(cities_ids)
+
+
+class AdvertGenerator(RecordGenerator):
+    table_name = 'advert'
+    fields = ('title', 'description', 'posted_on', 'band_id', 'genre_id', 'profession_id', 'user_id')
+
+    def generate(self):
+        amount = self.generator_sources['amount']
+        prof_ids = self.generator_sources['prof_ids']
+        user_ids = self.generator_sources['user_ids']
+        for _ in range(amount):
+            if random.random() < 0.5:
+                yield generate_band_advert_data(prof_ids, user_ids)
+            else:
+                yield generate_musician_advert_data(user_ids)
