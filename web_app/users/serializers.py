@@ -21,14 +21,12 @@ class UsersSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UsersRegisterSerializer(serializers.ModelSerializer):
-    email2 = serializers.EmailField(label='Confirm Email')
-    password = serializers.CharField(write_only=True, required=True)
+    email2 = serializers.EmailField(label='Confirm Email', write_only=True)
     password2 = serializers.CharField(label='Confirm Password', write_only=True, required=True)
 
     class Meta:
         model = Users
         fields = ('username', 'password', 'password2', 'email', 'email2')
-        extra_kwargs = {"password": {"write_only": True}}
 
     def validate_email(self, value):
         data = self.get_initial()
@@ -50,6 +48,8 @@ class UsersRegisterSerializer(serializers.ModelSerializer):
             raise ValidationError("Password must match")
 
     def create(self, validated_data):
+        validated_data.pop('password2')
+        validated_data.pop('email2')
         validated_data['password'] = make_password(validated_data.get('password'))
         return super(UsersRegisterSerializer, self).create(validated_data)
 
