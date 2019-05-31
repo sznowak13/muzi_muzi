@@ -3,8 +3,7 @@ from .serializers import BandsSerializer, MemberSerializer
 from rest_framework.decorators import action
 from rest_framework import viewsets
 from rest_framework.response import Response
-from .permissions import IsMemberOrReadOnly
-from django.core.mail import EmailMultiAlternatives
+from .permissions import IsMember
 from django.template.loader import render_to_string
 from .utils.email import generate_emails, send_mails
 
@@ -13,7 +12,7 @@ class BandViewSet(viewsets.ModelViewSet):
     queryset = Band.objects.all()
     serializer_class = BandsSerializer
 
-    @action(detail=True, permission_classes=[IsMemberOrReadOnly], methods=['post'])
+    @action(detail=True, permission_classes=[IsMember], methods=['post'])
     def notify_members(self, request, pk=None):
         band = self.get_object()
         user = request.user
