@@ -103,7 +103,21 @@ def populate_table(table_name, statement: str, param_gnrt, clear: bool = True, g
     print("Preparing sql...")
     sql, params = sql_gen.generate_sql_with_params(statement, param_gnrt, gnrt_sources)
     print("Executing inserts...")
-    db_manager.execute_with_params(sql, params)
+    returning_values = db_manager.execute_with_params(sql, params)
+    return returning_values
+
+
+def populate_table_with_generator(record_generator: BaseGenerator, clear=False):
+    print(f"-- Populating {record_generator.table_name} --")
+    if clear:
+        print(f"Clearing the data from {record_generator.table_name}...")
+        db_manager.clear_table(record_generator.table_name)
+
+    print("Preparing sql...")
+    sql, params = sql_gen.generate_sql_from_generator(record_generator)
+    print("Executing inserts...")
+    returning_values = db_manager.execute_with_params(sql, params)
+    return returning_values
 
 
 if __name__ == '__main__':
