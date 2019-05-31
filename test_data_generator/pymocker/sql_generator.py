@@ -1,4 +1,4 @@
-from record_generators import BaseGenerator
+from .abstract_mockers import BaseMocker
 
 
 def generate_sql_with_params(statement: str, param_generator, gnrt_sources: list):
@@ -21,7 +21,7 @@ def generate_sql_with_params(statement: str, param_generator, gnrt_sources: list
     return "".join(sql), query_params
 
 
-def generate_sql_from_generator(generator: BaseGenerator):
+def generate_sql_from_generator(generator: BaseMocker):
     lost_count = 0
     added = 0
     sql = []

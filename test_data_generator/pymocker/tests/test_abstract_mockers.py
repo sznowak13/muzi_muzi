@@ -1,5 +1,5 @@
 import pytest
-from record_generators import BaseGenerator, RecordGenerator
+from mockers import BaseGenerator, RecordGenerator
 
 
 def test_base_generator_cannot_be_instantiated():
