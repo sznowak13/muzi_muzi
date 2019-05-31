@@ -39,7 +39,7 @@ def generate_user_data(cities_ids) -> tuple:
     desc = resources.get_description(random.randint(50, 200))
     date_joined = datetime.datetime.now()
 
-    return first_name, last_name, nickname, email, password, city_id, desc, date_joined
+    return first_name, last_name, nickname, email, password, city_id, desc, date_joined, 1
 
 
 def user_data_generator(amount, cities_ids):
@@ -54,8 +54,9 @@ def generate_band_data(cities_ids) -> tuple:
     city_name = get_city_name_by_id(city_id)
     homepage = f"http://{''.join(name.split(' ')).lower()}.{''.join(city_name.split(' ')).lower()}.pl"
     description = resources.get_description(random.randint(20, 150))
+    created = datetime.datetime.now()
 
-    return name, city_id, year_founded, homepage, description
+    return name, city_id, year_founded, homepage, description, created
 
 
 def generate_email():
