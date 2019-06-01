@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'private_messages.apps.PrivateMessagesConfig',
     'corsheaders',
-    'rest_framework'
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

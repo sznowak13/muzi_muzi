@@ -1,38 +1,107 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import userphoto from "./userphoto.png";
 
 export default class Adverts extends Component {
+  constructor(props) {
+    super(props);
+    this.handlePage = this.handlePage.bind(this);
+    this.state = {
+      next: "http://127.0.0.1:8000/adverts/",
+      previous: null,
+      adverts: []
+    };
+  }
+
+  componentDidMount() {
+    const url = this.state.next;
+    this.handleUrl(url);
+  }
+
+  handleUrl(url) {
+    fetch(url)
+      .then(result => result.json())
+      .then(result => {
+        this.setState({
+          next: result.next,
+          adverts: result.results,
+          previous: result.previous
+        });
+        console.log(result);
+      });
+  }
+
+  handlePage(nextOrPreviousPage) {
+    this.setState({ adverts: [] });
+    const url = nextOrPreviousPage;
+    if (url !== null) {
+      this.handleUrl(url);
+    }
+  }
+
   render() {
-    const { advertData } = this.props;
+    const { adverts, next, previous } = this.state;
     return (
-      <Container>
-        <AdvBody advertData={advertData} />
+      <Container className="adverts-container">
+        <h2 className="section-title">New adverts</h2>
+        <PaginationPage
+          next={next}
+          previous={previous}
+          handlePage={this.handlePage}
+        />
+        <AdvBody advertData={adverts} />
       </Container>
     );
   }
 }
 
+const PaginationPage = props => {
+  return (
+    <nav aria-label="Page navigation">
+      <ul className="pagination justify-content-center">
+        <li className="page-item">
+          <Button
+            className="page-link"
+            disabled={props.previous === null}
+            onClick={() => props.handlePage(props.previous)}
+          >
+            Previous
+          </Button>
+        </li>
+        <li className="page-item">
+          <Button
+            className="page-link"
+            disabled={props.next === null}
+            onClick={() => props.handlePage(props.next)}
+          >
+            Next
+          </Button>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
 const AdvBody = props => {
   const rows = props.advertData.map((row, index) => {
     return (
-      <div class="boxes" key={index}>
-        <div class="grid-container">
-          <div class="item1">{row.fields.title}</div>
-          <div class="item2">
+      <div className="boxes" key={index}>
+        <div className="grid-container">
+          <div className="item1">{row.title}</div>
+          <div className="item2">
             <img src={userphoto} alt="ph" width="180" height="180" />
           </div>
-          <div class="item3">
+          <div className="item3">
             Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
             Ipsum Lorem Ipsum
           </div>
-          <div class="item4">{row.fields.city}</div>
-          <div class="item5">{row.fields.genre}</div>
-          <div class="item6">{row.fields.posted_on.substring(0, 10)}</div>
+          <div className="item4">{row.city}</div>
+          <div className="item5">{row.genre}</div>
+          <div className="item6">{row.posted_on.substring(0, 10)}</div>
         </div>
       </div>
     );
   });
 
-  return <tbody>{rows}</tbody>;
+  return <div>{rows}</div>;
 };

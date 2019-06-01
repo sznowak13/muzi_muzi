@@ -24,8 +24,12 @@ class AdvertSerializer(serializers.HyperlinkedModelSerializer):
     profession = serializers.SlugRelatedField(slug_field='name', queryset=Profession.objects.all())
     genre = serializers.SlugRelatedField(slug_field='name', queryset=Genre.objects.all())
     posted_on = serializers.DateTimeField(read_only=True)
+    city = serializers.StringRelatedField(source='user.city', read_only=True)
 
     class Meta:
         model = Advert
-        fields = ('advert_id', 'url', 'user', 'username', 'band', 'band_name', 'title', 'description', 'posted_on',
-                  'profession', 'genre')
+        fields = (
+            'advert_id', 'url', 'user', 'city', 'username', 'band',
+            'band_name', 'title', 'description', 'posted_on',
+            'profession', 'genre'
+        )

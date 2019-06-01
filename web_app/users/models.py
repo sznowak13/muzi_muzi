@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 class Users(AbstractUser):
     user_id = models.AutoField(primary_key=True)
-    role = models.ForeignKey('muzi_muzi.Role', models.DO_NOTHING, blank=True, null=False)
+    role = models.ForeignKey('muzi_muzi.Role', models.DO_NOTHING, blank=True, null=True)
     city = models.ForeignKey('muzi_muzi.City', models.DO_NOTHING, blank=True, null=True)
     photo_url = models.CharField(max_length=255, blank=True, null=True)
     video = models.ForeignKey('muzi_muzi.Videos', models.DO_NOTHING, blank=True, null=True)
