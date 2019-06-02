@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import { Container, Button, Card, Col, CardDeck } from "react-bootstrap";
+import { Container, Button, Card, CardDeck } from "react-bootstrap";
 import userphoto from "./userphoto.png";
 
-export default class Bands extends Component {
+export default class Users extends Component {
   constructor(props) {
     super(props);
     this.handlePage = this.handlePage.bind(this);
     this.state = {
-      next: "http://127.0.0.1:8000/bands/",
+      next: "http://127.0.0.1:8000/users/",
       previous: null,
-      bands: []
+      users: []
     };
   }
 
@@ -24,7 +24,7 @@ export default class Bands extends Component {
       .then(result => {
         this.setState({
           next: result.next,
-          bands: result.results,
+          users: result.results,
           previous: result.previous
         });
         console.log(result);
@@ -32,7 +32,7 @@ export default class Bands extends Component {
   }
 
   handlePage(nextOrPreviousPage) {
-    this.setState({ bands: [] });
+    this.setState({ users: [] });
     const url = nextOrPreviousPage;
     if (url !== null) {
       this.handleUrl(url);
@@ -40,27 +40,36 @@ export default class Bands extends Component {
   }
 
   render() {
-    const { bands } = this.state;
+    const { users } = this.state;
     return (
       <Container className="adverts-container">
-        <h2 className="section-title">New bands</h2>
-        <BandBody bandData={bands} />
+        <h2 className="section-title">New users</h2>
+        <BandBody usersData={users} />
       </Container>
     );
   }
 }
 
 const BandBody = props => {
-  const rows = props.bandData.map((row, index) => {
+  const rows = props.usersData.map((row, index) => {
     return (
       <CardDeck className="bandsbox">
         <Card border="warning" style={{ width: "11rem" }} key={index}>
           <Card.Img variant="top" src={userphoto} alt="ph" height="180" />
-          <Card.Header as="h5">{row.name}</Card.Header>
+          <Card.Header as="h5">{row.username}</Card.Header>
           <Card.Body>
-            <Card.Title>{row.genres}</Card.Title>
-            <Card.Text>{row.city}</Card.Text>
-            <Button variant="primary">More</Button>
+            <ul className="professions">
+              {row.professions.map(prof => {
+                return <li key={prof}>{prof}</li>;
+              })}
+            </ul>
+            <Card.Text>
+              <i class="fas fa-map-marker-alt" />
+              {row.city}
+            </Card.Text>
+            <Card.Footer>
+              <Button variant="primary">More</Button>
+            </Card.Footer>
           </Card.Body>
         </Card>
       </CardDeck>

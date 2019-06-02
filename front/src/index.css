@@ -121,9 +121,17 @@ div.item5 {
 .bandsbox {
   margin-top: 10px;
   margin-bottom: 10px;
-  min-height: 408px;
+  min-height: 430px;
 }
 
 .card-header {
-  min-height: 73px;
+  min-height: 55px;
+}
+
+.professions {
+  padding-left: 15px;
+}
+
+i {
+  margin-right: 3px;
 }
