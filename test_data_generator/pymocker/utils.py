@@ -19,7 +19,9 @@ def time_it(func):
     return wrapper
 
 
-def get_bool_from_input(inpt: str, valid_confirms):
+def get_bool_from_input(inpt: str, valid_confirms=None):
+    if valid_confirms is None:
+        valid_confirms = CONFIRMS
     inpt = inpt.strip().lower()
     for confirm in valid_confirms:
         if inpt == confirm:
@@ -35,7 +37,7 @@ class TableSetting:
         self.clear = clear
 
 
-def get_table_input(prompt, confirms=None):
+def get_table_setting(prompt, confirms=None):
     if confirms is None:
         confirms = CONFIRMS
     to_generate = input(prompt)

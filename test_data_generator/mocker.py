@@ -1,4 +1,4 @@
-from pymocker.utils import get_table_input, get_bool_from_input
+from pymocker.utils import get_table_setting, get_bool_from_input
 from pymocker.populators import populate_table_with_generator
 
 import db_manager
@@ -9,12 +9,12 @@ from mockers import *
 def main():
     print("Welcome to test data mocker for muzi_muzi database!")
 
-    user_setting = get_table_input("Input number of users to generate: ")
-    band_setting = get_table_input("Input number of bands to generate (Approx. half the users is best): ")
-    advert_setting = get_table_input("Input number of adverts to create: ")
+    user_setting = get_table_setting("Input number of users to generate: ")
+    band_setting = get_table_setting("Input number of bands to generate (Approx. half the users is best): ")
+    advert_setting = get_table_setting("Input number of adverts to create: ")
 
     repopulate_cities = get_bool_from_input(
-        input("Re-populate city table? (y/N) *enter 'yes' if this is first time* "), CONFIRMS
+        input("Re-populate city table? (y/N) *enter 'yes' if this is first time* ")
     )
 
     cities_ids = populate_table_with_generator(CityMocker(cities=generator.cities), clear=repopulate_cities) \
