@@ -1,3 +1,11 @@
-from django.test import TestCase
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APITestCase
+from .models import Advert
 
-# Create your tests here.
+
+class AdvertsTest(APITestCase):
+
+    def test_latest(self):
+
+        url = reverse('adverts-latest')
