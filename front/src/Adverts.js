@@ -89,7 +89,11 @@ const AdvBody = props => {
         <div className="grid-container">
           <div className="item1">{row.title}</div>
           <div className="item2">
-            <img src={userphoto} alt="ph" width="180" height="180" />
+            {row.photo_url = = null ? (
+              <img src={userphoto} alt="ph" width="180" height="180" />
+            ) : (
+              <img src={row.photo_url} alt="ph" width="180" height="180" />
+            )}
           </div>
           <div className="item3">
             Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
