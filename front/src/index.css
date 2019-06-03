@@ -85,7 +85,6 @@
 
 .grid-container > div {
   background-color: rgb(255, 255, 255);
-  text-align: center;
   font-size: 15px;
 }
 
@@ -94,7 +93,22 @@ div.item6,
 div.item3,
 div.item4,
 div.item5 {
-  padding: 15px;
+  padding: 5px;
+}
+
+div.item1 {
+  display: inline;
+}
+
+div.item1,
+div.item3 {
+  min-width: 695px;
+}
+
+div.item4,
+div.item5,
+div.item6 {
+  min-width: 170px;
 }
 
 .boxes {
@@ -134,4 +148,24 @@ div.item5 {
 
 i {
   margin-right: 3px;
+}
+
+div > p {
+  font-size: 1em;
+  margin: 0px;
+}
+
+.advert-title {
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+}
+
+.advert-data {
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.advert-label {
+  font-size: 0.9em;
 }
