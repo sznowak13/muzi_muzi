@@ -1,5 +1,5 @@
 #root {
-  background-color: rgb(231, 231, 231);
+  background-color: #303841;
 }
 
 .section-title {
@@ -19,9 +19,9 @@
 .adverts-container {
   margin: 0px 30px 20px 50px;
   width: 250px;
-  height: 700px;
+  height: 800px;
   overflow: auto;
-  background-color: rgb(255, 225, 142);
+  background-color: #eeeeee;
 }
 
 .ant-tabs-bar {
@@ -29,27 +29,33 @@
 }
 
 .ant-tabs-nav .ant-tabs-tab-active {
-  background-color: rgb(255, 225, 142) !important;
+  background-color: #eeeeee !important;
 }
 
 .ant-tabs-tab {
   box-sizing: content-box !important;
   margin: 0 3px 0 0 !important;
-  background-color: rgb(221, 196, 127) !important;
+  background-color: #606a72 !important;
+  color: white;
 }
 
 .navbar {
-  margin-bottom: 150px;
+  background-color: #f6c90e;
 }
 
-.form-inline {
+.nav2 {
+  background-color: #3a4750;
+  margin-bottom: 3%;
+}
+
+/* .form-inline {
   width: 100%;
-  padding-inline-start: 400px;
+  padding-inline-start: 70%;
 }
 
 .form-control {
   width: 60% !important;
-}
+} */
 
 .item1 {
   grid-area: title;
@@ -79,7 +85,7 @@
     "photo description description description city"
     "photo description description description footer";
   grid-gap: 2px;
-  background-color: #ffc526;
+  background-color: #f6c90e;
   padding: 4px;
 }
 
