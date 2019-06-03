@@ -97,7 +97,9 @@ div.item5 {
 }
 
 div.item1 {
-  display: inline;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 div.item1,
@@ -158,7 +160,6 @@ div > p {
 .advert-title {
   font-weight: 500;
   font-size: 20px;
-  text-align: center;
 }
 
 .advert-data {
