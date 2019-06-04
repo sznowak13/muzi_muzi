@@ -54,23 +54,39 @@ const BandBody = props => {
   const rows = props.usersData.map((row, index) => {
     return (
       <CardDeck className="bandsbox">
-        <Card border="warning" style={{ width: "11rem" }} key={index}>
+        <Card style={{ width: "12rem" }} key={index}>
           <Card.Img variant="top" src={userphoto} alt="ph" height="180" />
-          <Card.Header as="h5">{row.username}</Card.Header>
+          <Card.Header>
+            <p>{row.first_name}</p>
+            <span> "{row.username}"</span>
+          </Card.Header>
           <Card.Body>
-            <ul className="professions">
-              {row.professions.map(prof => {
+            <span>
+              <i class="fas fa-drum" />
+            </span>
+            <span>Professions: </span>
+            <ul className="users-info">
+              {row.professions.slice(0, 2).map(prof => {
                 return <li key={prof}>{prof}</li>;
+              })}
+            </ul>
+            <span>
+              <i class="fas fa-music" />
+            </span>
+            <span>Genres: </span>
+            <ul className="users-info">
+              {row.genres.slice(0, 2).map(genre => {
+                return <li key={genre}>{genre}</li>;
               })}
             </ul>
             <Card.Text>
               <i class="fas fa-map-marker-alt" />
               {row.city}
             </Card.Text>
-            <Card.Footer>
-              <Button variant="primary">More</Button>
-            </Card.Footer>
           </Card.Body>
+          <Card.Footer>
+            <Button variant="primary">More</Button>
+          </Card.Footer>
         </Card>
       </CardDeck>
     );
