@@ -48,15 +48,6 @@
   margin-bottom: 3%;
 }
 
-/* .form-inline {
-  width: 100%;
-  padding-inline-start: 70%;
-}
-
-.form-control {
-  width: 60% !important;
-} */
-
 .item1 {
   grid-area: title;
 }
@@ -136,18 +127,19 @@ div.item6 {
 }
 
 .card-deck {
-  margin-right: 5px !important;
-  margin-left: 0px !important;
+  margin-left: 4px !important;
 }
 
 .bandsbox {
   margin-top: 10px;
   margin-bottom: 10px;
-  min-height: 430px;
+  min-height: 460px;
 }
 
 .card-header {
-  min-height: 55px;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 500;
 }
 
 .professions {
@@ -175,4 +167,30 @@ div > p {
 
 .advert-label {
   font-size: 0.9em;
+}
+
+div.card-body {
+  padding: 10px;
+}
+
+div.card-header {
+  padding: 10px;
+  min-height: 70px;
+}
+
+div.card {
+  border-color: #f6c90e;
+  border-width: 3px;
+}
+
+div.card:hover {
+  box-shadow: 0 0 19px rgba(33, 33, 33, 0.2);
+}
+
+ul.professions {
+  margin-left: 10px;
+}
+
+ul.users-info li {
+  font-weight: 500;
 }
