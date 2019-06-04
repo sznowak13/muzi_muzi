@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Adverts from "./Adverts";
-import Bands from "./Bands";
+import Users from "./Users";
 import { Container } from "react-bootstrap";
 import { Tabs } from "antd";
 
@@ -17,10 +17,10 @@ export default class News extends Component {
           <TabPane tab="Adverts" key="1">
             <Adverts />
           </TabPane>
-          <TabPane tab="Bands" key="2">
-            <Bands />
+          <TabPane tab="Users" key="2">
+            <Users />
           </TabPane>
-          <TabPane tab="Users" key="3">
+          <TabPane tab="Bands" key="3">
             Content of Tab Pane 3
           </TabPane>
         </Tabs>
