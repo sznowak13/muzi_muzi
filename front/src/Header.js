@@ -7,7 +7,7 @@ class Header extends Component {
     return (
       <Navbar expand="lg">
         <Navbar.Brand href="#home">
-          <img alt="" src={logo} width="175" height="65" />
+          <img alt="" src={logo} width="160" height="55" />
         </Navbar.Brand>
       </Navbar>
     );
