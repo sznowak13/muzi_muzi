@@ -56,7 +56,11 @@ const BandBody = props => {
     return (
       <CardDeck className="bandsbox">
         <Card style={{ width: "12rem" }} key={index}>
-          <Card.Img variant="top" src={userphoto} alt="ph" height="180" />
+          {row.photo_url == null ? (
+            <Card.Img variant="top" src={userphoto} alt="ph" height="180" />
+          ) : (
+            <Card.Img variant="top" src={row.photo_url} alt="ph" height="180" />
+          )}
           <Card.Header>
             <p>{row.first_name}</p>
             <span> "{row.username}"</span>
@@ -93,7 +97,7 @@ const BandBody = props => {
               {row.city}
             </Card.Text>
           </Card.Body>
-          <Card.Footer>
+          <Card.Footer className="about-user">
             <Button variant="outline-dark">More</Button>
           </Card.Footer>
         </Card>

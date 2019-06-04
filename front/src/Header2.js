@@ -8,7 +8,7 @@ class Header2 extends Component {
         <Nav className="mr-auto" />
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button type="submit">Search</Button>
+          <Button variant="outline-warning">Search</Button>
         </Form>
       </Navbar>
     );
