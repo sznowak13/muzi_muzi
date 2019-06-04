@@ -191,6 +191,10 @@ ul.professions {
   margin-left: 10px;
 }
 
-ul.users-info li {
+p.users-info span {
   font-weight: 500;
+}
+
+.users-body {
+  margin-bottom: 7px;
 }

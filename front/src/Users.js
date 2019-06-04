@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { Component } from "react";
 import { Container, Button, Card, CardDeck } from "react-bootstrap";
 import userphoto from "./userphoto.png";
@@ -61,31 +62,39 @@ const BandBody = props => {
             <span> "{row.username}"</span>
           </Card.Header>
           <Card.Body>
-            <span>
-              <i class="fas fa-drum" />
-            </span>
-            <span>Professions: </span>
-            <ul className="users-info">
-              {row.professions.slice(0, 2).map(prof => {
-                return <li key={prof}>{prof}</li>;
-              })}
-            </ul>
-            <span>
-              <i class="fas fa-music" />
-            </span>
-            <span>Genres: </span>
-            <ul className="users-info">
-              {row.genres.slice(0, 2).map(genre => {
-                return <li key={genre}>{genre}</li>;
-              })}
-            </ul>
+            <div className="users-body">
+              <i className="fas fa-drum" />
+              <span>Professions: </span>
+              <p className="users-info">
+                {row.professions.slice(0, 2).map((prof, i) => {
+                  if (row.professions.slice(0, 2).length - 1 == i) {
+                    return <span key={prof}>{prof}</span>;
+                  } else {
+                    return <span key={prof}>{prof}, </span>;
+                  }
+                })}
+              </p>
+            </div>
+            <div className="users-body">
+              <i className="fas fa-music" />
+              <span>Genres: </span>
+              <p className="users-info">
+                {row.genres.slice(0, 2).map((genre, i) => {
+                  if (row.genres.slice(0, 2).length - 1 == i) {
+                    return <span key={genre}>{genre}</span>;
+                  } else {
+                    return <span key={genre}>{genre}, </span>;
+                  }
+                })}
+              </p>
+            </div>
             <Card.Text>
-              <i class="fas fa-map-marker-alt" />
+              <i className="fas fa-map-marker-alt" />
               {row.city}
             </Card.Text>
           </Card.Body>
           <Card.Footer>
-            <Button variant="primary">More</Button>
+            <Button variant="outline-dark">More</Button>
           </Card.Footer>
         </Card>
       </CardDeck>
