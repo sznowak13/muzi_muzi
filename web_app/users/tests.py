@@ -1,9 +1,9 @@
-from django.urls import reverse
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
 from rest_framework.test import APITestCase
 from .models import Users, VerificationToken
 from rest_framework.authtoken.models import Token
+from web_app.utils import reverse
 
 import json
 
