@@ -3,19 +3,27 @@ import Header from "./Header";
 import Header2 from "./Header2";
 import News from "./News";
 import Footer from "./Footer";
+import Sidebar from "./Sidebar";
+import { Col, Row } from "react-bootstrap";
 
 class App extends Component {
   render() {
     return (
-      <div className="App Site">
-        <div className="Site-content">
-          <div className="App-header">
+      <div className="app-site">
+        <div className="site-content">
+          <div className="app-header">
             <Header />
             <Header2 />
           </div>
-          <div className="main">
-            <News />
-          </div>
+          <Row>
+            <Col md="auto">
+              {" "}
+              <Sidebar />
+            </Col>
+            <Col>
+              <News />
+            </Col>
+          </Row>
         </div>
         <Footer />
       </div>
