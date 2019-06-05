@@ -1,4 +1,4 @@
-from .models import Users
+from .models import Users, VerificationToken
 from .serializers import UsersSerializer, UsersRegisterSerializer
 from rest_framework import mixins, viewsets, filters, status
 from rest_framework.decorators import action
@@ -25,7 +25,15 @@ class UserRegisterView(mixins.CreateModelMixin,
 
     @action(detail=False, methods=['get'])
     def verify_email(self, request):
-        token = request.data.get('key')
+        token = request.query_params.get('key')
         if not token:
             return Response({"error": "Missing verification token"}, status=status.HTTP_400_BAD_REQUEST)
-        return Response({"ok": "ok"})
+        try:
+            verified_user = VerificationToken.objects.get(key=token).user
+        except VerificationToken.DoesNotExist:
+            return Response({"error": "Wrong token provided"}, status=status.HTTP_400_BAD_REQUEST)
+
+        verified_user.is_active = True
+        verified_user.save()
+        print("ISACTIVE: ", verified_user.is_active)
+        return Response({"success": "Account activated"})

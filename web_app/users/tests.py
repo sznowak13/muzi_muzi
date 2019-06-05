@@ -25,7 +25,7 @@ class TestUsers(APITestCase):
         # we are getting basically random ids each time this test is ran (because test method execution is random)
         # so we are checking ids dynamically as we dont care much about correct user id
         user_ids = [user.user_id for user in Users.objects.order_by('pk')]
-        
+
         assert response.status_code == status.HTTP_200_OK
         assert len(response.data) == 4
         assert json_response == [
@@ -107,3 +107,22 @@ class TestUsers(APITestCase):
         json_response = json.loads(resp.content.decode('utf-8'))
         assert resp.status_code == status.HTTP_400_BAD_REQUEST
         assert json_response == {"error": "Missing verification token"}
+
+    def test_email_verification_with_unknown_token(self):
+        url = reverse('register-verify-email', query_params={"key": "very_wrong_token"})
+        resp = self.client.get(url)
+        json_response = json.loads(resp.content.decode('utf-8'))
+        assert resp.status_code == status.HTTP_400_BAD_REQUEST
+        assert json_response == {"error": "Wrong token provided"}
+
+    def test_email_verification_with_correct_token(self):
+        user = Users.objects.get(pk=1)
+        assert not user.is_active
+        correct_token = VerificationToken.objects.get(user=user)
+        url = reverse('register-verify-email', query_params={"key": correct_token})
+        resp = self.client.get(url)
+        json_response = json.loads(resp.content.decode('utf-8'))
+        user = Users.objects.get(pk=1)  # Need to re-fetch the user from DB!! Previous one isn't changed!
+        assert resp.status_code == status.HTTP_200_OK
+        assert json_response == {"success": "Account activated"}
+        assert user.is_active
