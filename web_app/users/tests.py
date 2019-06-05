@@ -20,19 +20,25 @@ class TestUsers(APITestCase):
         url = reverse('users-latest')
         response = self.client.get(url)
         json_response = json.loads(response.content.decode('utf-8'))
+
+        # Ok, its ugly, but since tests dont reset id sequence between each method
+        # we are getting basically random ids each time this test is ran (because test method execution is random)
+        # so we are checking ids dynamically as we dont care much about correct user id
+        user_ids = [user.user_id for user in Users.objects.order_by('pk')]
+        
         assert response.status_code == status.HTTP_200_OK
         assert len(response.data) == 4
         assert json_response == [
-            {'user_id': 4, 'url': 'http://testserver/users/4/', 'first_name': 'Ddam', 'last_name': 'Ddamowski',
+            {'user_id': user_ids[3], 'url': f'http://testserver/users/{user_ids[3]}/', 'first_name': 'Ddam', 'last_name': 'Ddamowski',
              'username': 'Test4', 'role': None, 'city': None, 'photo_url': None, 'video': None, 'description': None,
              'genres': [], 'professions': [], 'bands': [], 'adverts': []},
-            {'user_id': 3, 'url': 'http://testserver/users/3/', 'first_name': 'Cdam', 'last_name': 'Cdamowski',
+            {'user_id': user_ids[2], 'url': f'http://testserver/users/{user_ids[2]}/', 'first_name': 'Cdam', 'last_name': 'Cdamowski',
              'username': 'Test3', 'role': None, 'city': None, 'photo_url': None, 'video': None, 'description': None,
              'genres': [], 'professions': [], 'bands': [], 'adverts': []},
-            {'user_id': 2, 'url': 'http://testserver/users/2/', 'first_name': 'Bdam', 'last_name': 'Bdamowski',
+            {'user_id': user_ids[1], 'url': f'http://testserver/users/{user_ids[1]}/', 'first_name': 'Bdam', 'last_name': 'Bdamowski',
              'username': 'Test2', 'role': None, 'city': None, 'photo_url': None, 'video': None, 'description': None,
              'genres': [], 'professions': [], 'bands': [], 'adverts': []},
-            {'user_id': 1, 'url': 'http://testserver/users/1/', 'first_name': 'Adam', 'last_name': 'Adamowski',
+            {'user_id': user_ids[0], 'url': f'http://testserver/users/{user_ids[0]}/', 'first_name': 'Adam', 'last_name': 'Adamowski',
              'username': 'Test1', 'role': None, 'city': None, 'photo_url': None, 'video': None, 'description': None,
              'genres': [], 'professions': [], 'bands': [], 'adverts': []},
         ]
