@@ -99,17 +99,17 @@ const AdvBody = props => {
           </div>
           <div className="item3">{row.description}</div>
           <div className="item4">
-            <i class="fas fa-map-marker-alt" />
+            <i className="fas fa-map-marker-alt" />
             <span className="advert-label">City: </span>
             <p className="advert-data">{row.city}</p>
           </div>
           <div className="item5">
-            <i class="fas fa-music" />
+            <i className="fas fa-music" />
             <span className="advert-label"> Genres: </span>
             <p className="advert-data">{row.genre}</p>
           </div>
           <div className="item6">
-            <i class="far fa-clock" />
+            <i className="far fa-clock" />
             <span className="advert-label">Posted on: </span>
             <p className="advert-data">{row.posted_on.substring(0, 10)}</p>
           </div>
