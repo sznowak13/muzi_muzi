@@ -1,20 +1,10 @@
-from connection.connection_handler import db_execute
+from pymocker.db_connection import db_execute
 
 
 @db_execute
 def get_role_ids(cursor):
     cursor.execute("SELECT role_id FROM role;")
     return cursor.fetchall()
-
-
-@db_execute
-def clear_table(cursor, table_name: str):
-    cursor.execute(f"TRUNCATE TABLE {table_name} RESTART IDENTITY CASCADE;")
-
-
-@db_execute
-def execute_with_params(cursor, sql: str, parameters: tuple):
-    cursor.execute(sql, parameters)
 
 
 @db_execute
@@ -103,7 +93,3 @@ def get_profession_by_user_id(cursor, user_id):
 def get_username_by_id(cursor, user_id):
     cursor.execute("select u.username from users u where user_id = %s", (user_id,))
     return cursor.fetchone()[0]
-
-
-if __name__ == '__main__':
-    print(get_band_by_user_id(2))
