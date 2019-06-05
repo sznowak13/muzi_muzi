@@ -135,7 +135,11 @@ REST_FRAMEWORK = {
 }
 
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+email_password = os.environ.get('MUZI_MUZI_EMAIL_PASSWORD')
+if not email_password:
+    raise EnvironmentError("Password for email backend not provided. Check environment variables.")
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
