@@ -54,7 +54,7 @@ export default class Users extends Component {
 const BandBody = props => {
   const rows = props.usersData.map((row, index) => {
     return (
-      <CardDeck className="bandsbox">
+      <CardDeck className="usersbox">
         <Card style={{ width: "12rem" }} key={index}>
           {row.photo_url == null ? (
             <Card.Img variant="top" src={userphoto} alt="ph" height="180" />
