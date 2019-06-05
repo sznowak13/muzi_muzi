@@ -1,19 +1,8 @@
 #root {
+  height: 100%;
   display: flex;
   flex-direction: column;
   background-color: #303841;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font: 16px Sans-Serif;
-  display: flex;
-  flex-direction: column;
-}
-
-.content {
-  flex: 1 0 auto;
 }
 
 .footer {
@@ -39,9 +28,9 @@ body {
 }
 
 .adverts-container {
-  margin: 0px 30px 20px 50px;
+  margin: 0px 30px 20px 30px;
   width: 250px;
-  height: 800px;
+  max-height: 696px;
   overflow: auto;
   background-color: #eeeeee;
 }

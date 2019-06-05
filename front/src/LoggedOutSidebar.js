@@ -11,14 +11,14 @@ export default class LoggedOutSidebar extends Component {
             <Sidenav.Header>
               <div className="header-styles">
                 <h3 className="welcome-sign">
-                  Welcome to the MuzuMuzi community.
+                  Welcome to the MuziMuzi community.
                 </h3>
               </div>
             </Sidenav.Header>
-            <p className="welcome-sign">
+            <div className="welcome-sign">
               Don't have an account? It's free! Sign up and join us.
               <p>{<Icon icon="heart" />}</p>
-            </p>
+            </div>
             <Divider />
             <div className="welcome-btn">
               <Button variant="outline-secondary" block>
