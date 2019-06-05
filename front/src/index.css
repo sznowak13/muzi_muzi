@@ -1,9 +1,31 @@
 #root {
+  display: flex;
+  flex-direction: column;
   background-color: #303841;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  font: 16px Sans-Serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.footer {
+  padding: 8px;
+  flex-shrink: 0;
+  text-align: center;
+  background-color: #f6c90e;
+  color: rgb(0, 0, 0);
+}
+
 .section-title {
-  text-size-adjust: 0.3em;
+  text-size-adjust: 0.2em;
   text-align: left;
   padding: 20px;
 }
@@ -45,7 +67,7 @@
 
 .nav2 {
   background-color: #3a4750;
-  margin-bottom: 3%;
+  margin-bottom: 10px;
 }
 
 .item1 {
