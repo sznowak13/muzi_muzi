@@ -1,17 +1,20 @@
 from django.urls import reverse
+from django.contrib.auth.hashers import make_password
 from rest_framework import status
 from rest_framework.test import APITestCase
-from .models import Users
+from .models import Users, VerificationToken
+from rest_framework.authtoken.models import Token
+
 import json
 
 
 class TestUsers(APITestCase):
 
     def setUp(self) -> None:
-        Users.objects.create(username="Test1", first_name="Adam", last_name="Adamowski")
-        Users.objects.create(username="Test2", first_name="Bdam", last_name="Bdamowski")
-        Users.objects.create(username="Test3", first_name="Cdam", last_name="Cdamowski")
-        Users.objects.create(username="Test4", first_name="Ddam", last_name="Ddamowski")
+        Users.objects.create(username="Test1", first_name="Adam", last_name="Adamowski", password=make_password("Adam"))
+        Users.objects.create(username="Test2", first_name="Bdam", last_name="Bdamowski", password=make_password("Bdam"))
+        Users.objects.create(username="Test3", first_name="Cdam", last_name="Cdamowski", password=make_password("Cdam"))
+        Users.objects.create(username="Test4", first_name="Ddam", last_name="Ddamowski", password=make_password("Ddam"))
 
     def test_get_latest(self):
         url = reverse('users-latest')
