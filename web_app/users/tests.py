@@ -100,3 +100,10 @@ class TestUsers(APITestCase):
     def test_verification_tokens_are_created_for_each_user(self):
         # setup creates 4 users
         assert VerificationToken.objects.count() == 4
+
+    def test_email_verification_without_token(self):
+        url = reverse('register-verify-email')
+        resp = self.client.get(url)
+        json_response = json.loads(resp.content.decode('utf-8'))
+        assert resp.status_code == status.HTTP_400_BAD_REQUEST
+        assert json_response == {"error": "Missing verification token"}
