@@ -1,13 +1,15 @@
 from .models import Advert
 from .serializers import AdvertSerializer
-from rest_framework import generics, permissions, viewsets
+from rest_framework import permissions, viewsets
 from .permissions import IsOwnerOrReadOnly
+from muzi_muzi.views import LatestViewMixIn
 
 
-class AdvertViewSet(viewsets.ModelViewSet):
+class AdvertViewSet(viewsets.ModelViewSet, LatestViewMixIn):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
     queryset = Advert.objects.all()
     serializer_class = AdvertSerializer
+    latest_by = 'posted_on'
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

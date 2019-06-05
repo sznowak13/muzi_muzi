@@ -1,9 +1,31 @@
 #root {
-  background-color: rgb(231, 231, 231);
+  display: flex;
+  flex-direction: column;
+  background-color: #303841;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font: 16px Sans-Serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.footer {
+  padding: 8px;
+  flex-shrink: 0;
+  text-align: center;
+  background-color: #f6c90e;
+  color: rgb(0, 0, 0);
 }
 
 .section-title {
-  text-size-adjust: 0.3em;
+  text-size-adjust: 0.2em;
   text-align: left;
   padding: 20px;
 }
@@ -19,9 +41,9 @@
 .adverts-container {
   margin: 0px 30px 20px 50px;
   width: 250px;
-  height: 700px;
+  height: 800px;
   overflow: auto;
-  background-color: rgb(255, 225, 142);
+  background-color: #eeeeee;
 }
 
 .ant-tabs-bar {
@@ -29,26 +51,23 @@
 }
 
 .ant-tabs-nav .ant-tabs-tab-active {
-  background-color: rgb(255, 225, 142) !important;
+  background-color: #eeeeee !important;
 }
 
 .ant-tabs-tab {
   box-sizing: content-box !important;
   margin: 0 3px 0 0 !important;
-  background-color: rgb(221, 196, 127) !important;
+  background-color: #606a72 !important;
+  color: white;
 }
 
 .navbar {
-  margin-bottom: 150px;
+  background-color: #f6c90e;
 }
 
-.form-inline {
-  width: 100%;
-  padding-inline-start: 400px;
-}
-
-.form-control {
-  width: 60% !important;
+.nav2 {
+  background-color: #3a4750;
+  margin-bottom: 10px;
 }
 
 .item1 {
@@ -79,13 +98,12 @@
     "photo description description description city"
     "photo description description description footer";
   grid-gap: 2px;
-  background-color: #ffc526;
+  background-color: #f6c90e;
   padding: 4px;
 }
 
 .grid-container > div {
   background-color: rgb(255, 255, 255);
-  text-align: center;
   font-size: 15px;
 }
 
@@ -94,7 +112,24 @@ div.item6,
 div.item3,
 div.item4,
 div.item5 {
-  padding: 15px;
+  padding: 5px;
+}
+
+div.item1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.item1,
+div.item3 {
+  min-width: 695px;
+}
+
+div.item4,
+div.item5,
+div.item6 {
+  min-width: 170px;
 }
 
 .boxes {
@@ -114,16 +149,74 @@ div.item5 {
 }
 
 .card-deck {
-  margin-right: 5px !important;
-  margin-left: 0px !important;
+  margin-left: 4px !important;
 }
 
 .bandsbox {
   margin-top: 10px;
   margin-bottom: 10px;
-  min-height: 408px;
+  min-height: 460px;
 }
 
 .card-header {
-  min-height: 73px;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.professions {
+  padding-left: 15px;
+}
+
+i {
+  margin-right: 3px;
+}
+
+div > p {
+  font-size: 1em;
+  margin: 0px;
+}
+
+.advert-title {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.advert-data {
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.advert-label {
+  font-size: 0.9em;
+}
+
+div.card-body {
+  padding: 10px;
+}
+
+div.card-header {
+  padding: 10px;
+  min-height: 70px;
+}
+
+div.card {
+  border-color: #f6c90e;
+  border-width: 3px;
+}
+
+div.card:hover {
+  box-shadow: 0 0 19px rgba(33, 33, 33, 0.2);
+}
+
+ul.professions {
+  margin-left: 10px;
+}
+
+p.users-info span {
+  font-weight: 500;
+}
+
+.users-body {
+  margin-bottom: 7px;
 }
