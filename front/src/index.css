@@ -141,10 +141,36 @@ div.item6 {
   margin-left: 4px !important;
 }
 
-.bandsbox {
+.usersbox {
   margin-top: 10px;
   margin-bottom: 10px;
   min-height: 460px;
+}
+
+.bandsbox {
+  margin: 10px 10px;
+}
+
+.band-background {
+  background-size: contain;
+  opacity: 0.8;
+}
+
+.band-name {
+  text-align: center;
+  position: relative;
+  margin: 58% 0 58% 0;
+  font-weight: 500;
+  font-size: 2rem;
+  color: black;
+  text-shadow: 0 0 1rem white;
+  background:rgba(255,255,255,0.5);
+  width: inherit;
+}
+
+.item-data {
+  font-weight: 300;
+  font-size: 1.1rem;
 }
 
 .card-header {
@@ -210,6 +236,7 @@ p.users-info span {
   margin-bottom: 7px;
 }
 
+
 div.row {
   margin: 0;
 }
@@ -232,4 +259,7 @@ div.row {
   margin: 10px 10px 10px 10px;
   display: flex;
   justify-content: center;
+
+.search-bar{
+  width: 50px;
 }
