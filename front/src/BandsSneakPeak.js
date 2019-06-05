@@ -42,15 +42,20 @@ const Band = props => {
         <Card.ImgOverlay>
           <div className="band-name">{props.band.name}</div>
         </Card.ImgOverlay>
+
         <Card.Body>
           <div>
-            Homepage: <a href={props.band.homepage}>{props.band.homepage}</a>
+            <i className="fas fa-home" />
+            Homepage:
+            <p> <a href={props.band.homepage}>{props.band.homepage}</a> </p>
           </div>
           <div>
-            City: <p className="item-data">{props.band.city}</p>
+            <i className="fas fa-map-marker-alt" />
+            City: <p>{props.band.city}</p>
           </div>
           <div>
-            Genres: <p className="item-data">{props.band.genres}</p>
+            <i className="fas fa-music" />
+            Genres: <p>{props.band.genres}</p>
           </div>
         </Card.Body>
       </Card>
