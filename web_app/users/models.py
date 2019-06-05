@@ -20,6 +20,12 @@ class Users(AbstractUser):
         db_table = 'users'
 
 
+class VerificationToken(TokenModel):
+    class Meta:
+        abstract = False
+        db_table = 'verification_token'
+
+
 #  --- Views ---
 
 
