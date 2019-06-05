@@ -21,6 +21,7 @@ from muzi_muzi.urls import router as muzi_muzi_router
 from users.urls import router as users_router
 
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
 
 router = DefaultRouter()
 router.registry.extend(adverts_router.registry)
@@ -28,8 +29,10 @@ router.registry.extend(bands_router.registry)
 router.registry.extend(muzi_muzi_router.registry)
 router.registry.extend(users_router.registry)
 
+
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+    path('api-token/login', obtain_auth_token, name='api-token-auth'),
 ]
