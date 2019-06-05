@@ -71,3 +71,26 @@ class TestUsers(APITestCase):
                 "Emails must match"
             ]
         }
+
+    def test_login_inactive_user(self):
+        url = reverse('api-token-auth')
+        user = Users.objects.get(username="Test1")
+        resp = self.client.post(url, data={'username': user.username, 'password': 'Adam'})
+        assert resp.status_code == status.HTTP_400_BAD_REQUEST
+
+    def test_login_active_user(self):
+        url = reverse('api-token-auth')
+        user = Users.objects.get(username="Test1")
+        user.is_active = True
+        user.save()
+        token = Token.objects.get(user=user).key
+        resp = self.client.post(url, data={'username': user.username, 'password': 'Adam'})
+        json_response = json.loads(resp.content.decode('utf-8'))
+        assert resp.status_code == status.HTTP_200_OK
+        assert json_response == {
+            'token': token
+        }
+
+    def test_verification_tokens_are_created_for_each_user(self):
+        # setup creates 4 users
+        assert VerificationToken.objects.count() == 4
