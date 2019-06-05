@@ -27,7 +27,6 @@ class Users(AbstractUser):
 
 class VerificationToken(TokenModel):
     class Meta:
-        abstract = False
         db_table = 'verification_token'
 
 
