@@ -136,6 +136,30 @@ div.item6 {
   min-height: 460px;
 }
 
+.bandsbox {
+  margin: 10px 10px;
+}
+
+.band-background {
+  background-size: contain;
+  opacity: 0.8;
+}
+
+.band-name {
+  text-align: center;
+  position: relative;
+  margin: 10% 0 10% 0;
+  font-weight: 500;
+  font-size: 2rem;
+  color: black;
+  text-shadow: 0 0 1rem white;
+}
+
+.item-data {
+  font-weight: 300;
+  font-size: 1.1rem;
+}
+
 .card-header {
   text-align: center;
   font-size: 1.2em;
