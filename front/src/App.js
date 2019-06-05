@@ -3,8 +3,9 @@ import Header from "./Header";
 import Header2 from "./Header2";
 import News from "./News";
 import Footer from "./Footer";
-import Sidebar from "./Sidebar";
+import LoggedSidebar from "./LoggedSidebar";
 import { Col, Row } from "react-bootstrap";
+import LoggedOutSidebar from "./LoggedOutSidebar";
 
 class App extends Component {
   render() {
@@ -18,7 +19,8 @@ class App extends Component {
           <Row>
             <Col md="auto">
               {" "}
-              <Sidebar />
+              <LoggedSidebar />
+              <LoggedOutSidebar />
             </Col>
             <Col>
               <News />

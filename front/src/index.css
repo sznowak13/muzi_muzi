@@ -226,5 +226,5 @@ div.row {
 }
 
 .rs-divider-horizontal {
-  margin: 0px;
+  margin: 0px !important;
 }
