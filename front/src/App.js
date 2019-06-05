@@ -3,19 +3,29 @@ import Header from "./Header";
 import Header2 from "./Header2";
 import News from "./News";
 import Footer from "./Footer";
+import LoggedSidebar from "./LoggedSidebar";
+import { Col, Row } from "react-bootstrap";
+import LoggedOutSidebar from "./LoggedOutSidebar";
 
 class App extends Component {
   render() {
     return (
-      <div className="App Site">
-        <div className="Site-content">
-          <div className="App-header">
+      <div className="main-wrapper">
+        <div>
+          <div>
             <Header />
             <Header2 />
           </div>
-          <div className="main">
-            <News />
-          </div>
+          <Row>
+            <Col md="auto">
+              {" "}
+              {/* <LoggedSidebar /> */}
+              <LoggedOutSidebar />
+            </Col>
+            <Col>
+              <News />
+            </Col>
+          </Row>
         </div>
         <Footer />
       </div>

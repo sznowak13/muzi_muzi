@@ -13,7 +13,7 @@ export default class News extends Component {
       console.log(key);
     }
     return (
-      <Container className="news">
+      <Container>
         <Tabs onChange={callback} type="card">
           <TabPane tab="Adverts" key="1">
             <Adverts />
