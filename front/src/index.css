@@ -220,3 +220,11 @@ p.users-info span {
 .users-body {
   margin-bottom: 7px;
 }
+
+div.row {
+  margin: 0;
+}
+
+.rs-divider-horizontal {
+  margin: 0px;
+}
