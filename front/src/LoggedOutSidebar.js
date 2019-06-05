@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Sidenav, Nav, Icon, Divider } from "rsuite";
+import { Sidenav, Icon, Divider } from "rsuite";
 import { Button } from "react-bootstrap";
 
 export default class LoggedOutSidebar extends Component {
@@ -21,11 +21,15 @@ export default class LoggedOutSidebar extends Component {
             </p>
             <Divider />
             <div className="welcome-btn">
-              <Button variant="outline-secondary">Register</Button>
+              <Button variant="outline-secondary" block>
+                Register
+              </Button>
             </div>
             <Divider />
             <div className="welcome-btn">
-              <Button variant="outline-success">Login</Button>
+              <Button variant="outline-success" block>
+                Login
+              </Button>
             </div>
             <Divider />
           </Sidenav.Body>

@@ -10,9 +10,9 @@ import LoggedOutSidebar from "./LoggedOutSidebar";
 class App extends Component {
   render() {
     return (
-      <div className="app-site">
-        <div className="site-content">
-          <div className="app-header">
+      <div>
+        <div>
+          <div>
             <Header />
             <Header2 />
           </div>
