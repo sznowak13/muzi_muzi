@@ -164,7 +164,7 @@ div.item6 {
   font-size: 2rem;
   color: black;
   text-shadow: 0 0 1rem white;
-  background:rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
   width: inherit;
 }
 
@@ -236,7 +236,6 @@ p.users-info span {
   margin-bottom: 7px;
 }
 
-
 div.row {
   margin: 0;
 }
@@ -259,7 +258,8 @@ div.row {
   margin: 10px 10px 10px 10px;
   display: flex;
   justify-content: center;
+}
 
-.search-bar{
+.search-bar {
   width: 50px;
 }
