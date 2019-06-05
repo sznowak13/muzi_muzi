@@ -46,6 +46,7 @@ class UsersRegisterSerializer(serializers.ModelSerializer):
         password2 = value
         if password1 != password2:
             raise ValidationError("Password must match")
+        return value
 
     def create(self, validated_data):
         validated_data.pop('password2')
