@@ -170,11 +170,14 @@ div.item6 {
 .band-name {
   text-align: center;
   position: relative;
-  margin: 10% 0 10% 0;
+
+  margin: 58% 0 58% 0;
   font-weight: 500;
   font-size: 2rem;
   color: black;
   text-shadow: 0 0 1rem white;
+  background:rgba(255,255,255,0.5);
+  width: inherit;
 }
 
 .item-data {
@@ -243,4 +246,8 @@ p.users-info span {
 
 .users-body {
   margin-bottom: 7px;
+}
+
+.search-bar{
+  width: 50px;
 }
