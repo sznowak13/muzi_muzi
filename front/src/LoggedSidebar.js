@@ -17,7 +17,7 @@ export default class LoggedSidebar extends Component {
           </Sidenav.Header>
           <Sidenav.Body>
             <Nav>
-              <Nav.Item eventKey="1" active icon={<Icon icon="avatar" />}>
+              <Nav.Item eventKey="1" icon={<Icon icon="avatar" />}>
                 My profile
               </Nav.Item>
               <Nav.Item eventKey="2" icon={<Icon icon="envelope" />}>

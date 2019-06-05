@@ -1,29 +1,33 @@
 import React, { Component } from "react";
-import { Sidenav, Divider, Nav, Icon, Button } from "rsuite";
+import { Sidenav, Nav, Icon, Divider } from "rsuite";
+import { Button } from "react-bootstrap";
 
 export default class LoggedOutSidebar extends Component {
   render() {
-    const headerStyles = {
-      padding: 20,
-      fontSize: 16,
-      background: "#f6c90e",
-      color: " #3a4750"
-    };
     return (
       <div style={{ width: 250 }}>
         <Sidenav>
-          <Sidenav.Header>
-            <div style={headerStyles}>Custom Sidenav</div>
-          </Sidenav.Header>
           <Sidenav.Body>
-            <Nav>
-              <Nav.Item eventKey="1" active icon={<Icon icon="avatar" />}>
-                <Button>Register</Button>
-              </Nav.Item>
-              <Nav.Item eventKey="2" icon={<Icon icon="envelope" />}>
-                My messages
-              </Nav.Item>
-            </Nav>
+            <Sidenav.Header>
+              <div className="header-styles">
+                <h3 className="welcome-sign">
+                  Welcome to the MuzuMuzi community.
+                </h3>
+              </div>
+            </Sidenav.Header>
+            <p className="welcome-sign">
+              Don't have an account? It's free! Sign up and join us.
+              <p>{<Icon icon="heart" />}</p>
+            </p>
+            <Divider />
+            <div className="welcome-btn">
+              <Button variant="outline-secondary">Register</Button>
+            </div>
+            <Divider />
+            <div className="welcome-btn">
+              <Button variant="outline-success">Login</Button>
+            </div>
+            <Divider />
           </Sidenav.Body>
         </Sidenav>
       </div>

@@ -19,7 +19,7 @@ class App extends Component {
           <Row>
             <Col md="auto">
               {" "}
-              <LoggedSidebar />
+              {/* <LoggedSidebar /> */}
               <LoggedOutSidebar />
             </Col>
             <Col>
