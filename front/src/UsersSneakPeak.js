@@ -42,23 +42,22 @@ export default class UsersSneakPeak extends Component {
     return (
       <Container className="news-container">
         <h3 className="news-title">New users</h3>
-        <BandBody usersData={users} />
+        <UsersBody usersData={users} />
       </Container>
     );
   }
 }
 
-const BandBody = props => {
+const UsersBody = props => {
   const rows = props.usersData.map((row, index) => {
     return (
-      <CardDeck style={{ display: "-webkit-inline-box" }}>
+      <CardDeck style={{ display: "-webkit-inline-box" }} key={index}>
         <Card
           style={{
             width: "13.3em",
             margin: "20px 24px 10px 35px",
             minHeight: "480px"
           }}
-          key={index}
         >
           {row.photo_url == null ? (
             <Card.Img variant="top" src={userphoto} alt="ph" height="180" />
