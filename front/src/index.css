@@ -263,3 +263,12 @@ div.row {
 .search-bar {
   width: 50px;
 }
+
+.a.rs-dropdown-item-content{
+  padding: 0 0 0 0;
+}
+
+
+.rs-sidenav-collapse-in .rs-dropdown-item>.rs-dropdown-item-content {
+     padding: 10px!important;
+}
