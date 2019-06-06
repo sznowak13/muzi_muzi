@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Container, Button, Card, CardDeck } from "react-bootstrap";
 import userphoto from "./userphoto.png";
 
-export default class Users extends Component {
+export default class UsersSneakPeak extends Component {
   constructor(props) {
     super(props);
     this.handlePage = this.handlePage.bind(this);
@@ -40,8 +40,8 @@ export default class Users extends Component {
   render() {
     const { users } = this.state;
     return (
-      <Container className="adverts-container">
-        <h2 className="section-title">New users</h2>
+      <Container className="news-container">
+        <h3 className="news-title">New users</h3>
         <BandBody usersData={users} />
       </Container>
     );
@@ -51,8 +51,15 @@ export default class Users extends Component {
 const BandBody = props => {
   const rows = props.usersData.map((row, index) => {
     return (
-      <CardDeck className="usersbox">
-        <Card style={{ width: "12rem" }} key={index}>
+      <CardDeck style={{ display: "-webkit-inline-box" }}>
+        <Card
+          style={{
+            width: "13.3em",
+            margin: "20px 24px 10px 35px",
+            minHeight: "480px"
+          }}
+          key={index}
+        >
           {row.photo_url == null ? (
             <Card.Img variant="top" src={userphoto} alt="ph" height="180" />
           ) : (
@@ -63,7 +70,7 @@ const BandBody = props => {
             <span> "{row.username}"</span>
           </Card.Header>
           <Card.Body>
-            <div className="users-body">
+            <div className="users-and-bands-body">
               <i className="fas fa-drum" />
               <span>Professions: </span>
               <p className="users-info">
@@ -76,7 +83,7 @@ const BandBody = props => {
                 })}
               </p>
             </div>
-            <div className="users-body">
+            <div className="users-and-bands-body">
               <i className="fas fa-music" />
               <span>Genres: </span>
               <p className="users-info">
@@ -94,8 +101,10 @@ const BandBody = props => {
               {row.city}
             </Card.Text>
           </Card.Body>
-          <Card.Footer className="about-user">
-            <Button variant="outline-dark">More</Button>
+          <Card.Footer>
+            <Button variant="outline-dark" block>
+              More
+            </Button>
           </Card.Footer>
         </Card>
       </CardDeck>

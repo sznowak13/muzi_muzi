@@ -5,8 +5,8 @@ import { Navbar } from "react-bootstrap";
 class Header extends Component {
   render() {
     return (
-      <Navbar expand="lg">
-        <Navbar.Brand href="#home">
+      <Navbar style={{ padding: "0px", backgroundColor: "#f6c90e" }}>
+        <Navbar.Brand href="/">
           <img alt="" src={logo} width="160" height="55" />
         </Navbar.Brand>
       </Navbar>

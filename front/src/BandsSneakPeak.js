@@ -24,8 +24,8 @@ export default class BandsSneakPeak extends Component {
 
   render() {
     return (
-      <Container className="adverts-container">
-        <h2 className="section-title">New bands</h2>
+      <Container className="news-container">
+        <h2 className="news-title">New bands</h2>
         {this.state.latestBands.map((band, index) => {
           return <Band band={band} key={index} />;
         })}
@@ -36,14 +36,16 @@ export default class BandsSneakPeak extends Component {
 
 const Band = props => {
   return (
-    <CardDeck className="bandsbox">
+    <CardDeck
+      style={{ display: "-webkit-inline-box", margin: "20px 0 10px 0" }}
+    >
       <Card key={props.index} style={{ width: "20rem" }}>
         <Card.Img variant="top" src={genericband} className="band-background" />
         <Card.ImgOverlay>
           <div className="band-name">{props.band.name}</div>
         </Card.ImgOverlay>
         <Card.Body>
-          <div>
+          <div className="users-and-bands-body">
             <i className="fas fa-home" />
             Homepage:
             <p>
@@ -51,13 +53,13 @@ const Band = props => {
               <a href={props.band.homepage}>{props.band.homepage}</a>{" "}
             </p>
           </div>
-          <div>
+          <div className="users-and-bands-body">
             <i className="fas fa-map-marker-alt" />
-            City: <p>{props.band.city}</p>
+            City: <p className="users-info">{props.band.city}</p>
           </div>
           <div>
             <i className="fas fa-music" />
-            Genres: <p>{props.band.genres}</p>
+            Genres: <p className="users-info">{props.band.genres}</p>
           </div>
         </Card.Body>
       </Card>

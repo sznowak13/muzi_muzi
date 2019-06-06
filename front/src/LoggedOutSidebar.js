@@ -10,7 +10,7 @@ export default class LoggedOutSidebar extends Component {
           <Sidenav.Body>
             <Sidenav.Header>
               <div className="header-styles">
-                <h3 className="welcome-sign">
+                <h3 className="welcome-sign main">
                   Welcome to the MuziMuzi community.
                 </h3>
               </div>

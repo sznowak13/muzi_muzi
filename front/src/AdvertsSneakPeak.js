@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import userphoto from "./userphoto.png";
 
-export default class Adverts extends Component {
+export default class AdvertsSneakPeak extends Component {
   constructor(props) {
     super(props);
     this.handlePage = this.handlePage.bind(this);
@@ -40,8 +40,8 @@ export default class Adverts extends Component {
   render() {
     const { adverts } = this.state;
     return (
-      <Container className="adverts-container">
-        <h2 className="section-title">New adverts</h2>
+      <Container className="news-container">
+        <h3 className="news-title">New adverts</h3>
         {/* <PaginationPage
           next={next}
           previous={previous}
@@ -83,34 +83,32 @@ export default class Adverts extends Component {
 const AdvBody = props => {
   const rows = props.advertData.map((row, index) => {
     return (
-      <div className="boxes" key={index}>
-        <div className="grid-container">
-          <div className="item1">
-            <p className="advert-title">{row.title}</p>
-          </div>
-          <div className="item2">
-            {row.photo_url == null ? (
-              <img src={userphoto} alt="ph" width="180" height="180" />
-            ) : (
-              <img src={row.photo_url} alt="ph" width="180" height="180" />
-            )}
-          </div>
-          <div className="item3">{row.description}</div>
-          <div className="item4">
-            <i className="fas fa-map-marker-alt" />
-            <span className="advert-label">City: </span>
-            <p className="advert-data">{row.city}</p>
-          </div>
-          <div className="item5">
-            <i className="fas fa-music" />
-            <span className="advert-label"> Genres: </span>
-            <p className="advert-data">{row.genre}</p>
-          </div>
-          <div className="item6">
-            <i className="far fa-clock" />
-            <span className="advert-label">Posted on: </span>
-            <p className="advert-data">{row.posted_on.substring(0, 10)}</p>
-          </div>
+      <div className="grid-container" key={index}>
+        <div className="item1">
+          <p className="advert-title">{row.title}</p>
+        </div>
+        <div className="item2">
+          {row.photo_url == null ? (
+            <img src={userphoto} alt="ph" width="180" height="180" />
+          ) : (
+            <img src={row.photo_url} alt="ph" width="180" height="180" />
+          )}
+        </div>
+        <div className="item3">{row.description}</div>
+        <div className="item4">
+          <i className="fas fa-map-marker-alt" />
+          <span className="advert-label">City: </span>
+          <p className="advert-data">{row.city}</p>
+        </div>
+        <div className="item5">
+          <i className="fas fa-music" />
+          <span className="advert-label"> Genres: </span>
+          <p className="advert-data">{row.genre}</p>
+        </div>
+        <div className="item6">
+          <i className="far fa-clock" />
+          <span className="advert-label">Posted on: </span>
+          <p className="advert-data">{row.posted_on.substring(0, 10)}</p>
         </div>
       </div>
     );
