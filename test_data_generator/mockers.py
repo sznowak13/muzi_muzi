@@ -8,9 +8,9 @@ class UserMocker(RecordMocker):
     table_name = "users"
     fields = (
         "first_name", "last_name", "username", "email", "password", "city_id", "description", "is_superuser",
-        "is_staff", "is_active", "date_joined", "role_id"
+        "is_staff", "is_active", "date_joined", "role_id", "photo_url"
     )
-    values_statement = "(%s, %s, %s, %s, %s, %s, %s, FALSE, FALSE, TRUE, %s, %s)"
+    values_statement = "(%s, %s, %s, %s, %s, %s, %s, FALSE, FALSE, TRUE, %s, %s, %s)"
     returning_column = "user_id"
 
     def generate(self):

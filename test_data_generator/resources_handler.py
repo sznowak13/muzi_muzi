@@ -34,6 +34,13 @@ def get_cities():
     return cities
 
 
+def get_photos():
+    with open("resources/photos.txt") as f:
+        photos = [photo.strip() for photo in f.readlines()]
+
+    return photos
+
+
 def get_description(length: int):
     with open("resources/lorem.txt") as f:
         desc = f.read(length)
