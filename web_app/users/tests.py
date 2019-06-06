@@ -1,4 +1,5 @@
 from django.contrib.auth.hashers import make_password
+from django.core import mail
 from rest_framework import status
 from rest_framework.test import APITestCase
 from .models import Users, VerificationToken
@@ -126,3 +127,7 @@ class TestUsers(APITestCase):
         assert resp.status_code == status.HTTP_200_OK
         assert json_response == {"success": "Account activated"}
         assert user.is_active
+
+    def test_mail_sent_after_register(self):
+        # TODO test sending mails
+        pass
