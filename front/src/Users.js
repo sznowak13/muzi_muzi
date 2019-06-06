@@ -8,7 +8,7 @@ export default class Users extends Component {
     super(props);
     this.handlePage = this.handlePage.bind(this);
     this.state = {
-      next: "http://127.0.0.1:8000/users/",
+      next: "http://127.0.0.1:8000/users/latest/",
       previous: null,
       users: []
     };
@@ -24,11 +24,8 @@ export default class Users extends Component {
       .then(result => result.json())
       .then(result => {
         this.setState({
-          next: result.next,
-          users: result.results,
-          previous: result.previous
+          users: result
         });
-        console.log(result);
       });
   }
 

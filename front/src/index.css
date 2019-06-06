@@ -159,12 +159,12 @@ div.item6 {
 .band-name {
   text-align: center;
   position: relative;
-  margin: 58% 0 58% 0;
+  margin: 62% 0 0 0;
   font-weight: 500;
-  font-size: 2rem;
+  font-size: 1.5em;
   color: black;
   text-shadow: 0 0 1rem white;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.37);
   width: inherit;
 }
 

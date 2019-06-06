@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Button, Card, CardDeck, ListGroup } from "react-bootstrap";
+import { Container, Card, CardDeck } from "react-bootstrap";
 import genericband from "./generic-band.jpg";
 
 export default class BandsSneakPeak extends Component {
@@ -7,7 +7,7 @@ export default class BandsSneakPeak extends Component {
     super(props);
     this.state = {
       latestBands: [],
-      apiUrl: "http://127.0.0.1:8000/bands/"
+      apiUrl: "http://127.0.0.1:8000/bands/latest?num=12"
     };
   }
 
@@ -17,7 +17,7 @@ export default class BandsSneakPeak extends Component {
       .then(res => res.json())
       .then(json =>
         this.setState({
-          latestBands: json.results
+          latestBands: json
         })
       );
   }
@@ -42,12 +42,14 @@ const Band = props => {
         <Card.ImgOverlay>
           <div className="band-name">{props.band.name}</div>
         </Card.ImgOverlay>
-
         <Card.Body>
           <div>
             <i className="fas fa-home" />
             Homepage:
-            <p> <a href={props.band.homepage}>{props.band.homepage}</a> </p>
+            <p>
+              {" "}
+              <a href={props.band.homepage}>{props.band.homepage}</a>{" "}
+            </p>
           </div>
           <div>
             <i className="fas fa-map-marker-alt" />

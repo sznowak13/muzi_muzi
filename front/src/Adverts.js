@@ -7,7 +7,7 @@ export default class Adverts extends Component {
     super(props);
     this.handlePage = this.handlePage.bind(this);
     this.state = {
-      next: "http://127.0.0.1:8000/adverts/",
+      next: "http://127.0.0.1:8000/adverts/latest/",
       previous: null,
       adverts: []
     };
@@ -23,9 +23,7 @@ export default class Adverts extends Component {
       .then(result => result.json())
       .then(result => {
         this.setState({
-          next: result.next,
-          adverts: result.results,
-          previous: result.previous
+          adverts: result
         });
         console.log(result);
       });
@@ -40,47 +38,47 @@ export default class Adverts extends Component {
   }
 
   render() {
-    const { adverts, next, previous } = this.state;
+    const { adverts } = this.state;
     return (
       <Container className="adverts-container">
         <h2 className="section-title">New adverts</h2>
-        <PaginationPage
+        {/* <PaginationPage
           next={next}
           previous={previous}
           handlePage={this.handlePage}
-        />
+        /> */}
         <AdvBody advertData={adverts} />
       </Container>
     );
   }
 }
 
-const PaginationPage = props => {
-  return (
-    <nav aria-label="Page navigation">
-      <ul className="pagination justify-content-center">
-        <li className="page-item">
-          <Button
-            className="page-link"
-            disabled={props.previous === null}
-            onClick={() => props.handlePage(props.previous)}
-          >
-            Previous
-          </Button>
-        </li>
-        <li className="page-item">
-          <Button
-            className="page-link"
-            disabled={props.next === null}
-            onClick={() => props.handlePage(props.next)}
-          >
-            Next
-          </Button>
-        </li>
-      </ul>
-    </nav>
-  );
-};
+// const PaginationPage = props => {
+//   return (
+//     <nav aria-label="Page navigation">
+//       <ul className="pagination justify-content-center">
+//         <li className="page-item">
+//           <Button
+//             className="page-link"
+//             disabled={props.previous === null}
+//             onClick={() => props.handlePage(props.previous)}
+//           >
+//             Previous
+//           </Button>
+//         </li>
+//         <li className="page-item">
+//           <Button
+//             className="page-link"
+//             disabled={props.next === null}
+//             onClick={() => props.handlePage(props.next)}
+//           >
+//             Next
+//           </Button>
+//         </li>
+//       </ul>
+//     </nav>
+//   );
+// };
 
 const AdvBody = props => {
   const rows = props.advertData.map((row, index) => {
