@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
+    'django_sites'
 ]
 
 MIDDLEWARE = [
@@ -125,6 +126,15 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+SITES = {
+    "dev": {"domain": "localhost:8000", "scheme": "http", "name": "localhost"},
+}
+
+# settings_development.py
+# defaut site id for development environment
+SITE_ID = "dev"
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
