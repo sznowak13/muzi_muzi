@@ -65,7 +65,7 @@ const UsersBody = props => {
             <Card.Img variant="top" src={row.photo_url} alt="ph" height="180" />
           )}
           <Card.Header>
-            <p>{row.first_name}</p>
+            <p>{row.first_name ? row.first_name : "Anonymous"}</p>
             <span> "{row.username}"</span>
           </Card.Header>
           <Card.Body>
@@ -73,31 +73,39 @@ const UsersBody = props => {
               <i className="fas fa-drum" />
               <span>Professions: </span>
               <p className="users-info">
-                {row.professions.slice(0, 2).map((prof, i) => {
-                  if (row.professions.slice(0, 2).length - 1 == i) {
-                    return <span key={prof}>{prof}</span>;
-                  } else {
-                    return <span key={prof}>{prof}, </span>;
-                  }
-                })}
+                {row.professions.length ? (
+                  row.professions.slice(0, 2).map((prof, i) => {
+                    if (row.professions.slice(0, 2).length - 1 == i) {
+                      return <span key={prof}>{prof}</span>;
+                    } else {
+                      return <span key={prof}>{prof}, </span>;
+                    }
+                  })
+                ) : (
+                  <span>Not provided</span>
+                )}
               </p>
             </div>
             <div className="users-and-bands-body">
               <i className="fas fa-music" />
               <span>Genres: </span>
               <p className="users-info">
-                {row.genres.slice(0, 2).map((genre, i) => {
-                  if (row.genres.slice(0, 2).length - 1 == i) {
-                    return <span key={genre}>{genre}</span>;
-                  } else {
-                    return <span key={genre}>{genre}, </span>;
-                  }
-                })}
+                {row.genres.length ? (
+                  row.genres.slice(0, 2).map((genre, i) => {
+                    if (row.genres.slice(0, 2).length - 1 == i) {
+                      return <span key={genre}>{genre}</span>;
+                    } else {
+                      return <span key={genre}>{genre}, </span>;
+                    }
+                  })
+                ) : (
+                  <span>Not provided</span>
+                )}
               </p>
             </div>
             <Card.Text>
               <i className="fas fa-map-marker-alt" />
-              {row.city}
+              {row.city ? row.city : "Not provided"}
             </Card.Text>
           </Card.Body>
           <Card.Footer>
