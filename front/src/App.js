@@ -3,7 +3,7 @@ import Header from "./Header";
 import Header2 from "./Header2";
 import News from "./News";
 import Footer from "./Footer";
-import LoggedSidebar from "./LoggedSidebar";
+// import LoggedSidebar from "./LoggedSidebar";
 import { Col, Row } from "react-bootstrap";
 import LoggedOutSidebar from "./LoggedOutSidebar";
 
