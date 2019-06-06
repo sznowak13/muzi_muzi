@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header";
-import Header2 from "./Header2";
+import HeaderSearch from "./HeaderSearch";
 import News from "./News";
 import Footer from "./Footer";
 // import LoggedSidebar from "./LoggedSidebar";
@@ -14,7 +14,7 @@ class App extends Component {
         <div>
           <div>
             <Header />
-            <Header2 />
+            <HeaderSearch />
           </div>
           <Row>
             <Col md="auto">

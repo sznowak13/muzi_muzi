@@ -1,10 +1,25 @@
-#root .main-wrapper {
+#root {
   height: auto;
-  position: static;
-  display: flex;
   flex-direction: column;
   background-color: #303841;
 }
+
+i {
+  margin-right: 4px;
+}
+
+/* Navbars */
+.navbar-main {
+  padding: 0;
+  background-color: #f6c90e;
+}
+
+.navbar-search {
+  background-color: #3a4750;
+  margin-bottom: 10px;
+}
+
+/* Footer */
 
 .footer {
   padding: 8px;
@@ -13,29 +28,24 @@
   color: rgb(0, 0, 0);
 }
 
-.section-title {
-  text-size-adjust: 0.2em;
+/* News */
+.news-title {
+  font-weight: 600;
+  font-size: 2em;
   text-align: left;
-  padding: 20px;
+  margin-left: 15px;
 }
 
-.adverts-container::-webkit-scrollbar {
-  width: 0 !important;
-}
-
-.adverts-box {
-  overflow: -moz-scrollbars-none;
-}
-
-.adverts-container {
-  margin: 0px 30px 20px 30px;
-  max-height: 30%;
+.news-container {
+  margin: 0px 0px 20px 0px;
   overflow: auto;
   background-color: #eeeeee;
 }
 
+/* NewsTabs */
+
 .ant-tabs-bar {
-  margin: 0 0 0 0 !important;
+  margin: 0 !important;
 }
 
 .ant-tabs-nav .ant-tabs-tab-active {
@@ -49,14 +59,7 @@
   color: white;
 }
 
-.navbar {
-  background-color: #f6c90e;
-}
-
-.nav2 {
-  background-color: #3a4750;
-  margin-bottom: 10px;
-}
+/* AdvertBoxes */
 
 .item1 {
   grid-area: title;
@@ -71,35 +74,17 @@
   grid-area: city;
 }
 .item5 {
-  grid-area: footer;
+  grid-area: genres;
 }
 .item6 {
   grid-area: date;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: 180px auto 450px auto;
-  grid-template-rows: max-content;
-  grid-template-areas:
-    "photo title title title date"
-    "photo description description description city"
-    "photo description description description footer";
-  grid-gap: 2px;
-  background-color: #f6c90e;
-  padding: 4px;
-}
-
-.grid-container > div {
-  background-color: rgb(255, 255, 255);
-  font-size: 15px;
-}
-
 div.item1,
-div.item6,
 div.item3,
 div.item4,
-div.item5 {
+div.item5,
+div.item6 {
   padding: 5px;
 }
 
@@ -117,38 +102,66 @@ div.item3 {
 div.item4,
 div.item5,
 div.item6 {
-  min-width: 170px;
+  min-width: 150px;
 }
 
-.boxes {
+.grid-container {
+  display: grid;
+  grid-template-columns: 180px;
+  grid-template-rows: max-content;
+  grid-template-areas:
+    "photo title title title date"
+    "photo description description description city"
+    "photo description description description genres";
+  grid-gap: 3px;
+  background-color: #f6c90e;
+  padding: 3px;
   transition: box-shadow 0.3s;
-  min-width: 1000px;
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
-.boxes:hover {
+.grid-container:hover {
   box-shadow: 0 0 19px rgba(33, 33, 33, 0.2);
 }
 
-.card-deck {
-  display: -webkit-inline-box !important;
-  flex-direction: column;
+.grid-container > div {
+  background-color: rgb(255, 255, 255);
+  font-size: 15px;
 }
 
-.card-deck {
-  margin-left: 4px !important;
+.advert-title {
+  font-weight: 700;
+  font-size: 20px;
 }
 
-.usersbox {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  min-height: 460px;
+.advert-data {
+  font-weight: 600;
+  font-size: 1em;
 }
 
-.bandsbox {
-  margin: 10px 10px;
-  min-height: 408px;
+.advert-label {
+  font-size: 0.9em;
+}
+
+/* UsersBoxes & BandsBoxes */
+
+.card-header {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+div.card-body {
+  padding: 12px;
+}
+
+.users-and-bands-body {
+  margin-bottom: 7px;
+}
+
+.users-info {
+  font-weight: bold;
 }
 
 .band-background {
@@ -168,48 +181,6 @@ div.item6 {
   width: inherit;
 }
 
-.item-data {
-  font-weight: 300;
-  font-size: 1.1rem;
-}
-
-.card-header {
-  text-align: center;
-  font-size: 1.2em;
-  font-weight: 500;
-}
-
-.professions {
-  padding-left: 15px;
-}
-
-i {
-  margin-right: 3px;
-}
-
-div > p {
-  font-size: 1em;
-  margin: 0px;
-}
-
-.advert-title {
-  font-weight: 500;
-  font-size: 20px;
-}
-
-.advert-data {
-  font-weight: 600;
-  font-size: 1em;
-}
-
-.advert-label {
-  font-size: 0.9em;
-}
-
-div.card-body {
-  padding: 10px;
-}
-
 div.card-header {
   padding: 10px;
   min-height: 70px;
@@ -224,17 +195,7 @@ div.card:hover {
   box-shadow: 0 0 19px rgba(33, 33, 33, 0.2);
 }
 
-ul.professions {
-  margin-left: 10px;
-}
-
-p.users-info span {
-  font-weight: 1000;
-}
-
-.users-body {
-  margin-bottom: 7px;
-}
+/* Sidebar */
 
 div.row {
   margin: 0;
@@ -249,16 +210,20 @@ div.row {
   text-align: center;
 }
 
+.main {
+  font-weight: bold;
+}
+
 .header-styles {
   padding: 5px;
   background-color: #f6c90e;
 }
 
 .welcome-btn {
-  margin: 10px 10px 10px 10px;
-  display: flex;
-  justify-content: center;
+  margin: 10px;
 }
+
+/* SearchBar */
 
 .search-bar {
   width: 50px;
