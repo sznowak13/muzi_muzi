@@ -5,6 +5,7 @@ from rest_framework.test import APITestCase
 from .models import Users, VerificationToken
 from rest_framework.authtoken.models import Token
 from web_app.utils import reverse
+import pytest
 
 import json
 
@@ -131,3 +132,11 @@ class TestUsers(APITestCase):
     def test_mail_sent_after_register(self):
         # TODO test sending mails
         pass
+
+    def test_verification_token_delete_after_confirmation(self):
+        user = Users.objects.get(username="Test1")
+        correct_token = VerificationToken.objects.get(user=user)
+        url = reverse('register-verify-email', query_params={"key": correct_token})
+        resp = self.client.get(url)
+        with pytest.raises(VerificationToken.DoesNotExist):
+            VerificationToken.objects.get(pk=correct_token)

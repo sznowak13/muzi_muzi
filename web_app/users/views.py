@@ -25,14 +25,16 @@ class UserRegisterView(mixins.CreateModelMixin,
 
     @action(detail=False, methods=['get'])
     def verify_email(self, request):
-        token = request.query_params.get('key')
-        if not token:
+        key = request.query_params.get('key')
+        if not key:
             return Response({"error": "Missing verification token"}, status=status.HTTP_400_BAD_REQUEST)
         try:
-            verified_user = VerificationToken.objects.get(key=token).user
+            verification_token = VerificationToken.objects.get(key=key)
+            verified_user = verification_token.user
         except VerificationToken.DoesNotExist:
             return Response({"error": "Wrong token provided"}, status=status.HTTP_400_BAD_REQUEST)
 
         verified_user.is_active = True
         verified_user.save()
+        verification_token.delete()
         return Response({"success": "Account activated"})
