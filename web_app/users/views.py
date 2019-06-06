@@ -35,5 +35,4 @@ class UserRegisterView(mixins.CreateModelMixin,
 
         verified_user.is_active = True
         verified_user.save()
-        print("ISACTIVE: ", verified_user.is_active)
         return Response({"success": "Account activated"})
