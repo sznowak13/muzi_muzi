@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import userphoto from "./userphoto.png";
+import moment from "moment";
 
 export default class AdvertsSneakPeak extends Component {
   constructor(props) {
@@ -97,18 +98,22 @@ const AdvBody = props => {
         <div className="item3">{row.description}</div>
         <div className="item4">
           <i className="fas fa-map-marker-alt" />
-          <span className="advert-label">City: </span>
+          <span className="advert-label">City:</span>
           <p className="advert-data">{row.city}</p>
         </div>
         <div className="item5">
           <i className="fas fa-music" />
-          <span className="advert-label"> Genres: </span>
+          <span className="advert-label">Genres:</span>
           <p className="advert-data">{row.genre}</p>
         </div>
         <div className="item6">
           <i className="far fa-clock" />
-          <span className="advert-label">Posted on: </span>
-          <p className="advert-data">{row.posted_on.substring(0, 10)}</p>
+          <span className="advert-label">Posted:</span>
+          <p className="advert-data">
+            {moment(row.posted_on)
+              .startOf("minute")
+              .fromNow()}
+          </p>
         </div>
       </div>
     );
