@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
+    'django_sites'
 ]
 
 MIDDLEWARE = [
@@ -126,6 +127,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITES = {
+    "dev": {"domain": "localhost:8000", "scheme": "http", "name": "localhost"},
+}
+
+# settings_development.py
+# defaut site id for development environment
+SITE_ID = "dev"
+
+
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
@@ -134,8 +144,15 @@ REST_FRAMEWORK = {
     ],
 }
 
+# testing backend
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# actual backend
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+email_password = os.environ.get('MUZI_MUZI_EMAIL_PASSWORD')
+if not email_password:
+    raise EnvironmentError("Password for email backend not provided. Check environment variables.")
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
