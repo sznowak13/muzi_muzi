@@ -3,7 +3,7 @@ attrs==19.1.0
 backcall==0.1.0
 colorama==0.4.1
 decorator==4.4.0
-Django==2.2.1
+Django==2.2.2
 django-cors-headers==3.0.1
 djangorestframework==3.9.4
 ipython==7.5.0
