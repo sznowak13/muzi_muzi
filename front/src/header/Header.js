@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./logo.png";
+import logo from "../resources/logo.png";
 import { Navbar } from "react-bootstrap";
 
 class Header extends Component {
