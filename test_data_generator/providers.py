@@ -16,6 +16,7 @@ last_names = resources.get_lastnames()
 cities = resources.get_cities()
 adjectives = resources.get_adjectives()
 nouns = resources.get_nouns()
+photos = resources.get_photos()
 
 
 def provide_user_data(cities_ids) -> tuple:
@@ -34,8 +35,9 @@ def provide_user_data(cities_ids) -> tuple:
     city_id = random.choice(cities_ids)
     desc = resources.get_description(random.randint(50, 200))
     date_joined = datetime.datetime.now()
+    pic = random.choice(photos)
 
-    return first_name, last_name, nickname, email, password, city_id, desc, date_joined, 1
+    return first_name, last_name, nickname, email, password, city_id, desc, date_joined, 1, pic
 
 
 def provide_band_data(cities_ids) -> tuple:
