@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Card, CardDeck } from "react-bootstrap";
-import genericband from "./generic-band.jpg";
+import genericband from "../resources/generic-band.jpg";
 
 export default class BandsSneakPeak extends Component {
   constructor(props) {

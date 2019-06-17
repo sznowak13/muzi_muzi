@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
-import userphoto from "./userphoto.png";
+import userphoto from "../resources/userphoto.png";
 import moment from "moment";
 
 export default class AdvertsSneakPeak extends Component {

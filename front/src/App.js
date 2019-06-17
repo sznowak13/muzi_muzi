@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import Header from "./Header";
-import HeaderSearch from "./HeaderSearch";
-import News from "./News";
-import Footer from "./Footer";
+import Header from "./header/Header";
+import HeaderSearch from "./header/HeaderSearch";
+import News from "./mainContent/News";
+import Footer from "./header/Footer";
 // import LoggedSidebar from "./LoggedSidebar";
 import { Col, Row } from "react-bootstrap";
-import LoggedOutSidebar from "./LoggedOutSidebar";
+import LoggedOutSidebar from "./sideBard/LoggedOutSidebar";
 
 class App extends Component {
   render() {
