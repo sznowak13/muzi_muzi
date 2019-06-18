@@ -32,6 +32,14 @@ export default class LoginForm extends Component {
     }
   }
 
+  authorizeUser() {
+    let data = JSON.stringify(this.state);
+    fetch("http://localhost:8000/api-token/login", {
+      method: "POST",
+      body: data
+    });
+  }
+
   render() {
     return (
       <Form>
