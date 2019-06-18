@@ -145,10 +145,10 @@ REST_FRAMEWORK = {
 }
 
 # testing backend
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # actual backend
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 email_password = os.environ.get('MUZI_MUZI_EMAIL_PASSWORD')
 if not email_password:
