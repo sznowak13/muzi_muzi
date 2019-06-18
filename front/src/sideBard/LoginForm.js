@@ -12,16 +12,13 @@ import { Button } from "react-bootstrap";
 export default class LoginForm extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
     this.updateState = this.updateState.bind(this);
+    this.authorizeUser = this.authorizeUser.bind(this);
 
     this.state = {
       username: "",
       password: ""
     };
-  }
-  handleClick() {
-    console.log(this.state);
   }
 
   updateState(value, event) {
@@ -32,12 +29,26 @@ export default class LoginForm extends Component {
     }
   }
 
-  authorizeUser() {
+  async authorizeUser() {
     let data = JSON.stringify(this.state);
-    fetch("http://localhost:8000/api-token/login", {
+    let response = await fetch("http://localhost:8000/api-token/login", {
       method: "POST",
-      body: data
+      body: data,
+      headers: {
+        "Content-type": "application/json"
+      }
     });
+    let status = response.status;
+    if (status === 400){
+      console.log("jeb sie");
+    } else if (status === 200){
+      let json = await response.json();
+      localStorage.setItem("muzi_muzi_token", json.token);
+    }
+
+      // .then(response => response.json())
+      // .then(result => console.log(result))
+      // .catch(error => console.log(error));
   }
 
   render() {
@@ -62,7 +73,7 @@ export default class LoginForm extends Component {
             <Button
               variant="outline-secondary"
               block
-              onClick={this.handleClick}
+              onClick={this.authorizeUser}
             >
               Submit
             </Button>
