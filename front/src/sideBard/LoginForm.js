@@ -4,10 +4,10 @@ import {
   FormGroup,
   FormControl,
   ControlLabel,
-  HelpBlock,
   ButtonToolbar
 } from "rsuite";
 import { Button } from "react-bootstrap";
+import { Alert } from "rsuite";
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ export default class LoginForm extends Component {
 
     let status = response.status;
     if (status === 400) {
-      console.log("jeb sie");
+      Alert.warning("Unable to log in with proviaded credentials.", 5000);
     } else if (status === 200) {
       let json = await response.json();
       localStorage.setItem("muzi_muzi_token", json.token);
