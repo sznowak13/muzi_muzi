@@ -9,6 +9,7 @@ import {
   HelpBlock,
   ButtonToolbar
 } from "rsuite";
+import RegisterModal from "./RegisterModal";
 
 export default class LoggedOutSidebar extends Component {
   render() {
@@ -31,9 +32,7 @@ export default class LoggedOutSidebar extends Component {
             </div>
             <Divider />
             <div className="welcome-btn">
-              <Button variant="outline-secondary" block>
-                Register
-              </Button>
+              <RegisterModal />
             </div>
             <Divider />
             <Dropdown eventKey="1" title="Login">
