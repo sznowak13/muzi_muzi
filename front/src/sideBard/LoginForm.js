@@ -80,7 +80,7 @@ export default class LoginForm extends Component {
         <FormGroup>
           <ButtonToolbar>
             <Button
-              variant="outline-secondary"
+              variant="outline-success"
               block
               onClick={this.authorizeUser}
               disabled={this.validateLoginInputs()}
