@@ -74,7 +74,7 @@ export default class RegisterModal extends Component {
                 <FormControl name="password2" type="password" />
               </FormGroup>
               <Button color="green">Submit</Button>
-              <Button>Cancel</Button>
+              <Button onClick={this.close}>Cancel</Button>
             </Form>
           </Modal.Body>
         </Modal>
