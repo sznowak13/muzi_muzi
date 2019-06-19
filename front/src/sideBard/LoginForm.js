@@ -4,7 +4,8 @@ import {
   FormGroup,
   FormControl,
   ControlLabel,
-  ButtonToolbar
+  ButtonToolbar,
+  HelpBlock
 } from "rsuite";
 import { Button } from "react-bootstrap";
 import { Alert } from "rsuite";
@@ -65,7 +66,7 @@ export default class LoginForm extends Component {
         <FormGroup>
           <ControlLabel>Username</ControlLabel>
           <FormControl name="name" onChange={this.updateState} />
-          <HelpBlock>Required</HelpBlock>
+          <HelpBlock>This field is required</HelpBlock>
         </FormGroup>
         <FormGroup>
           <ControlLabel>Password</ControlLabel>
@@ -74,7 +75,7 @@ export default class LoginForm extends Component {
             type="password"
             onChange={this.updateState}
           />
-          <HelpBlock>Required</HelpBlock>
+          <HelpBlock>This field is required</HelpBlock>
         </FormGroup>
         <FormGroup>
           <ButtonToolbar>
