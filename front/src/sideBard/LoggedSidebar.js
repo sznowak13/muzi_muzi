@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { Sidenav, Divider, Nav, Icon } from "rsuite";
 
 export default class LoggedSidebar extends Component {
+  logOut() {
+    localStorage.clear();
+    window.location.reload();
+  }
   render() {
     const headerStyles = {
       padding: 20,
@@ -30,7 +34,11 @@ export default class LoggedSidebar extends Component {
                 My bands
               </Nav.Item>
               <Divider />
-              <Nav.Item eventKey="5" icon={<Icon icon="sign-out" />} onSelect={}>
+              <Nav.Item
+                eventKey="5"
+                icon={<Icon icon="sign-out" />}
+                onClick={this.logOut}
+              >
                 Log out
               </Nav.Item>
             </Nav>
