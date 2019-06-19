@@ -36,15 +36,23 @@ export default class RegisterModal extends Component {
   }
 
   render() {
+    const { formData } = this.state;
     return (
       <div>
-        <Modal show={this.state.show} onHide={this.close} size="xs">
+        <Modal show={this.state.show} onHide={this.close} size="lg">
           <Modal.Header>
             <Modal.Title>Register new User</Modal.Title>
           </Modal.Header>
           <Divider />
           <Modal.Body>
-            <Form fluid model={userModel}>
+            <Form
+              fluid
+              model={userModel}
+              formValue={formData}
+              onChange={formValue => {
+                this.setState({ formData: formValue });
+              }}
+            >
               <FormGroup>
                 <ControlLabel>Username</ControlLabel>
                 <FormControl name="username" />
@@ -59,14 +67,14 @@ export default class RegisterModal extends Component {
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Password</ControlLabel>
-                <FormControl name="password1" />
+                <FormControl name="password1" type="password" />
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Confirm password</ControlLabel>
-                <FormControl name="password2" />
+                <FormControl name="password2" type="password" />
               </FormGroup>
               <Button color="green">Submit</Button>
-              <Button>Cancel</Button>
+              <Button onClick={this.close}>Cancel</Button>
             </Form>
           </Modal.Body>
         </Modal>
