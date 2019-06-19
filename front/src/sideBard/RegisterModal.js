@@ -67,11 +67,11 @@ export default class RegisterModal extends Component {
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Password</ControlLabel>
-                <FormControl name="password1" />
+                <FormControl name="password1" type="password" />
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Confirm password</ControlLabel>
-                <FormControl name="password2" />
+                <FormControl name="password2" type="password" />
               </FormGroup>
               <Button color="green">Submit</Button>
               <Button>Cancel</Button>
