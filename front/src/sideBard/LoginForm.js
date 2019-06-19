@@ -31,24 +31,28 @@ export default class LoginForm extends Component {
 
   async authorizeUser() {
     let data = JSON.stringify(this.state);
-    let response = await fetch("http://localhost:8000/api-token/login", {
-      method: "POST",
-      body: data,
-      headers: {
-        "Content-type": "application/json"
-      }
-    });
-    let status = response.status;
-    if (status === 400){
-      console.log("jeb sie");
-    } else if (status === 200){
-      let json = await response.json();
-      localStorage.setItem("muzi_muzi_token", json.token);
+    let response;
+    try {
+      response = await fetch("http://localhost:8000/api-token/login", {
+        method: "POST",
+        body: data,
+        headers: {
+          "Content-type": "application/json"
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      return;
     }
 
-      // .then(response => response.json())
-      // .then(result => console.log(result))
-      // .catch(error => console.log(error));
+    let status = response.status;
+    if (status === 400) {
+      console.log("jeb sie");
+    } else if (status === 200) {
+      let json = await response.json();
+      localStorage.setItem("muzi_muzi_token", json.token);
+      window.location.reload();
+    }
   }
 
   render() {

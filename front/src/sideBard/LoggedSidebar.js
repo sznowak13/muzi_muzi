@@ -30,7 +30,7 @@ export default class LoggedSidebar extends Component {
                 My bands
               </Nav.Item>
               <Divider />
-              <Nav.Item eventKey="5" icon={<Icon icon="sign-out" />}>
+              <Nav.Item eventKey="5" icon={<Icon icon="sign-out" />} onSelect={}>
                 Log out
               </Nav.Item>
             </Nav>
