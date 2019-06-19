@@ -36,6 +36,7 @@ export default class RegisterModal extends Component {
   }
 
   render() {
+    const { formData } = this.state;
     return (
       <div>
         <Modal show={this.state.show} onHide={this.close} size="xs">
@@ -44,7 +45,14 @@ export default class RegisterModal extends Component {
           </Modal.Header>
           <Divider />
           <Modal.Body>
-            <Form fluid model={userModel}>
+            <Form
+              fluid
+              model={userModel}
+              formValue={formData}
+              onChange={formValue => {
+                this.setState({ formData: formValue });
+              }}
+            >
               <FormGroup>
                 <ControlLabel>Username</ControlLabel>
                 <FormControl name="username" />
