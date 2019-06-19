@@ -29,6 +29,10 @@ export default class LoginForm extends Component {
     }
   }
 
+  validateLoginInputs() {
+    return !this.state.username || !this.state.password;
+  }
+
   async authorizeUser() {
     let data = JSON.stringify(this.state);
     let response;
@@ -78,6 +82,7 @@ export default class LoginForm extends Component {
               variant="outline-secondary"
               block
               onClick={this.authorizeUser}
+              disabled={this.validateLoginInputs()}
             >
               Submit
             </Button>
