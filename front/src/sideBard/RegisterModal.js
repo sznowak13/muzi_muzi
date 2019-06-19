@@ -39,7 +39,7 @@ export default class RegisterModal extends Component {
     const { formData } = this.state;
     return (
       <div>
-        <Modal show={this.state.show} onHide={this.close} size="xs">
+        <Modal show={this.state.show} onHide={this.close} size="lg">
           <Modal.Header>
             <Modal.Title>Register new User</Modal.Title>
           </Modal.Header>
