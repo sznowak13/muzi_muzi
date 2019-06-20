@@ -10,6 +10,7 @@ import {
   Divider,
   Loader
 } from "rsuite";
+import { sendRegisterData } from "../registerService";
 
 export default class RegisterModal extends Component {
   constructor(props) {
@@ -31,10 +32,25 @@ export default class RegisterModal extends Component {
     };
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
+    this.submit = this.submit.bind(this);
+  }
+
+  submit() {
+    this.setState({ loading: true });
+    sendRegisterData(fetch, this.state.formData).then(result => {
+      this.setState({ loading: false, registerResult: result });
+    });
   }
 
   close() {
-    this.setState({ show: false });
+    this.setState({
+      show: false,
+      registerResult: {
+        result: "failed",
+        errors: {},
+        data: {}
+      }
+    });
   }
 
   open() {
@@ -59,38 +75,54 @@ export default class RegisterModal extends Component {
           </Modal.Header>
           <Divider />
           <Modal.Body>
-            <Form
-              fluid
-              model={userModel}
-              formValue={formData}
-              onChange={formValue => {
-                this.setState({ formData: formValue });
-              }}
-            >
-              <FormGroup>
-                <ControlLabel>Username</ControlLabel>
-                <FormControl name="username" />
-              </FormGroup>
-              <FormGroup>
-                <ControlLabel>Email</ControlLabel>
-                <FormControl name="email1" />
-              </FormGroup>
-              <FormGroup>
-                <ControlLabel>Confirm email</ControlLabel>
-                <FormControl name="email2" />
-              </FormGroup>
-              <FormGroup>
-                <ControlLabel>Password</ControlLabel>
-                <FormControl name="password1" type="password" />
-              </FormGroup>
-              <FormGroup>
-                <ControlLabel>Confirm password</ControlLabel>
-                <FormControl name="password2" type="password" />
-              </FormGroup>
-              <Button color="green">Submit</Button>
-              <Button onClick={this.close}>Cancel</Button>
-            </Form>
+            <RegisterErrors errors={this.state.registerResult.errors} />
+            {!this.state.registerResult.success ? (
+              <Form
+                fluid
+                model={userModel}
+                formValue={formData}
+                onChange={formValue => {
+                  this.setState({ formData: formValue });
+                }}
+              >
+                <FormGroup>
+                  <ControlLabel>Username</ControlLabel>
+                  <FormControl name="username" />
+                </FormGroup>
+                <FormGroup>
+                  <ControlLabel>Email</ControlLabel>
+                  <FormControl name="email1" />
+                </FormGroup>
+                <FormGroup>
+                  <ControlLabel>Confirm email</ControlLabel>
+                  <FormControl name="email2" />
+                </FormGroup>
+                <FormGroup>
+                  <ControlLabel>Password</ControlLabel>
+                  <FormControl name="password1" type="password" />
+                </FormGroup>
+                <FormGroup>
+                  <ControlLabel>Confirm password</ControlLabel>
+                  <FormControl name="password2" type="password" />
+                </FormGroup>
+                <Button onClick={this.submit} color="green">
+                  Submit
+                </Button>
+              </Form>
+            ) : (
+              <div>
+                Success! An email was sent to{" "}
+                <b>{this.state.registerResult.data.email} </b>
+                with activation link. Please check your mail and activate your
+                account.
+              </div>
+            )}
+
+            {this.showLoader()}
           </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.close}>Go back</Button>
+          </Modal.Footer>
         </Modal>
 
         <Button onClick={this.open} appearance="primary" color="yellow" block>
@@ -100,6 +132,24 @@ export default class RegisterModal extends Component {
     );
   }
 }
+
+const RegisterErrors = props => {
+  const errors = props.errors;
+  let divs = [];
+  if (Object.keys(errors).length) {
+    divs.push(<div>Errors:</div>);
+    for (let key in errors) {
+      divs.push(
+        <span>
+          {key}:{errors[key]}
+          <br />
+        </span>
+      );
+    }
+  }
+  return <div>{divs}</div>;
+};
+
 const { StringType } = Schema.Types;
 const userModel = Schema.Model({
   username: StringType().isRequired("User name is required"),
