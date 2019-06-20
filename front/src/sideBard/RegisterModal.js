@@ -7,7 +7,8 @@ import {
   Schema,
   Modal,
   Button,
-  Divider
+  Divider,
+  Loader
 } from "rsuite";
 
 export default class RegisterModal extends Component {
@@ -21,7 +22,12 @@ export default class RegisterModal extends Component {
         email1: "",
         email2: ""
       },
-      show: false
+      registerResult: {
+        result: "failed",
+        errors: {},
+        data: {}
+      },
+      loading: false
     };
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
@@ -33,6 +39,14 @@ export default class RegisterModal extends Component {
 
   open() {
     this.setState({ show: true });
+  }
+
+  showLoader() {
+    if (this.state.loading) {
+      return (
+        <Loader backdrop center size="md" content="Sending data..." vertical />
+      );
+    }
   }
 
   render() {
