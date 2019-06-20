@@ -68,3 +68,10 @@ export const sendRegisterData = async (fetch, formData) => {
 
   return result;
 };
+
+export const sendVerificationToken = async token => {
+  let response = await fetch(
+    "http://127.0.0.1:8000/register/verify_email/?key=" + token
+  );
+  return response.ok;
+};
