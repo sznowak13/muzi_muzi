@@ -11,6 +11,5 @@ from muzi_muzi.utils.email import generate_mail
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         token = VerificationToken.objects.create(user=instance)
-        activation_url = reverse('register-verify-email', query_params={"key": token.key}, absolute=True)
-        message = render_to_string('users/email_confirmation.html', {'url': activation_url})
+        message = render_to_string('users/email_confirmation.html', {'key': token.key})
         generate_mail("Activate your Muzi Muzi account", message, instance.email).send()
