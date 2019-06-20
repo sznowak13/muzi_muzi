@@ -37,38 +37,31 @@ export const validateRegisterData = (
   }
 };
 
-export const sendRegisterData = async (
-  fetch,
-  username,
-  email,
-  email2,
-  password,
-  password2
-) => {
+export const sendRegisterData = async (fetch, formData) => {
   let result = {
-    result: "success",
+    success: true,
     errors: {},
-    data: { username: username, email: email }
+    data: { username: formData.username, email: formData.email1 }
   };
   let response = await fetch("http://127.0.0.1:8000/register/", {
     method: "POST",
     body: JSON.stringify({
-      username: username,
-      email: email,
-      email2: email2,
-      password: password,
-      password2: password2
+      username: formData.username,
+      email: formData.email1,
+      email2: formData.email2,
+      password: formData.password1,
+      password2: formData.password2
     }),
     headers: {
       "Content-Type": "application/json"
     }
   });
   let json;
-  if (!response.ok) {
-    result.result = "failed";
+  if (response.status === 500) {
+    result.success = false;
     result.errors = { serverError: "Failed to fetch resources" };
   } else if (response.status === 400) {
-    result.result = "failed";
+    result.success = false;
     json = await response.json();
     result.errors = json;
   }
