@@ -7,7 +7,8 @@ import LoggedSidebar from "./sideBard/LoggedSidebar";
 import { Col, Row } from "react-bootstrap";
 // import LoggedOutSidebar from "./sideBard/LoggedOutSidebar";
 import EmailVerification from "./sideBard/EmailVerification";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import UserProfile from "./sideBard/UserProfile";
 
 class App extends Component {
   render() {
@@ -22,11 +23,12 @@ class App extends Component {
             <Row>
               <Col md="auto">
                 {" "}
-                 <LoggedSidebar />
+                <LoggedSidebar />
                 {/*<LoggedOutSidebar />*/}
               </Col>
               <Col>
                 <Route exact path="/" component={News} />
+                <Route path="/profile/:id" component={UserProfile} />
                 <Route
                   path="/email-verification"
                   component={EmailVerification}
