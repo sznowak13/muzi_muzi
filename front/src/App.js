@@ -3,9 +3,9 @@ import Header from "./header/Header";
 import HeaderSearch from "./header/HeaderSearch";
 import News from "./mainContent/News";
 import Footer from "./header/Footer";
-// import LoggedSidebar from "./LoggedSidebar";
+import LoggedSidebar from "./sideBard/LoggedSidebar";
 import { Col, Row } from "react-bootstrap";
-import LoggedOutSidebar from "./sideBard/LoggedOutSidebar";
+// import LoggedOutSidebar from "./sideBard/LoggedOutSidebar";
 import EmailVerification from "./sideBard/EmailVerification";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
@@ -22,8 +22,8 @@ class App extends Component {
             <Row>
               <Col md="auto">
                 {" "}
-                {/* <LoggedSidebar /> */}
-                <LoggedOutSidebar />
+                 <LoggedSidebar />
+                {/*<LoggedOutSidebar />*/}
               </Col>
               <Col>
                 <Route exact path="/" component={News} />
