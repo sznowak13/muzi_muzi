@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Sidenav, Divider, Nav, Icon } from "rsuite";
+import { Link } from "react-router-dom";
 
 export default class LoggedSidebar extends Component {
   render() {
@@ -9,6 +10,7 @@ export default class LoggedSidebar extends Component {
       background: "#f6c90e",
       color: " #3a4750"
     };
+
     return (
       <div style={{ width: 250 }}>
         <Sidenav>
@@ -18,7 +20,7 @@ export default class LoggedSidebar extends Component {
           <Sidenav.Body>
             <Nav>
               <Nav.Item eventKey="1" icon={<Icon icon="avatar" />}>
-                My profile
+                <Link to="/profile/:id">My Profile</Link>
               </Nav.Item>
               <Nav.Item eventKey="2" icon={<Icon icon="envelope" />}>
                 My messages
