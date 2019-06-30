@@ -36,6 +36,11 @@ i {
   margin-left: 15px;
 }
 
+.info-title {
+  font-weight: bold;
+  font-size: 2em;
+}
+
 .news-container {
   margin: 0px 0px 20px 0px;
   overflow: auto;
