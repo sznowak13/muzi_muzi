@@ -7,19 +7,14 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "antd/dist/antd.css";
 import "../node_modules/rsuite/dist/styles/rsuite.min.css";
 import "./style/index.css";
-import UserProfile from "./sideBard/UserProfile";
-// import Notfound from "./notFound";
 
 const routing = (
   <Router>
     <div>
-      <Route exact path="/" component={App} />
-      <Route path="/profile/:id" component={UserProfile} />
-      {/*<Route component={Notfound} />*/}
+      <Route path="/" component={App} />
     </div>
   </Router>
 );
 
 ReactDOM.render(routing, document.getElementById("root"));
 
-// ReactDOM.render(<App />, document.getElementById("root"));
