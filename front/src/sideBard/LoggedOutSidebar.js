@@ -2,6 +2,15 @@ import React, { Component } from "react";
 import { Sidenav, Icon, Divider, Dropdown } from "rsuite";
 import { Button } from "react-bootstrap";
 import LoginForm from "./LoginForm";
+import {
+  Form,
+  FormGroup,
+  FormControl,
+  ControlLabel,
+  HelpBlock,
+  ButtonToolbar
+} from "rsuite";
+import RegisterModal from "./RegisterModal";
 
 export default class LoggedOutSidebar extends Component {
   render() {
@@ -26,14 +35,13 @@ export default class LoggedOutSidebar extends Component {
             </div>
             <Divider />
             <div className="welcome-btn">
-              <Button variant="outline-secondary" block>
-                Register
-              </Button>
+              <RegisterModal />
             </div>
             <Divider />
             <Dropdown eventKey="1" title="Login">
-              <Dropdown.Item eventKey="1-1" style={{ paddingLeft: 0 }} />
+              <Dropdown.Item eventKey="1-1" style={{ paddingLeft: 0 }}>
               <LoginForm />
+              </Dropdown.Item>
             </Dropdown>
           </Sidenav.Body>
         </Sidenav>

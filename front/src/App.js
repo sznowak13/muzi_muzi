@@ -6,15 +6,33 @@ import Footer from "./header/Footer";
 import LoggedSidebar from "./sideBard/LoggedSidebar";
 import { Col, Row } from "react-bootstrap";
 import LoggedOutSidebar from "./sideBard/LoggedOutSidebar";
+import EmailVerification from "./sideBard/EmailVerification";
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
-      <div className="main-wrapper">
-        <div>
+      <Router>
+        <div className="main-wrapper">
           <div>
-            <Header />
-            <HeaderSearch />
+            <div>
+              <Header />
+              <HeaderSearch />
+            </div>
+            <Row>
+              <Col md="auto">
+                {" "}
+                {/* <LoggedSidebar /> */}
+                <LoggedOutSidebar />
+              </Col>
+              <Col>
+                <Route exact path="/" component={News} />
+                <Route
+                  path="/email-verification"
+                  component={EmailVerification}
+                />
+              </Col>
+            </Row>
           </div>
           <Row>
             <Col md="auto">
@@ -28,9 +46,9 @@ class App extends Component {
               <News />
             </Col>
           </Row>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      </Router>
     );
   }
 }
