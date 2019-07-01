@@ -1,8 +1,10 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Band(models.Model):
     band_id = models.AutoField(primary_key=True)
+    created = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=50)
     city = models.ForeignKey('muzi_muzi.City', models.DO_NOTHING, blank=True, null=True)
     year_founded = models.DateField(blank=True, null=True)

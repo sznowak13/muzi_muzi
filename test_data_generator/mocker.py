@@ -1,91 +1,49 @@
-import data_generator as generator
+from pymocker.utils import get_table_setting, get_bool_from_input
+from pymocker.populators import populate_table_with_generator
+
 import db_manager
-import sql_generator as sql_gen
+import providers as generator
+from mockers import *
 
 
 def main():
     print("Welcome to test data mocker for muzi_muzi database!")
 
-    users_to_generate = int(input("Input number of users to generate: "))
-    bands_to_generate = int(input("Input number of bands to generate (Approx. half the users is best): "))
-    adverts_to_generate = int(input("Input number of adverts to create: "))
+    user_setting = get_table_setting("Input number of users to generate: ")
+    band_setting = get_table_setting("Input number of bands to generate (Approx. half the users is best): ")
+    advert_setting = get_table_setting("Input number of adverts to create: ")
 
-    populate_cities()
+    repopulate_cities = get_bool_from_input(
+        input("Re-populate city table? (y/N) *enter 'yes' if this is first time* ")
+    )
+
+    cities_ids = populate_table_with_generator(CityMocker(cities=generator.cities), clear=repopulate_cities) \
+        if repopulate_cities else db_manager.get_all_cities_ids()
+
     profession_ids = db_manager.get_all_professions_ids()
-    cities_ids = db_manager.get_all_cities_ids()
-    populate_users(users_to_generate, cities_ids)
-    users_ids = db_manager.get_all_users_ids()
     genres_ids = db_manager.get_all_genres_ids()
-    assign_genres_to_users(users_ids, genres_ids)
-    assign_profession_to_users(users_ids, profession_ids)
-    populate_bands(bands_to_generate, cities_ids)
-    bands_ids = db_manager.get_all_bands_ids()
-    assign_genres_to_bands(bands_ids, genres_ids)
-    assign_users_to_bands(bands_ids, users_ids)
-    populate_adverts(adverts_to_generate, profession_ids, users_ids)
 
+    users_ids = populate_table_with_generator(UserMocker(amount=user_setting.to_generate, cities_ids=cities_ids),
+                                              clear=user_setting.clear) if user_setting.generate else db_manager.get_all_users_ids()
 
-def populate_users(row_number, cities_ids):
-    statement = (
-        "INSERT INTO users (first_name, last_name, username, email, password, city_id, description, is_superuser, is_staff, is_active, date_joined) "
-        "VALUES (%s, %s, %s, %s, %s, %s, %s, FALSE, FALSE, TRUE, %s);")
-    populate_table("users", statement, generator.user_data_generator, gnrt_sources=[row_number, cities_ids])
+    if user_setting.generate:
+        populate_table_with_generator(GenresUsersMocker(users_ids=users_ids, genre_ids=genres_ids),
+                                      clear=user_setting.clear)
+        populate_table_with_generator(UserProfessionMocker(users_ids=users_ids, profession_ids=profession_ids),
+                                      clear=user_setting.clear)
 
+    if band_setting.generate:
+        bands_ids = populate_table_with_generator(BandMocker(amount=band_setting.to_generate, cities_ids=cities_ids),
+                                                  clear=band_setting.clear)
+        populate_table_with_generator(BandGenreMocker(band_ids=bands_ids, genre_ids=genres_ids),
+                                      clear=band_setting.clear)
+        populate_table_with_generator(UserBandMocker(users_ids=users_ids, band_ids=bands_ids),
+                                      clear=band_setting.clear)
 
-def populate_bands(row_number, cities_ids):
-    statement = ("INSERT INTO band (name, city_id, year_founded, homepage, description) "
-                 "VALUES (%s, %s, %s, %s, %s);")
-
-    populate_table("band", statement, generator.band_data_generator, gnrt_sources=[row_number, cities_ids])
-
-
-def populate_cities():
-    statement = ("INSERT INTO city (name) "
-                 "VALUES (%s);")
-    populate_table("city", statement, generator.city_data_generator)
-
-
-def populate_adverts(amount, prof_ids, user_ids):
-    statement = ("INSERT INTO advert (title, description, posted_on, band_id, genre_id, profession_id, user_id) "
-                 "VALUES (%s, %s, %s, %s, %s, %s, %s);")
-    populate_table("advert",
-                   statement, generator.advert_data_generator,
-                   gnrt_sources=[
-                       amount, prof_ids, user_ids
-                   ])
-
-
-def assign_users_to_bands(bands_ids, users_ids):
-    statement = "INSERT INTO user_band (band_id, users_id) VALUES (%s, %s);"
-    populate_table("user_band", statement, generator.band_user_tuple_generator, gnrt_sources=[bands_ids, users_ids])
-
-
-def assign_genres_to_users(users_ids, genres_ids):
-    statement = "INSERT INTO users_genres (users_id, genre_id) VALUES (%s, %s);"
-    populate_table("users_genres", statement, generator.user_genre_data_generator, gnrt_sources=[users_ids, genres_ids])
-
-
-def assign_genres_to_bands(bands_ids, genres_ids):
-    statement = "INSERT INTO band_genre (band_id, genre_id) VALUES (%s, %s);"
-    populate_table("band_genre", statement, generator.band_genre_data_generator, gnrt_sources=[bands_ids, genres_ids])
-
-
-def assign_profession_to_users(users_ids, prof_ids):
-    statement = "INSERT INTO users_professions (users_id, profession_id) VALUES (%s, %s);"
-    populate_table("users_professions", statement, generator.user_prof_data_generator,
-                   gnrt_sources=[users_ids, prof_ids])
-
-
-def populate_table(table_name, statement: str, param_gnrt, clear: bool = True, gnrt_sources: list = None):
-    print(f"-- Populating {table_name} --")
-    if clear:
-        print(f"Clearing the data from {table_name}...")
-        db_manager.clear_table(table_name)
-
-    print("Preparing sql...")
-    sql, params = sql_gen.generate_sql_with_params(statement, param_gnrt, gnrt_sources)
-    print("Executing inserts...")
-    db_manager.execute_with_params(sql, params)
+    if advert_setting.generate:
+        populate_table_with_generator(
+            AdvertMocker(amount=advert_setting.to_generate, prof_ids=profession_ids, user_ids=users_ids),
+            clear=advert_setting.clear)
 
 
 if __name__ == '__main__':
