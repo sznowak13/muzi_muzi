@@ -3,7 +3,7 @@ import Header from "./header/Header";
 import HeaderSearch from "./header/HeaderSearch";
 import News from "./mainContent/News";
 import Footer from "./header/Footer";
-// import LoggedSidebar from "./LoggedSidebar";
+import LoggedSidebar from "./sideBard/LoggedSidebar";
 import { Col, Row } from "react-bootstrap";
 import LoggedOutSidebar from "./sideBard/LoggedOutSidebar";
 import EmailVerification from "./sideBard/EmailVerification";
@@ -34,6 +34,18 @@ class App extends Component {
               </Col>
             </Row>
           </div>
+          <Row>
+            <Col md="auto">
+              {localStorage.getItem("muzi_muzi_token") !== null ? (
+                <LoggedSidebar />
+              ) : (
+                <LoggedOutSidebar />
+              )}
+            </Col>
+            <Col>
+              <News />
+            </Col>
+          </Row>
           <Footer />
         </div>
       </Router>

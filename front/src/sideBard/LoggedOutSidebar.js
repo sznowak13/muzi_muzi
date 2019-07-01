@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Sidenav, Icon, Divider, Dropdown } from "rsuite";
 import { Button } from "react-bootstrap";
+import LoginForm from "./LoginForm";
 import {
   Form,
   FormGroup,
@@ -28,7 +29,9 @@ export default class LoggedOutSidebar extends Component {
               <p>Don't have an account?</p>
               <p>It's free! </p>
               <p>Sign up and join us.</p>
-              <p>{<Icon icon="heart" />}</p>
+              <p>
+                <Icon icon="heart" />
+              </p>
             </div>
             <Divider />
             <div className="welcome-btn">
@@ -37,25 +40,7 @@ export default class LoggedOutSidebar extends Component {
             <Divider />
             <Dropdown eventKey="1" title="Login">
               <Dropdown.Item eventKey="1-1" style={{ paddingLeft: 0 }}>
-                <Form>
-                  <FormGroup>
-                    <ControlLabel>Username</ControlLabel>
-                    <FormControl name="name" />
-                    <HelpBlock>Required</HelpBlock>
-                  </FormGroup>
-                  <FormGroup>
-                    <ControlLabel>Password</ControlLabel>
-                    <FormControl name="password" type="password" />
-                    <HelpBlock>Required</HelpBlock>
-                  </FormGroup>
-                  <FormGroup>
-                    <ButtonToolbar>
-                      <Button variant="outline-secondary" block>
-                        Submit
-                      </Button>
-                    </ButtonToolbar>
-                  </FormGroup>
-                </Form>
+              <LoginForm />
               </Dropdown.Item>
             </Dropdown>
           </Sidenav.Body>
