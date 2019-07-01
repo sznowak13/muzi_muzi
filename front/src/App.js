@@ -21,9 +21,11 @@ class App extends Component {
             </div>
             <Row>
               <Col md="auto">
-                {" "}
-                {/* <LoggedSidebar /> */}
-                <LoggedOutSidebar />
+                {localStorage.getItem("muzi_muzi_token") !== null ? (
+                  <LoggedSidebar />
+                ) : (
+                  <LoggedOutSidebar />
+                )}
               </Col>
               <Col>
                 <Route exact path="/" component={News} />
@@ -34,18 +36,6 @@ class App extends Component {
               </Col>
             </Row>
           </div>
-          <Row>
-            <Col md="auto">
-              {localStorage.getItem("muzi_muzi_token") !== null ? (
-                <LoggedSidebar />
-              ) : (
-                <LoggedOutSidebar />
-              )}
-            </Col>
-            <Col>
-              <News />
-            </Col>
-          </Row>
           <Footer />
         </div>
       </Router>
