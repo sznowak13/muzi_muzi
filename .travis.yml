@@ -1,6 +1,8 @@
 language: python
 addons:
   postgresql: "9.6"
+before_install:
+  - sudo apt install nodejs
 before_script:
   - psql -c "alter role postgres with password 'postgres';" -U postgres
 services:
@@ -10,3 +12,6 @@ python:
 script:
   - cd web_app
   - pytest
+  - cd ../front
+  - npm i
+  - npm test
