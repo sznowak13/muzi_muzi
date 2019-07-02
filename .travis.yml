@@ -3,4 +3,5 @@ python:
   - "3.6"
 script:
   - pip install -r requirements.txt
-  - python manage.py test
+  - cd web_app
+  - pytest
