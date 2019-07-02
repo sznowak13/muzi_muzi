@@ -79,7 +79,8 @@ MUZI_MUZI_DB
 After environment varibles are set next thing is to run migrations from the repository.
 In the 'web_app' folder run:
 ```
-(venv) user@your_laptop: ~/path/to/muzi_muzi$ python manage.py migrate
+(venv) user@your_laptop: ~/path/to/muzi_muzi$ cd web_app
+(venv) user@your_laptop: ~/path/to/muzi_muzi/web_app$ python manage.py migrate
 ```
 It will run all the migrations for the database.
 
@@ -88,3 +89,26 @@ After that you can start the server with
 (venv) user@your_laptop: ~/path/to/muzi_muzi$ python manage.py runserver
 ```
 Everything should be fine.
+
+# (Optional) 
+If you want to populate database with lots of records, you can use the test data generator module to do that.
+NOTE: Before running the generator, you MUST create a dburi.py file in test_data_generator.connection module.
+      Copy dburi.example.py and rename it to dburi.py, and replace dummy data with your own database credentials.
+      It's because data generator its totally separate from django project, so it uses its own db credentials.
+      For example:
+  ```python
+  class DBURI:
+    user = "bob"
+    password = "secret123"
+    host = "localhost"
+    name = "muzi_muzi"
+    connection_string = f"postgresql://{user}:{password}@{host}/{name}"
+
+  ```
+      
+ If your credentials are set, simply run:
+ ```
+(venv) user@your_laptop: ~/path/to/muzi_muzi$ cd test_data_generator
+(venv) user@your_laptop: ~/path/to/muzi_muzi/test_data_generator$ python mocker.py```
+```
+And follow the prompts from the script.

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Users
+from .models import Users, VerificationToken
 from bands.models import Band
 
 
@@ -25,5 +25,5 @@ class UserAdmin(admin.ModelAdmin):
 
     list_display = ('username', 'first_name', 'last_name', 'date_joined', 'role')
 
-
 admin.site.register(Users, UserAdmin)
+admin.site.register(VerificationToken)
