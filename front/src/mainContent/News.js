@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import Adverts from "./Adverts";
-import Bands from "./Bands";
 import { Container } from "react-bootstrap";
 import { Tabs } from "antd";
+import UsersSneakPeak from "./UsersSneakPeak";
+import BandsSneakPeak from "./BandsSneakPeak";
+import AdvertsSneakPeak from "./AdvertsSneakPeak";
 
 export default class News extends Component {
   render() {
@@ -12,16 +13,16 @@ export default class News extends Component {
       console.log(key);
     }
     return (
-      <Container className="news">
+      <Container>
         <Tabs onChange={callback} type="card">
           <TabPane tab="Adverts" key="1">
-            <Adverts />
+            <AdvertsSneakPeak />
           </TabPane>
-          <TabPane tab="Bands" key="2">
-            <Bands />
+          <TabPane tab="Users" key="2">
+            <UsersSneakPeak />
           </TabPane>
-          <TabPane tab="Users" key="3">
-            Content of Tab Pane 3
+          <TabPane tab="Bands" key="3">
+            <BandsSneakPeak />
           </TabPane>
         </Tabs>
       </Container>

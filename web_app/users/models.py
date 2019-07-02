@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from rest_framework.authtoken.models import Token as TokenModel
 
 
 DEFAULT_ROLE_ID = 1
@@ -7,6 +8,11 @@ DEFAULT_ROLE_ID = 1
 
 class Users(AbstractUser):
     user_id = models.AutoField(primary_key=True)
+    email = models.EmailField(blank=False)
+    is_active = models.BooleanField(default=False, help_text=(
+        'Designates whether this user should be treated as active. '
+        'Unselect this instead of deleting accounts.'
+    ), )
     role = models.ForeignKey('muzi_muzi.Role', models.SET_NULL, null=True, default=DEFAULT_ROLE_ID)
     city = models.ForeignKey('muzi_muzi.City', models.SET_NULL, blank=True, null=True)
     photo_url = models.CharField(max_length=255, blank=True, null=True)
@@ -21,6 +27,11 @@ class Users(AbstractUser):
     class Meta:
         db_table = 'users'
         verbose_name_plural = 'Users'
+
+
+class VerificationToken(TokenModel):
+    class Meta:
+        db_table = 'verification_token'
 
 
 #  --- Views ---

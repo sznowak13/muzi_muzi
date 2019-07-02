@@ -1,0 +1,239 @@
+#root {
+  height: auto;
+  flex-direction: column;
+  background-color: #303841;
+}
+
+i {
+  margin-right: 4px;
+}
+
+/* Navbars */
+.navbar-main {
+  padding: 0;
+  background-color: #f6c90e;
+}
+
+.navbar-search {
+  background-color: #3a4750;
+  margin-bottom: 10px;
+}
+
+/* Footer */
+
+.footer {
+  padding: 8px;
+  text-align: center;
+  background-color: #f6c90e;
+  color: rgb(0, 0, 0);
+}
+
+/* News */
+.news-title {
+  font-weight: 600;
+  font-size: 2em;
+  text-align: left;
+  margin-left: 15px;
+}
+
+.news-container {
+  margin: 0px 0px 20px 0px;
+  overflow: auto;
+  background-color: #eeeeee;
+}
+
+/* NewsTabs */
+
+.ant-tabs-bar {
+  margin: 0 !important;
+}
+
+.ant-tabs-nav .ant-tabs-tab-active {
+  background-color: #eeeeee !important;
+}
+
+.ant-tabs-tab {
+  box-sizing: content-box !important;
+  margin: 0 3px 0 0 !important;
+  background-color: #606a72 !important;
+  color: white;
+}
+
+/* AdvertBoxes */
+
+.item1 {
+  grid-area: title;
+}
+.item2 {
+  grid-area: photo;
+}
+.item3 {
+  grid-area: description;
+}
+.item4 {
+  grid-area: city;
+}
+.item5 {
+  grid-area: genres;
+}
+.item6 {
+  grid-area: date;
+}
+
+div.item1,
+div.item3,
+div.item4,
+div.item5,
+div.item6 {
+  padding: 5px;
+}
+
+div.item1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.item1,
+div.item3 {
+  min-width: 695px;
+}
+
+div.item4,
+div.item5,
+div.item6 {
+  min-width: 150px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 180px;
+  grid-template-rows: max-content;
+  grid-template-areas:
+    "photo title title title date"
+    "photo description description description city"
+    "photo description description description genres";
+  grid-gap: 3px;
+  background-color: #f6c90e;
+  padding: 3px;
+  transition: box-shadow 0.3s;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.grid-container:hover {
+  box-shadow: 0 0 19px rgba(33, 33, 33, 0.2);
+}
+
+.grid-container > div {
+  background-color: rgb(255, 255, 255);
+  font-size: 15px;
+}
+
+.advert-title {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.advert-data {
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.advert-label {
+  font-size: 0.9em;
+}
+
+/* UsersBoxes & BandsBoxes */
+
+.card-header {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+div.card-body {
+  padding: 12px;
+}
+
+.users-and-bands-body {
+  margin-bottom: 7px;
+}
+
+.users-info {
+  font-weight: bold;
+}
+
+.band-background {
+  background-size: contain;
+  opacity: 0.8;
+}
+
+.band-name {
+  text-align: center;
+  position: relative;
+  margin: 62% 0 0 0;
+  font-weight: 500;
+  font-size: 1.5em;
+  color: black;
+  text-shadow: 0 0 1rem white;
+  background: rgba(255, 255, 255, 0.37);
+  width: inherit;
+}
+
+div.card-header {
+  padding: 10px;
+  min-height: 70px;
+}
+
+div.card {
+  border-color: #f6c90e;
+  border-width: 3px;
+}
+
+div.card:hover {
+  box-shadow: 0 0 19px rgba(33, 33, 33, 0.2);
+}
+
+/* Sidebar */
+
+div.row {
+  margin: 0;
+}
+
+.rs-divider-horizontal {
+  margin: 0px !important;
+}
+
+.welcome-sign {
+  padding: 15px;
+  text-align: center;
+}
+
+.main {
+  font-weight: bold;
+}
+
+.header-styles {
+  padding: 5px;
+  background-color: #f6c90e;
+}
+
+.welcome-btn {
+  margin: 10px;
+}
+
+/* SearchBar */
+
+.search-bar {
+  width: 50px;
+}
+
+.a.rs-dropdown-item-content{
+  padding: 0 0 0 0;
+}
+
+
+.rs-sidenav-collapse-in .rs-dropdown-item>.rs-dropdown-item-content {
+     padding: 10px!important;
+}
