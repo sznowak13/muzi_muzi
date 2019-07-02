@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sznowak13/muzi_muzi.svg?branch=master)](https://travis-ci.org/sznowak13/muzi_muzi)
+
 # Muzi Muzi Advert Service
 
 Muzi Muzi is a service for musiscians where You can post musical adverts - 
