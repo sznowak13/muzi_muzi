@@ -140,6 +140,3 @@ class TestUsers(APITestCase):
         resp = self.client.get(url)
         with pytest.raises(VerificationToken.DoesNotExist):
             VerificationToken.objects.get(pk=correct_token)
-
-    def test_to_fail(self):
-        assert 1 == 2
