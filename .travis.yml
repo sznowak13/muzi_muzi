@@ -1,4 +1,6 @@
 language: python
+addons:
+  postgresql: "9.6"
 before_script:
   - psql -c "alter role postgres with password 'postgres';" -U postgres
 services:
