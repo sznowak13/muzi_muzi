@@ -3,6 +3,10 @@ import { Sidenav, Divider, Nav, Icon } from "rsuite";
 import { Link } from "react-router-dom";
 
 export default class LoggedSidebar extends Component {
+  logOut() {
+    localStorage.clear();
+    window.location.reload();
+  }
   render() {
     const headerStyles = {
       padding: 20,
@@ -20,7 +24,9 @@ export default class LoggedSidebar extends Component {
           <Sidenav.Body>
             <Nav>
               <Nav.Item eventKey="1" icon={<Icon icon="avatar" />}>
-                <Link to="/profile/:id">My Profile</Link>
+                <Link className="navbar-links" to="/profile/:user_id/">
+                  My Profile
+                </Link>
               </Nav.Item>
               <Nav.Item eventKey="2" icon={<Icon icon="envelope" />}>
                 My messages
@@ -32,8 +38,13 @@ export default class LoggedSidebar extends Component {
                 My bands
               </Nav.Item>
               <Divider />
-              <Nav.Item eventKey="5" icon={<Icon icon="sign-out" />}>
-                Log out
+              <Nav.Item
+                eventKey="5"
+                icon={<Icon icon="sign-out" />}
+                onClick={this.logOut}
+              >
+                {" "}
+                Log Out
               </Nav.Item>
             </Nav>
           </Sidenav.Body>
