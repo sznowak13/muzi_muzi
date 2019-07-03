@@ -33,9 +33,12 @@ export default class LoggedSidebar extends Component {
               <Nav.Item eventKey="4" icon={<Icon icon="group" />}>
                 My bands
               </Nav.Item>
+              <Nav.Item eventKey="5" icon={<Icon icon="plus-square" />}>
+                Add new advert
+              </Nav.Item>
               <Divider />
               <Nav.Item
-                eventKey="5"
+                eventKey="6"
                 icon={<Icon icon="sign-out" />}
                 onClick={this.logOut}
               >

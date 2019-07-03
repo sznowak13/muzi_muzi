@@ -42,6 +42,11 @@ i {
   background-color: #eeeeee;
 }
 
+.add-advert-container {
+  background-color: #eeeeee;
+  padding: 20px;
+}
+
 /* NewsTabs */
 
 .ant-tabs-bar {
@@ -229,11 +234,10 @@ div.row {
   width: 50px;
 }
 
-.a.rs-dropdown-item-content{
+.a.rs-dropdown-item-content {
   padding: 0 0 0 0;
 }
 
-
-.rs-sidenav-collapse-in .rs-dropdown-item>.rs-dropdown-item-content {
-     padding: 10px!important;
+.rs-sidenav-collapse-in .rs-dropdown-item > .rs-dropdown-item-content {
+  padding: 10px !important;
 }
