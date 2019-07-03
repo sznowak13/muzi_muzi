@@ -7,7 +7,7 @@ import RegisterModal from "./RegisterModal";
 export default class LoggedOutSidebar extends Component {
   render() {
     return (
-      <div style={{ width: "100%" }}>
+      <div style={{ width: 340 }}>
         <Sidenav>
           <Sidenav.Body>
             <Sidenav.Header>

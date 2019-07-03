@@ -9,16 +9,18 @@ export default class LoggedSidebar extends Component {
   }
   render() {
     const headerStyles = {
+      textAlign: "center",
+      fontWeight: 600,
       padding: 20,
-      fontSize: 16,
+      fontSize: 20,
       background: "#f6c90e",
       color: " #3a4750"
     };
     return (
-      <div style={{ width: 250 }}>
+      <div style={{ width: 340 }}>
         <Sidenav>
           <Sidenav.Header>
-            <div style={headerStyles}>Custom Sidenav</div>
+            <div style={headerStyles}>Welcome</div>
           </Sidenav.Header>
           <Sidenav.Body>
             <Nav>
