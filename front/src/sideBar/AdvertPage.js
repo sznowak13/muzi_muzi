@@ -10,7 +10,7 @@ export default class UserProfile extends Component {
       advert_id: "",
       advert_username: "",
       advert_city: "",
-      advert_band_name: "",
+      advert_band_name: null,
       advert_title: "",
       advert_description: "",
       advert_genre: "",
@@ -20,7 +20,7 @@ export default class UserProfile extends Component {
   }
 
   async componentDidMount() {
-    const url = `http://127.0.0.1:8000/adverts/1/`;
+    const url = `http://127.0.0.1:8000/adverts/10/`;
     const response = await fetch(url);
     const data = await response.json();
     this.setState({
@@ -45,7 +45,14 @@ export default class UserProfile extends Component {
           margin="1%"
           padding="3%"
         >
-          <div className="advert-header"> BAND </div>
+          <div className="advert-header">
+            {" "}
+            {this.state.advert_band_name != null ? (
+              <span> BAND </span>
+            ) : (
+              <span> USER </span>
+            )}{" "}
+          </div>
           <div className="advert-header"> {this.state.advert_city} </div>
           <div className="advert-header"> {this.state.advert_profession} </div>
           <div className="advert-header"> {this.state.advert_genre}</div>
