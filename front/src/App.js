@@ -3,11 +3,12 @@ import Header from "./header/Header";
 import HeaderSearch from "./header/HeaderSearch";
 import News from "./mainContent/News";
 import Footer from "./header/Footer";
-import LoggedSidebar from "./sideBard/LoggedSidebar";
+import LoggedSidebar from "./sideBar/LoggedSidebar";
 import { Col, Row } from "react-bootstrap";
-import LoggedOutSidebar from "./sideBard/LoggedOutSidebar";
-import EmailVerification from "./sideBard/EmailVerification";
+import LoggedOutSidebar from "./sideBar/LoggedOutSidebar";
+import EmailVerification from "./sideBar/EmailVerification";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import AdvertPage from "./sideBar/AdvertPage";
 
 class App extends Component {
   render() {
@@ -29,6 +30,7 @@ class App extends Component {
               </Col>
               <Col>
                 <Route exact path="/" component={News} />
+                <Route path="/advert/:id/" component={AdvertPage} />
                 <Route
                   path="/email-verification"
                   component={EmailVerification}
