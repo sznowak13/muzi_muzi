@@ -244,3 +244,13 @@ div.row {
 .rs-sidenav-collapse-in .rs-dropdown-item > .rs-dropdown-item-content {
   padding: 10px !important;
 }
+
+.advert-header {
+  font-weight: bold;
+  font-size: medium;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border: 2px solid darkolivegreen;
+  background-color: darkseagreen;
+  border-radius: 5px;
+}
