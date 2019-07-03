@@ -20,7 +20,9 @@ export default class UserProfile extends Component {
   }
 
   async componentDidMount() {
-    const url = "http://127.0.0.1:8000/users/19/";
+    const url = `http://127.0.0.1:8000/users/${localStorage.getItem(
+      "muzi_muzi_user_id"
+    )}/`;
     const response = await fetch(url);
     const data = await response.json();
     this.setState({
