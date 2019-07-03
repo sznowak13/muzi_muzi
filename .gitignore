@@ -24,6 +24,7 @@
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
+
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
@@ -95,3 +96,4 @@ sql/dont_executeXD.sql
 __pycache__/
 */.history/
 *.pyc
+.idea/
