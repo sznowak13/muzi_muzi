@@ -85,7 +85,7 @@ export default class LoginForm extends Component {
               onClick={this.authorizeUser}
               disabled={this.validateLoginInputs()}
             >
-              Submit
+              Log in
             </Button>
           </ButtonToolbar>
         </FormGroup>
