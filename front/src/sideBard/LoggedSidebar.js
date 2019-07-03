@@ -24,7 +24,7 @@ export default class LoggedSidebar extends Component {
           <Sidenav.Body>
             <Nav>
               <Nav.Item eventKey="1" icon={<Icon icon="avatar" />}>
-                <Link className="navbar-links" to="/profile/:user_id/">
+                <Link className="navbar-links" to="../my-profile/">
                   My Profile
                 </Link>
               </Nav.Item>
