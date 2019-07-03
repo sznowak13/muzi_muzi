@@ -43,7 +43,6 @@ export default class LoggedSidebar extends Component {
                 icon={<Icon icon="sign-out" />}
                 onClick={this.logOut}
               >
-                {" "}
                 Log Out
               </Nav.Item>
             </Nav>

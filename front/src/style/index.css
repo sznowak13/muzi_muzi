@@ -1,11 +1,19 @@
 #root {
-  height: auto;
+  min-height: 100%;
+}
+body {
+  display: flex;
   flex-direction: column;
   background-color: #303841;
 }
 
 i {
   margin-right: 4px;
+}
+
+.main-wrapper {
+  min-height: 96%;
+  flex: 1;
 }
 
 /* Navbars */
@@ -271,10 +279,9 @@ div.row {
   width: 50px;
 }
 
-.a.rs-dropdown-item-content{
+.a.rs-dropdown-item-content {
   padding: 0 0 0 0;
 }
-
 
 .rs-sidenav-collapse-in .rs-dropdown-item>.rs-dropdown-item-content {
      padding: 10px!important;
@@ -286,4 +293,3 @@ div.row {
 .navbar-links:hover {
   color: #606a72;
 }
-
