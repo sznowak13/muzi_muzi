@@ -94,3 +94,4 @@ sql/.idea/
 sql/dont_executeXD.sql
 __pycache__/
 */.history/
+*.pyc
