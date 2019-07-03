@@ -91,6 +91,7 @@ class TestUsers(APITestCase):
         json_response = json.loads(resp.content.decode('utf-8'))
         assert resp.status_code == status.HTTP_200_OK
         assert json_response == {
+            'id': 1,
             'token': token
         }
 
@@ -135,3 +136,22 @@ class TestUsers(APITestCase):
         resp = self.client.get(url)
         with pytest.raises(VerificationToken.DoesNotExist):
             VerificationToken.objects.get(pk=correct_token)
+
+    def test_authorization_returns_token_and_id(self):
+        user = Users.objects.get(username="Test1")
+        user.is_active = True
+        user.save()
+        correct_token = VerificationToken.objects.get(user=user)
+        url = reverse('api-token-auth')
+        print(url)
+        resp = self.client.post(url, data={
+            'username': user.username,
+            'password': 'Adam'
+        })
+        json_response = json.loads(resp.content.decode('utf-8'))
+        assert resp.status_code == 200
+        assert json_response == {
+            "token": correct_token.key,
+            "id": 1
+        }
+
