@@ -254,3 +254,13 @@ div.row {
   background-color: darkseagreen;
   border-radius: 5px;
 }
+
+.advert-image {
+
+}
+
+.advert-description {
+  font-weight: bold;
+  font-size: medium;
+  letter-spacing: 1px;
+}
