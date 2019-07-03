@@ -5,7 +5,8 @@ import {
   FormControl,
   ControlLabel,
   SelectPicker,
-  Icon
+  Icon,
+  HelpBlock
 } from "rsuite";
 import { Button } from "react-bootstrap";
 
@@ -14,7 +15,9 @@ export default class AddMusicianAdvert extends Component {
     super(props);
     this.state = {
       professions: [],
-      apiUrl: "http://localhost:8000/professions/",
+      genres: [],
+      professionsUrl: "http://localhost:8000/professions/",
+      genresUrl: "http://localhost:8000/genres/",
       formData: {
         title: "",
         description: "",
@@ -23,21 +26,22 @@ export default class AddMusicianAdvert extends Component {
         genre: ""
       }
     };
-    this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleProfessionsUpdate = this.handleProfessionsUpdate.bind(this);
+    this.handleGenresUpdate = this.handleGenresUpdate.bind(this);
   }
 
-  formatData(professions) {
-    for (let prof of professions) {
-      prof.label = prof.name;
-      prof.value = prof.name;
+  formatData(data) {
+    for (let item of data) {
+      item.label = item.name;
+      item.value = item.name;
     }
-    return professions;
+    return data;
   }
 
-  handleUpdate() {
+  handleProfessionsUpdate() {
     if (this.state.professions.length === 0) {
       this.setState({ professions: [] });
-      fetch(this.state.apiUrl)
+      fetch(this.state.professionsUrl)
         .then(res => res.json())
         .then(json =>
           this.setState({
@@ -47,61 +51,107 @@ export default class AddMusicianAdvert extends Component {
     }
   }
 
+  handleGenresUpdate() {
+    if (this.state.genres.length === 0) {
+      this.setState({ genres: [] });
+      fetch(this.state.genresUrl)
+        .then(res => res.json())
+        .then(json =>
+          this.setState({
+            genres: this.formatData(json.results)
+          })
+        );
+    }
+  }
+
   render() {
     const { professions } = this.state;
+    const { genres } = this.state;
     const { formData } = this.state;
     return (
-      <div className="add-advert-container">
+      <div>
+        <h1 style={{ color: "#f6c90e" }}>Add Musician Advert</h1>
         <Form
+          layout="inline"
+          className="add-advert-container"
           formValue={formData}
           onChange={formValue => {
             this.setState({ formData: formValue });
           }}
         >
-          <FormGroup>
-            <ControlLabel>Title</ControlLabel>
-            <FormControl name="title" />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Description</ControlLabel>
-            <FormControl
-              rows={5}
-              name="description"
-              componentClass="textarea"
-            />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>City</ControlLabel>
-            <FormControl name="city" />
-          </FormGroup>
-          <FormGroup>
-            <SelectPicker
-              data={professions}
-              placeholder="Select Profession"
-              style={{ width: 224 }}
-              onOpen={this.handleUpdate}
-              onSearch={this.handleUpdate}
-              renderMenu={menu => {
-                if (professions.length === 0) {
-                  return (
-                    <p
-                      style={{ padding: 4, color: "#999", textAlign: "center" }}
-                    >
-                      <Icon icon="spinner" spin /> Please Wait...
-                    </p>
-                  );
-                }
-                return menu;
-              }}
-            />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Genre</ControlLabel>
-            <FormControl name="genre" />
-          </FormGroup>
-          <Button onClick={this.submit} color="green">
-            Submit
-          </Button>
+          <div className="title-city-section">
+            <FormGroup>
+              <ControlLabel>Title</ControlLabel>
+              <FormControl name="title" />
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>City</ControlLabel>
+              <FormControl name="city" />
+            </FormGroup>
+            <FormGroup>
+              <SelectPicker
+                data={professions}
+                placeholder="Select Profession"
+                style={{ width: 224 }}
+                onOpen={this.handleProfessionsUpdate}
+                onSearch={this.handleProfessionsUpdate}
+                renderMenu={menu => {
+                  if (professions.length === 0) {
+                    return (
+                      <p
+                        style={{
+                          padding: 4,
+                          color: "#999",
+                          textAlign: "center"
+                        }}
+                      >
+                        <Icon icon="spinner" spin /> Please Wait...
+                      </p>
+                    );
+                  }
+                  return menu;
+                }}
+              />
+            </FormGroup>
+            <FormGroup>
+              <SelectPicker
+                data={genres}
+                placeholder="Select Genre"
+                style={{ width: 224 }}
+                onOpen={this.handleGenresUpdate}
+                onSearch={this.handleGenresUpdate}
+                renderMenu={menu => {
+                  if (genres.length === 0) {
+                    return (
+                      <p
+                        style={{
+                          padding: 4,
+                          color: "#999",
+                          textAlign: "center"
+                        }}
+                      >
+                        <Icon icon="spinner" spin /> Please Wait...
+                      </p>
+                    );
+                  }
+                  return menu;
+                }}
+              />
+            </FormGroup>
+          </div>
+          <div className="description-section">
+            <FormGroup>
+              <ControlLabel>Description</ControlLabel>
+              <FormControl
+                style={{ width: 600 }}
+                rows={4}
+                name="description"
+                componentClass="textarea"
+              />
+              <HelpBlock tooltip>Write few sentences about you</HelpBlock>
+            </FormGroup>
+          </div>
+          <Button onClick={this.submit}>Submit</Button>
         </Form>
       </div>
     );

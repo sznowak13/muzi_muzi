@@ -42,9 +42,21 @@ i {
   background-color: #eeeeee;
 }
 
+/* Add advert */
+
 .add-advert-container {
   background-color: #eeeeee;
   padding: 20px;
+}
+
+.title-city-section {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.description-section {
+  display: flex;
 }
 
 /* NewsTabs */
