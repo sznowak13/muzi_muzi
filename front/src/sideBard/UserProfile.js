@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Image } from "react-bootstrap";
-import { Input, InputGroup, Icon, Col, Row, Container } from "rsuite";
+import { Input, InputGroup, Icon, Col, Row, Tooltip, Whisper } from "rsuite";
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export default class UserProfile extends Component {
       person_photo: { edit: false, value: "" },
       person_email: { edit: false, value: "" },
       person_genres: { edit: false, value: [] },
-      person_professions: { edit: false, value: "" }
+      person_professions: { edit: false, value: [] }
     };
   }
 
@@ -50,15 +50,22 @@ export default class UserProfile extends Component {
     return formated;
   }
 
-  formatFieldDisplay(fieldName) {
+  formatFieldDisplay(fieldName, label) {
+    let field;
+    let labelSpan = <span className="field-label">{label + ": "}</span>;
     let value = this.state[fieldName].value;
     if (!value) {
-      return "---";
+      value = "---";
     } else if (Array.isArray(value)) {
-      return value.join(", ");
-    } else {
-      return value;
+      value = value.join(", ");
     }
+    field = <div className="field-value">{value}</div>;
+    return (
+      <div className="field-group">
+        {labelSpan}
+        {field}
+      </div>
+    );
   }
 
   toggleEdit(fieldName) {
