@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Container, Image } from "react-bootstrap";
 import Flexbox from "flexbox-react";
-import genericband from "../resources/generic-band.jpg";
-import FlexboxGridItem from "rsuite/lib/FlexboxGridItem";
+import Button from "react-bootstrap/Button";
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -40,7 +39,12 @@ export default class UserProfile extends Component {
   render() {
     return (
       <Container className="news-container">
-        <Flexbox flexDirection="row" justifyContent="space-around" margin="1%" padding="3%">
+        <Flexbox
+          flexDirection="row"
+          justifyContent="space-around"
+          margin="1%"
+          padding="3%"
+        >
           <div className="advert-header"> BAND </div>
           <div className="advert-header"> {this.state.advert_city} </div>
           <div className="advert-header"> {this.state.advert_profession} </div>
@@ -66,11 +70,29 @@ export default class UserProfile extends Component {
             {this.state.advert_description}{" "}
           </div>
         </Flexbox>
-        <Flexbox flexDirection="row" justifyContent="space-evenly" margin="1%" padding="3%">
-          <div className="advert-description"> Posted by: </div>
-          <div> {this.state.advert_username} </div>
-          <div className="advert-description"> Posted on: </div>
-          <div> {this.state.advert_posted_on} </div>
+        <Flexbox
+          flexDirection="row"
+          justifyContent="flex-end"
+          margin="1%"
+          padding="3%"
+        >
+          <div className="advert-posted"> Posted by: </div>
+          <div className="advert-posted"> {this.state.advert_username} </div>
+          <div className="advert-posted"> Posted on: </div>
+          <div className="advert-posted"> {this.state.advert_posted_on} </div>
+        </Flexbox>
+        <Flexbox
+          flexDirection="row"
+          justifyContent="flex-end"
+          margin="1%"
+          padding="3%"
+        >
+          <Button className="advert-button" variant="info">
+            Answer this advert
+          </Button>
+          <Button className="advert-button" variant="secondary">
+            Take me back
+          </Button>
         </Flexbox>
       </Container>
     );
