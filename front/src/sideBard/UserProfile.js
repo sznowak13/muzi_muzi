@@ -105,11 +105,17 @@ export default class UserProfile extends Component {
   }
 
   render() {
+    const tooltip = <Tooltip>Edit this section</Tooltip>;
     return (
-      <Container className="news-container">
-        <Container className="personal-info-container">
-          <Row>
-            <Col>
+      <div className="profile-container">
+        <div className="top-section">
+          <div className="main-profile-section section">
+            <div className="edit-section">
+              <Whisper placement="left" trigger="hover" speaker={tooltip}>
+                <Icon icon="edit2" className="edit-button" size="lg" />
+              </Whisper>
+            </div>
+            <div className="flex-center">
               <Image
                 width="200"
                 height="200"
@@ -117,73 +123,32 @@ export default class UserProfile extends Component {
                 src={this.state.person_photo.value}
                 roundedCircle
               />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <h2 className="news-title">
-                {this.state.person_first_name.value}{" "}
-                {this.state.person_last_name.value}
-              </h2>
-              <h2 className="news-title">
-                {" "}
-                "{this.state.person_username.value}"{" "}
-              </h2>
-            </Col>
-          </Row>
-        </Container>
-
-        <Container className="person-info-container">
-          <Row>
-            <Col className="person-info-title">Email:</Col>
-          </Row>
-          <Row>
-            <Col>{this.state.person_email.value}</Col>
-          </Row>
-
-          <Row>
-            <Col className="person-info-title">City:</Col>
-          </Row>
-          <Row>
-            <Col>{this.state.person_city.value}</Col>
-          </Row>
-
-          <Row>
-            <Col className="person-info-title">Professions:</Col>
-          </Row>
-          <Row>
-            <Col>
-              {this.state.person_professions.value.length > 0 ? (
-                this.state.person_professions.value.toString()
-              ) : (
-                <span>Not provided</span>
-              )}
-            </Col>
-          </Row>
-
-          <Row>
-            <Col className="person-info-title">Genres:</Col>
-          </Row>
-          <Row>
-            <Col>
-              {this.state.person_genres.value.length > 0 ? (
-                this.state.person_genres.value.toString()
-              ) : (
-                <span>Not provided</span>
-              )}
-            </Col>
-          </Row>
-        </Container>
-
-        <Container className="person-description-container">
-          <Row>
-            <Col className="person-info-title">Description:</Col>
-          </Row>
-          <Row>
-            <Col>{this.state.person_description.value}</Col>
-          </Row>
-        </Container>
-      </Container>
+            </div>
+            {this.formatFieldDisplay("person_first_name", "First name")}
+            {this.formatFieldDisplay("person_last_name", "Last name")}
+            {this.formatFieldDisplay("person_username", "Username")}
+          </div>
+          <div className="additional-profile-section section">
+            <div className="edit-section">
+              <Whisper placement="left" trigger="hover" speaker={tooltip}>
+                <Icon icon="edit2" className="edit-button" size="lg" />
+              </Whisper>
+            </div>
+            {this.formatFieldDisplay("person_email", "Email")}
+            {this.formatFieldDisplay("person_city", "City")}
+            {this.formatFieldDisplay("person_genres", "Genres")}
+            {this.formatFieldDisplay("person_professions", "Professions")}
+          </div>
+        </div>
+        <div className="desc-profile-section section">
+          <div className="edit-section">
+            <Whisper placement="left" trigger="hover" speaker={tooltip}>
+              <Icon icon="edit2" className="edit-button" size="lg" />
+            </Whisper>
+          </div>
+          {this.formatFieldDisplay("person_description", "Description")}
+        </div>
+      </div>
     );
   }
 }
