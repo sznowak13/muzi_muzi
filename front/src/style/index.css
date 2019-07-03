@@ -264,3 +264,13 @@ div.row {
   font-size: medium;
   letter-spacing: 1px;
 }
+
+.advert-posted {
+  font-size: medium;
+  letter-spacing: 1px;
+  margin: 2%;
+}
+
+.advert-button {
+  margin: 2%;
+}
