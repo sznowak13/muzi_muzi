@@ -62,13 +62,16 @@ export default class AdvertPage extends Component {
                 <span> USER </span>
               )}{" "}
             </Tag>
-            <Tag color="green" className="advert-header">
+            <a className="advert-header" /> CITY:
+            <Tag color="green" className="advert-tag">
               {this.state.advert_city}
             </Tag>
-            <Tag color="green" className="advert-header">
+            <a className="advert-header" /> PROFESSION:
+            <Tag color="yellow" className="advert-tag">
               {this.state.advert_profession}
             </Tag>
-            <Tag color="green" className="advert-header">
+            <a className="advert-header" /> GENRE:
+            <Tag color="orange" className="advert-tag">
               {this.state.advert_genre}
             </Tag>
           </TagGroup>
