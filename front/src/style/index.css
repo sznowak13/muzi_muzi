@@ -241,24 +241,24 @@ div.row {
   padding: 10px !important;
 }
 
-.advert-header {
+.advert-tag {
   font-weight: bold;
   font-size: medium;
   letter-spacing: 3px;
   text-transform: uppercase;
-  border: 2px solid darkolivegreen;
-  background-color: darkseagreen;
-  border-radius: 5px;
 }
 
 .advert-image {
 
 }
 
+.advert-description:hover,
 .advert-description {
   font-weight: bold;
   font-size: medium;
   letter-spacing: 1px;
+  text-decoration: none;
+  color: #3a4750;
 }
 
 .advert-posted {
