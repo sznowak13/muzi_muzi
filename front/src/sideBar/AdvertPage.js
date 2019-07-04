@@ -93,6 +93,7 @@ export default class AdvertPage extends Component {
           </div>
           <div className="advert-page-title"> {this.state.advert_title} </div>
         </Flexbox>
+        <Divider />
         <Flexbox
           flexDirection="row"
           justifyContent="center"
@@ -104,6 +105,7 @@ export default class AdvertPage extends Component {
             {this.state.advert_description}{" "}
           </div>
         </Flexbox>
+        <Divider />
         <Flexbox
           flexDirection="row"
           justifyContent="flex-end"
