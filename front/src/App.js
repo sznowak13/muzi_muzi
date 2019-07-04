@@ -5,12 +5,20 @@ import News from "./mainContent/News";
 import Footer from "./header/Footer";
 import LoggedSidebar from "./sideBar/LoggedSidebar";
 import { Col, Row } from "react-bootstrap";
+import AdvertPage from "./sideBar/AdvertPage";
 import LoggedOutSidebar from "./sideBar/LoggedOutSidebar";
 import EmailVerification from "./sideBar/EmailVerification";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import AdvertPage from "./sideBar/AdvertPage";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import UserProfile from "./sideBar/UserProfile";
+
 
 class App extends Component {
+  checkAuthorizedRouting() {
+    if (localStorage.getItem("muzi_muzi_token")) {
+      return <Route path="/my-profile" component={UserProfile} />;
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -35,6 +43,7 @@ class App extends Component {
                   path="/email-verification"
                   component={EmailVerification}
                 />
+                {this.checkAuthorizedRouting()}
               </Col>
             </Row>
           </div>
