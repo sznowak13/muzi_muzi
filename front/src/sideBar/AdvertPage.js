@@ -133,10 +133,10 @@ export default class AdvertPage extends Component {
           margin="1%"
           padding="3%"
         >
-          <Button className="advert-button" variant="info">
+          <Button className="advert-button" color="cyan">
             Answer this advert
           </Button>
-          <Button className="advert-button" variant="secondary">
+          <Button className="advert-button" appearance="ghost">
             Take me back
           </Button>
         </Flexbox>
