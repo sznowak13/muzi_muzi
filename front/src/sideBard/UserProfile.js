@@ -1,23 +1,22 @@
 import React, { Component } from "react";
 import { Image } from "react-bootstrap";
-import { Input, InputGroup, Icon, Col, Row, Tooltip, Whisper } from "rsuite";
+import {
+  Input,
+  InputGroup,
+  Icon,
+  Col,
+  Row,
+  Tooltip,
+  Whisper,
+  Tag,
+  TagGroup
+} from "rsuite";
+import { userProfileFiledMapping as fieldMapping } from "./mappings";
 
 export default class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fields_map: {
-        person_id: "user_id",
-        person_first_name: "first_name",
-        person_last_name: "last_name",
-        person_username: "username",
-        person_city: "city",
-        person_description: "description",
-        person_photo: "photo_url",
-        person_email: "email",
-        person_genres: "genres",
-        person_professions: "professions"
-      },
       person_id: { edit: false, value: "" },
       person_first_name: { edit: false, value: "" },
       person_last_name: { edit: false, value: "" },
@@ -43,11 +42,18 @@ export default class UserProfile extends Component {
 
   formatFetchData(data) {
     let formated = {};
-    for (let entry of Object.entries(this.state.fields_map)) {
+    for (let entry of Object.entries(fieldMapping)) {
       formated[entry[0]] = { ...this.state[entry[0]], value: data[entry[1]] };
     }
-    console.log(formated);
     return formated;
+  }
+
+  createTags(arr) {
+    let tags = [];
+    for (let v of arr) {
+      tags.push(<Tag color="cyan">{v}</Tag>);
+    }
+    return <TagGroup>{tags}</TagGroup>;
   }
 
   formatFieldDisplay(fieldName, label) {
@@ -57,7 +63,7 @@ export default class UserProfile extends Component {
     if (!value) {
       value = "---";
     } else if (Array.isArray(value)) {
-      value = value.join(", ");
+      value = this.createTags(value);
     }
     field = <div className="field-value">{value}</div>;
     return (
