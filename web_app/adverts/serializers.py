@@ -19,6 +19,7 @@ class PKFilteredRelatedFiled(serializers.PrimaryKeyRelatedField):
 class AdvertSerializer(serializers.HyperlinkedModelSerializer):
     user = serializers.HyperlinkedRelatedField(view_name='users-detail', read_only=True)
     username = serializers.ReadOnlyField(source='user.username')
+    user_id = serializers.ReadOnlyField(source='user.user_id')
     band_name = serializers.StringRelatedField(source='band.name', read_only=True)
     band = serializers.HyperlinkedRelatedField(view_name='band-detail', queryset=Band.objects.all())
     profession = serializers.SlugRelatedField(slug_field='name', queryset=Profession.objects.all())
@@ -29,7 +30,7 @@ class AdvertSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Advert
         fields = (
-            'advert_id', 'url', 'user', 'city', 'username', 'band',
+            'advert_id', 'url', 'user', 'user_id', 'city', 'username', 'band',
             'band_name', 'title', 'description', 'posted_on',
             'profession', 'genre'
         )
