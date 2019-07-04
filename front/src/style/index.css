@@ -270,3 +270,32 @@ div.row {
 .advert-button {
   margin: 2%;
 }
+
+.advert-photo {
+  width: 50%;
+  margin-left: 20%;
+
+}
+
+.links:visited,
+.links:hover,
+.links{
+  text-decoration: none;
+  color: #3a4750;
+}
+
+.advert-page-title {
+  font-weight: 600;
+  font-size: 2em;
+  text-align: left;
+  margin-top: 7%;
+}
+
+.advert-tag {
+  margin: 1%;
+}
+
+.tag-group-advert {
+  width: 80%;
+  margin-left: 10%;
+}
