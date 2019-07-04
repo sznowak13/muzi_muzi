@@ -52,8 +52,9 @@ export default class AdvertPage extends Component {
           margin="1%"
           padding="3%"
         >
-          <TagGroup>
-            <Tag color="green" className="advert-header">
+          <TagGroup className="tag-group-advert">
+            <a className="advert-header" /> TYPE:
+            <Tag color="cyan" className="advert-tag">
               {" "}
               {this.state.advert_band_name != null ? (
                 <span> BAND </span>
