@@ -56,6 +56,24 @@ i {
   background-color: #eeeeee;
 }
 
+/* Add advert */
+
+.add-advert-container {
+  background-color: #eeeeee;
+  padding: 20px;
+}
+
+.flex-space {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 15px;
+}
+
+.description-section {
+  display: flex;
+}
+
 .personal-info-container {
   overflow: auto;
   background-color: #e1e1e1;

@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Sidenav, Icon, Divider, Dropdown } from "rsuite";
 import LoginForm from "./LoginForm";
+
 import RegisterModal from "./RegisterModal";
 
 export default class LoggedOutSidebar extends Component {
   render() {
     return (
-      <div style={{ width: "100%" }}>
+      <div style={{ width: 340 }}>
         <Sidenav>
           <Sidenav.Body>
             <Sidenav.Header>
@@ -31,7 +32,7 @@ export default class LoggedOutSidebar extends Component {
             <Divider />
             <Dropdown eventKey="1" title="Login">
               <Dropdown.Item eventKey="1-1" style={{ paddingLeft: 0 }}>
-              <LoginForm />
+                <LoginForm />
               </Dropdown.Item>
             </Dropdown>
           </Sidenav.Body>

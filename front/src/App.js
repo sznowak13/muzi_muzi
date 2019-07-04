@@ -9,8 +9,8 @@ import AdvertPage from "./sideBar/AdvertPage";
 import LoggedOutSidebar from "./sideBar/LoggedOutSidebar";
 import EmailVerification from "./sideBar/EmailVerification";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import AddMusicianAdvert from "./mainContent/AddMusicianAdvert";
 import UserProfile from "./sideBar/UserProfile";
-
 
 class App extends Component {
   checkAuthorizedRouting() {
@@ -37,6 +37,15 @@ class App extends Component {
                 )}
               </Col>
               <Col>
+                {localStorage.getItem("muzi_muzi_token") !== null ? (
+                  <Route
+                    path="/new-advert-musician"
+                    component={AddMusicianAdvert}
+                  />
+                ) : (
+                  true
+                )}
+
                 <Route exact path="/" component={News} />
                 <Route path="/advert/:id/" component={AdvertPage} />
                 <Route
