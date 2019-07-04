@@ -121,8 +121,11 @@ export default class AdvertPage extends Component {
               {this.state.advert_username}
             </Link>
           </div>
-          <div className="advert-posted"> Posted on: </div>
-          <div className="advert-posted"> {this.state.advert_posted_on} </div>
+          <div className="advert-posted"> Posted : </div>
+          <div className="advert-posted">
+            {" "}
+            {moment(this.state.advert_posted_on).fromNow()}{" "}
+          </div>
         </Flexbox>
         <Flexbox
           flexDirection="row"
