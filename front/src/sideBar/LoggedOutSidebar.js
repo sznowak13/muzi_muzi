@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Sidenav, Icon, Divider, Dropdown } from "rsuite";
-import { Button } from "react-bootstrap";
 import LoginForm from "./LoginForm";
 import RegisterModal from "./RegisterModal";
 
