@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Sidenav, Divider, Nav, Icon } from "rsuite";
-import { Link } from "react-router-dom";
+import AdvertChoiceModal from "../mainContent/AdvertChoiceModal";
 
 export default class LoggedSidebar extends Component {
   logOut() {
@@ -37,13 +37,8 @@ export default class LoggedSidebar extends Component {
                 My bands
               </Nav.Item>
 
-              <Nav.Item
-                eventKey="5"
-                componentClass={Link}
-                to="/new-advert"
-                icon={<Icon icon="plus-square" />}
-              >
-                Add new advert
+              <Nav.Item eventKey="5" icon={<Icon icon="plus-square" />}>
+                <AdvertChoiceModal />
               </Nav.Item>
 
               <Divider />
