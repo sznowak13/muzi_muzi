@@ -3,6 +3,18 @@ from .models import Profession, Genre, City
 from .serializers import ProfessionSerializer, GenreSerializer, CitySerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.authtoken.views import ObtainAuthToken
+
+
+class ObtainTokenAndId(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        resp = super().post(request, *args, **kwargs)
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        resp.data['id'] = user.user_id
+        return resp
 
 
 class ProfessionList(viewsets.ModelViewSet):

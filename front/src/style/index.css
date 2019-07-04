@@ -1,11 +1,19 @@
 #root {
-  height: auto;
+  min-height: 100%;
+}
+body {
+  display: flex;
   flex-direction: column;
   background-color: #303841;
 }
 
 i {
   margin-right: 4px;
+}
+
+.main-wrapper {
+  min-height: 96%;
+  flex: 1;
 }
 
 /* Navbars */
@@ -36,7 +44,13 @@ i {
   margin-left: 15px;
 }
 
+.info-title {
+  font-weight: bold;
+  font-size: 2em;
+}
+
 .news-container {
+  position: relative;
   margin: 0px 0px 20px 0px;
   overflow: auto;
   background-color: #eeeeee;
@@ -58,6 +72,36 @@ i {
 
 .description-section {
   display: flex;
+
+.personal-info-container {
+  overflow: auto;
+  background-color: #e1e1e1;
+  height: 70%;
+  margin: 20px 10px 20px 3px;
+  padding: 30px;
+}
+
+.person-description-container {
+  background-color: #e1e1e1;
+  height: fit-content;
+  margin: 0px 0px 20px 0px;
+  padding: 30px;
+}
+
+.person-info-container {
+  background-color: #e1e1e1;
+  max-width: fit-content;
+  height: 69%;
+  margin: 20px 0px 20px 0px;
+  padding-top: 10%;
+  position: absolute;
+  bottom: 24%;
+  left: 32%;
+}
+
+.person-info-title {
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
 /* NewsTabs */
@@ -254,3 +298,68 @@ div.row {
 .rs-sidenav-collapse-in .rs-dropdown-item > .rs-dropdown-item-content {
   padding: 10px !important;
 }
+
+
+.navbar-links,
+.navbar-links:active,
+.navbar-links:visited,
+.navbar-links:hover {
+  color: #606a72;
+}
+
+/* user profile */
+
+.person-photo {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.edit-button {
+  opacity: 0.5;
+  cursor: pointer;
+  color: green;
+}
+
+.edit-section {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-button:hover {
+  opacity: 1;
+}
+
+.section {
+  padding: 5px;
+  margin: 10px;
+  background: #eeeeee;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.field-label {
+  font-size: 0.9rem;
+}
+
+.field-value {
+  margin: 5px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.top-section {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-container {
+  background-color: #3a4750;
+  padding: 10px;
+}
+

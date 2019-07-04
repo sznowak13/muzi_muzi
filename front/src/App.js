@@ -9,8 +9,15 @@ import LoggedOutSidebar from "./sideBard/LoggedOutSidebar";
 import EmailVerification from "./sideBard/EmailVerification";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import AddMusicianAdvert from "./mainContent/AddMusicianAdvert";
+import UserProfile from "./sideBard/UserProfile";
 
 class App extends Component {
+  checkAuthorizedRouting() {
+    if (localStorage.getItem("muzi_muzi_token")) {
+      return <Route path="/my-profile" component={UserProfile} />;
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -43,11 +50,12 @@ class App extends Component {
                   path="/email-verification"
                   component={EmailVerification}
                 />
+                {this.checkAuthorizedRouting()}
               </Col>
             </Row>
           </div>
-          <Footer />
         </div>
+        <Footer />
       </Router>
     );
   }
