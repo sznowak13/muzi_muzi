@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Sidenav, Divider, Nav, Icon } from "rsuite";
+import AdvertChoiceModal from "../mainContent/AdvertChoiceModal";
 import { Link } from "react-router-dom";
 
 export default class LoggedSidebar extends Component {
@@ -9,17 +10,19 @@ export default class LoggedSidebar extends Component {
   }
   render() {
     const headerStyles = {
+      textAlign: "center",
+      fontWeight: 600,
       padding: 20,
-      fontSize: 16,
+      fontSize: 20,
       background: "#f6c90e",
       color: " #3a4750"
     };
 
     return (
-      <div style={{ width: 250 }}>
+      <div style={{ width: 340 }}>
         <Sidenav>
           <Sidenav.Header>
-            <div style={headerStyles}>Custom Sidenav</div>
+            <div style={headerStyles}>Welcome</div>
           </Sidenav.Header>
           <Sidenav.Body>
             <Nav>
@@ -41,9 +44,14 @@ export default class LoggedSidebar extends Component {
               <Nav.Item eventKey="4" icon={<Icon icon="group" />}>
                 My bands
               </Nav.Item>
+
+              <Nav.Item eventKey="5" icon={<Icon icon="plus-square" />}>
+                <AdvertChoiceModal />
+              </Nav.Item>
+
               <Divider />
               <Nav.Item
-                eventKey="5"
+                eventKey="6"
                 icon={<Icon icon="sign-out" />}
                 onClick={this.logOut}
               >
