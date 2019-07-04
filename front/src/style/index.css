@@ -59,7 +59,6 @@ i {
 .personal-info-container {
   overflow: auto;
   background-color: #e1e1e1;
-  max-width: fit-content;
   height: 70%;
   margin: 20px 10px 20px 3px;
   padding: 30px;
@@ -67,7 +66,6 @@ i {
 
 .person-description-container {
   background-color: #e1e1e1;
-  max-width: available;
   height: fit-content;
   margin: 0px 0px 20px 0px;
   padding: 30px;
@@ -89,9 +87,6 @@ i {
   font-size: 1.5em;
 }
 
-.person-photo {
-  margin: 20px 20px 20px 20px
-}
 /* NewsTabs */
 
 .ant-tabs-bar {
@@ -283,8 +278,8 @@ div.row {
   padding: 0 0 0 0;
 }
 
-.rs-sidenav-collapse-in .rs-dropdown-item>.rs-dropdown-item-content {
-     padding: 10px!important;
+.rs-sidenav-collapse-in .rs-dropdown-item > .rs-dropdown-item-content {
+  padding: 10px !important;
 }
 
 .navbar-links,
@@ -292,4 +287,60 @@ div.row {
 .navbar-links:visited,
 .navbar-links:hover {
   color: #606a72;
+}
+
+/* user profile */
+
+.person-photo {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.edit-button {
+  opacity: 0.5;
+  cursor: pointer;
+  color: green;
+}
+
+.edit-section {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-button:hover {
+  opacity: 1;
+}
+
+.section {
+  padding: 5px;
+  margin: 10px;
+  background: #eeeeee;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.field-label {
+  font-size: 0.9rem;
+}
+
+.field-value {
+  margin: 5px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.top-section {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-container {
+  background-color: #3a4750;
+  padding: 10px;
 }
