@@ -36,6 +36,10 @@ export default class UserProfile extends Component {
     });
   }
 
+  goToUserPage() {
+      console.log("jestem")
+  }
+
   render() {
     return (
       <Container className="news-container">
@@ -84,7 +88,10 @@ export default class UserProfile extends Component {
           padding="3%"
         >
           <div className="advert-posted"> Posted by: </div>
-          <div className="advert-posted"> {this.state.advert_username} </div>
+          <div className="advert-posted" onClick={this.goToUserPage}>
+            {" "}
+            {this.state.advert_username}{" "}
+          </div>
           <div className="advert-posted"> Posted on: </div>
           <div className="advert-posted"> {this.state.advert_posted_on} </div>
         </Flexbox>
