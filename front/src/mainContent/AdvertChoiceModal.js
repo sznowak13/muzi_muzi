@@ -22,7 +22,7 @@ export default class AdvertChoiceModal extends Component {
       <div className="modal-container">
         <Modal show={this.state.show} onHide={this.close}>
           <Modal.Header>
-            <Modal.Title>What advert do you want create?</Modal.Title>
+            <Modal.Title>Which advert do you want to create?</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Link to="new-advert-musician">
