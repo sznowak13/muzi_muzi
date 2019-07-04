@@ -49,10 +49,11 @@ i {
   padding: 20px;
 }
 
-.title-city-section {
+.flex-space {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  margin: 15px;
 }
 
 .description-section {
