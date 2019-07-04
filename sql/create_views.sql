@@ -79,7 +79,6 @@ create view user_list_view as (
     select u.user_id,
            u.first_name,
            u.email,
-           u.photo_url,
            c.name                               city,
            string_agg(distinct p.name, ', ') as prof,
            string_agg(distinct g.name, ', ') as genre
@@ -89,7 +88,7 @@ create view user_list_view as (
              join profession p on up.profession_id = p.prof_id
              join users_genres ug on u.user_id = ug.users_id
              join genre g on ug.genre_id = g.genre_id
-    group by u.first_name, u.email, u.photo_url, c.name, u.user_id
+    group by u.first_name, u.email, c.name, u.user_id
 );
 
 create view user_profile_view as (
@@ -99,7 +98,6 @@ create view user_profile_view as (
            u.username,
            u.email,
            u.description,
-           u.photo_url                          photo,
            c.name                               city,
            (select v.url from videos v where u.video_id = v.video_id)
            video,
@@ -115,5 +113,5 @@ create view user_profile_view as (
              join profession p on up.profession_id = p.prof_id
              join users_genres ug on u.user_id = ug.users_id
              join genre g on ug.genre_id = g.genre_id
-    group by u.user_id, u.first_name, u.email, u.photo_url, c.name, video
+    group by u.user_id, u.first_name, u.email, c.name, video
 );
