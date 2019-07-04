@@ -3,7 +3,6 @@ import { Container, Image } from "react-bootstrap";
 import Flexbox from "flexbox-react";
 import Button from "react-bootstrap/Button";
 import { Divider } from "rsuite";
-import UsersSneakPeak from "../mainContent/UsersSneakPeak";
 import userphoto from "../resources/userphoto.png";
 import genericband from "../resources/generic-band.jpg";
 import { Link } from "react-router-dom";
