@@ -72,6 +72,7 @@ i {
 
 .description-section {
   display: flex;
+}
 
 .personal-info-container {
   overflow: auto;
@@ -299,7 +300,6 @@ div.row {
   padding: 10px !important;
 }
 
-
 .navbar-links,
 .navbar-links:active,
 .navbar-links:visited,
@@ -362,4 +362,3 @@ div.row {
   background-color: #3a4750;
   padding: 10px;
 }
-
