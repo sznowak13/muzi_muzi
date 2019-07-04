@@ -193,10 +193,6 @@ div.item6 {
   font-size: 15px;
 }
 
-.advert-title {
-  font-weight: 700;
-  font-size: 20px;
-}
 
 .advert-data {
   font-weight: 600;
@@ -300,6 +296,73 @@ div.row {
   padding: 10px !important;
 }
 
+.advert-tag {
+  font-weight: bold;
+  font-size: medium;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.advert-image {
+
+}
+
+.advert-description:hover,
+.advert-description {
+  font-weight: bold;
+  font-size: medium;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #3a4750;
+  margin: auto;
+}
+
+.advert-posted {
+  font-size: medium;
+  letter-spacing: 1px;
+  margin: 2%;
+}
+
+.advert-button {
+  margin: 2%;
+}
+
+.advert-photo {
+  width: 50%;
+  margin-left: 20%;
+
+}
+
+.links:visited,
+.links:hover,
+.links{
+  text-decoration: none;
+  color: #3a4750;
+}
+
+.advert-page-title {
+  font-weight: 600;
+  font-size: 2em;
+  text-align: left;
+  margin-top: 7%;
+}
+
+.advert-tag {
+  margin: 1%;
+}
+
+.tag-group-advert {
+  width: 80%;
+  margin-left: 10%;
+}
+
+.advert-flexbox {
+  flexDirection: "row";
+  justifyContent: "space-around";
+  margin: 1%;
+  padding: 3%;
+}
+
 .navbar-links,
 .navbar-links:active,
 .navbar-links:visited,
@@ -362,3 +425,4 @@ div.row {
   background-color: #3a4750;
   padding: 10px;
 }
+

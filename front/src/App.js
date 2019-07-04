@@ -3,13 +3,14 @@ import Header from "./header/Header";
 import HeaderSearch from "./header/HeaderSearch";
 import News from "./mainContent/News";
 import Footer from "./header/Footer";
-import LoggedSidebar from "./sideBard/LoggedSidebar";
+import LoggedSidebar from "./sideBar/LoggedSidebar";
 import { Col, Row } from "react-bootstrap";
-import LoggedOutSidebar from "./sideBard/LoggedOutSidebar";
-import EmailVerification from "./sideBard/EmailVerification";
+import AdvertPage from "./sideBar/AdvertPage";
+import LoggedOutSidebar from "./sideBar/LoggedOutSidebar";
+import EmailVerification from "./sideBar/EmailVerification";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import AddMusicianAdvert from "./mainContent/AddMusicianAdvert";
-import UserProfile from "./sideBard/UserProfile";
+import UserProfile from "./sideBar/UserProfile";
 
 class App extends Component {
   checkAuthorizedRouting() {
@@ -46,6 +47,7 @@ class App extends Component {
                 )}
 
                 <Route exact path="/" component={News} />
+                <Route path="/advert/:id/" component={AdvertPage} />
                 <Route
                   path="/email-verification"
                   component={EmailVerification}
