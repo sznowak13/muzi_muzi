@@ -6,9 +6,9 @@ import {
   ControlLabel,
   SelectPicker,
   Icon,
-  HelpBlock
+  HelpBlock,
+  Button
 } from "rsuite";
-import { Button } from "react-bootstrap";
 
 export default class AddMusicianAdvert extends Component {
   constructor(props) {
@@ -79,7 +79,7 @@ export default class AddMusicianAdvert extends Component {
             this.setState({ formData: formValue });
           }}
         >
-          <div className="title-city-section">
+          <div className="flex-space">
             <FormGroup>
               <ControlLabel>Title</ControlLabel>
               <FormControl name="title" />
@@ -88,7 +88,12 @@ export default class AddMusicianAdvert extends Component {
               <ControlLabel>City</ControlLabel>
               <FormControl name="city" />
             </FormGroup>
+          </div>
+          <div className="flex-space">
             <FormGroup>
+              <ControlLabel style={{ marginRight: 15 }}>
+                Profession
+              </ControlLabel>
               <SelectPicker
                 data={professions}
                 placeholder="Select Profession"
@@ -114,6 +119,7 @@ export default class AddMusicianAdvert extends Component {
               />
             </FormGroup>
             <FormGroup>
+              <ControlLabel style={{ marginRight: 15 }}>Genre</ControlLabel>
               <SelectPicker
                 data={genres}
                 placeholder="Select Genre"
@@ -139,7 +145,7 @@ export default class AddMusicianAdvert extends Component {
               />
             </FormGroup>
           </div>
-          <div className="description-section">
+          <div className="flex-space">
             <FormGroup>
               <ControlLabel>Description</ControlLabel>
               <FormControl
@@ -151,7 +157,9 @@ export default class AddMusicianAdvert extends Component {
               <HelpBlock tooltip>Write few sentences about you</HelpBlock>
             </FormGroup>
           </div>
-          <Button onClick={this.submit}>Submit</Button>
+          <Button color="green" onClick={this.submit}>
+            Submit
+          </Button>
         </Form>
       </div>
     );
