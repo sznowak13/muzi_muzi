@@ -46,12 +46,7 @@ export default class AdvertPage extends Component {
   render() {
     return (
       <Container className="news-container">
-        <Flexbox
-          flexDirection="row"
-          justifyContent="space-around"
-          margin="1%"
-          padding="3%"
-        >
+        <Flexbox className="advert-flexbox">
           <TagGroup className="tag-group-advert">
             <a className="advert-header" /> TYPE:
             <Tag color="cyan" className="advert-tag">
@@ -77,12 +72,7 @@ export default class AdvertPage extends Component {
           </TagGroup>
         </Flexbox>
         <Divider />
-        <Flexbox
-          flexDirection="row"
-          justifyContent="space-around"
-          margin="1%"
-          padding="3%"
-        >
+        <Flexbox className="advert-flexbox">
           <div>
             {" "}
             {this.state.advert_band_name != null ? (
@@ -94,12 +84,7 @@ export default class AdvertPage extends Component {
           <div className="advert-page-title"> {this.state.advert_title} </div>
         </Flexbox>
         <Divider />
-        <Flexbox
-          flexDirection="row"
-          justifyContent="center"
-          margin="1%"
-          padding="3%"
-        >
+        <Flexbox className="advert-flexbox">
           <div className="advert-description">
             {" "}
             {this.state.advert_description}{" "}

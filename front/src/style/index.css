@@ -259,6 +259,7 @@ div.row {
   letter-spacing: 1px;
   text-decoration: none;
   color: #3a4750;
+  margin: auto;
 }
 
 .advert-posted {
@@ -298,4 +299,11 @@ div.row {
 .tag-group-advert {
   width: 80%;
   margin-left: 10%;
+}
+
+.advert-flexbox {
+  flexDirection: "row";
+  justifyContent: "space-around";
+  margin: 1%;
+  padding: 3%;
 }
