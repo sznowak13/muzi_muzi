@@ -26,8 +26,6 @@ export default class AddMusicianAdvert extends Component {
         genre: ""
       }
     };
-    this.handleProfessionsUpdate = this.handleProfessionsUpdate.bind(this);
-    this.handleGenresUpdate = this.handleGenresUpdate.bind(this);
   }
 
   formatData(data) {
@@ -38,31 +36,18 @@ export default class AddMusicianAdvert extends Component {
     return data;
   }
 
-  handleProfessionsUpdate() {
-    if (this.state.professions.length === 0) {
-      this.setState({ professions: [] });
-      fetch(this.state.professionsUrl)
+  handleUpdate = (dataUrl, dataName) => {
+    if (this.state[dataName].length === 0) {
+      this.setState({ [dataName]: [] });
+      fetch(dataUrl)
         .then(res => res.json())
         .then(json =>
           this.setState({
-            professions: this.formatData(json.results)
+            [dataName]: this.formatData(json.results)
           })
         );
     }
-  }
-
-  handleGenresUpdate() {
-    if (this.state.genres.length === 0) {
-      this.setState({ genres: [] });
-      fetch(this.state.genresUrl)
-        .then(res => res.json())
-        .then(json =>
-          this.setState({
-            genres: this.formatData(json.results)
-          })
-        );
-    }
-  }
+  };
 
   render() {
     const { professions } = this.state;
@@ -98,8 +83,16 @@ export default class AddMusicianAdvert extends Component {
                 data={professions}
                 placeholder="Select Profession"
                 style={{ width: 224 }}
-                onOpen={this.handleProfessionsUpdate}
-                onSearch={this.handleProfessionsUpdate}
+                onOpen={this.handleUpdate.bind(
+                  this,
+                  this.state.professionsUrl,
+                  "professions"
+                )}
+                onSearch={this.handleUpdate.bind(
+                  this,
+                  this.state.professionsUrl,
+                  "professions"
+                )}
                 renderMenu={menu => {
                   if (professions.length === 0) {
                     return (
@@ -124,8 +117,16 @@ export default class AddMusicianAdvert extends Component {
                 data={genres}
                 placeholder="Select Genre"
                 style={{ width: 224 }}
-                onOpen={this.handleGenresUpdate}
-                onSearch={this.handleGenresUpdate}
+                onOpen={this.handleUpdate.bind(
+                  this,
+                  this.state.genresUrl,
+                  "genres"
+                )}
+                onSearch={this.handleUpdate.bind(
+                  this,
+                  this.state.genresUrl,
+                  "genres"
+                )}
                 renderMenu={menu => {
                   if (genres.length === 0) {
                     return (
