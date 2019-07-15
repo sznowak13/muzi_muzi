@@ -54,6 +54,7 @@ class Videos(models.Model):
 
     class Meta:
         db_table = 'videos'
+        verbose_name_plural = "Videos"
 
 
 
