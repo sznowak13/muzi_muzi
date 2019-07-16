@@ -133,59 +133,117 @@ export default class UserProfile extends Component {
   }
 
   render() {
-    const tooltip = <Tooltip>Edit this section</Tooltip>;
     return (
       <div className="profile-container">
         <div className="top-section">
-          <div className="main-profile-section section">
-            <div className="edit-section">
-              <Whisper placement="left" trigger="hover" speaker={tooltip}>
-                <IconButton
-                  appearance="subtle"
-                  icon={<Icon icon="edit2" className="edit-button" size="lg" />}
-                  onClick={() => console.log("hej")}
-                />
-              </Whisper>
-            </div>
-            <div className="flex-center">
-              <Image
-                width="200"
-                height="200"
-                className="person-photo"
-                src={this.state.person_photo.value}
-                roundedCircle
-              />
-            </div>
-            {this.formatFieldDisplay("person_first_name", "First name")}
-            {this.formatFieldDisplay("person_last_name", "Last name")}
-            {this.formatFieldDisplay("person_username", "Username")}
-          </div>
-          <div className="additional-profile-section section">
-            <div className="edit-section">
-              <Whisper placement="left" trigger="hover" speaker={tooltip}>
-                <IconButton
-                  appearance="subtle"
-                  icon={<Icon icon="edit2" className="edit-button" size="lg" />}
-                />
-              </Whisper>
-            </div>
-            {this.formatFieldDisplay("person_email", "Email")}
-            {this.formatFieldDisplay("person_city", "City")}
-            {this.formatFieldDisplay("person_genres", "Genres")}
-            {this.formatFieldDisplay("person_professions", "Professions")}
-          </div>
+          <GeneralSection
+            firstName={this.state.person_first_name.value}
+            lastName={this.state.person_last_name.value}
+            photoUrl={this.state.person_photo.value}
+            username={this.state.person_username.value}
+          />
+          <DetailSection
+            email={this.state.person_email.value}
+            city={this.state.person_city.value}
+            professions={this.state.person_professions.value}
+            genres={this.state.person_genres.value}
+          />
         </div>
-        <div className="desc-profile-section section">
-          <div className="edit-section">
-            <Whisper placement="left" trigger="hover" speaker={tooltip}>
-              <IconButton
-                appearance="subtle"
-                icon={<Icon icon="edit2" className="edit-button" size="lg" />}
-              />
-            </Whisper>
-          </div>
-          {this.formatFieldDisplay("person_description", "Description")}
+        <DescSection description={this.state.person_description.value} />
+        {this.showLoader()}
+      </div>
+    );
+  }
+}
+
+const EditButton = props => (
+  <Whisper
+    placement="left"
+    trigger="hover"
+    speaker={<Tooltip>Edit this section</Tooltip>}
+  >
+    <IconButton
+      appearance="subtle"
+      icon={<Icon icon="edit2" className="edit-button" size="lg" />}
+    />
+  </Whisper>
+);
+
+class GeneralSection extends EditableSection {
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.firstName !== prevProps.firstName ||
+      this.props.lastName !== prevProps.lastName ||
+      this.props.username !== prevProps.username ||
+      this.props.photoUrl !== prevProps.photoUrl
+    ) {
+      this.setState({ ...this.props, edit: this.state.edit });
+    }
+  }
+
+  render() {
+    return (
+      <div className="main-profile-section section">
+        <div className="edit-section">
+          <EditButton />
         </div>
+        <div className="flex-center">
+          <Image
+            width="200"
+            height="200"
+            className="person-photo"
+            src={this.state.photoUrl}
+            roundedCircle
+          />
+        </div>
+        {this.formatFieldDisplay("firstName", "First name")}
+        {this.formatFieldDisplay("lastName", "Last name")}
+        {this.formatFieldDisplay("username", "Username")}
+      </div>
+    );
+  }
+}
+
+class DetailSection extends EditableSection {
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.email !== prevProps.email ||
+      this.props.city !== prevProps.city ||
+      this.props.genres !== prevProps.genres ||
+      this.props.professions !== prevProps.professions
+    ) {
+      this.setState({ ...this.props, edit: this.state.edit });
+    }
+  }
+
+  render() {
+    return (
+      <div className="additional-profile-section section">
+        <div className="edit-section">
+          <EditButton />
+        </div>
+        {this.formatFieldDisplay("email", "Email")}
+        {this.formatFieldDisplay("city", "City")}
+        {this.formatFieldDisplay("genres", "Genres")}
+        {this.formatFieldDisplay("professions", "Professions")}
+      </div>
+    );
+  }
+}
+
+class DescSection extends EditableSection {
+  componentDidUpdate(prevProps) {
+    if (this.props.description !== prevProps.description) {
+      this.setState({ ...this.props, edit: this.state.edit });
+    }
+  }
+  render() {
+    return (
+      <div className="desc-profile-section section">
+        <div className="edit-section">
+          <EditButton />
+        </div>
+        {this.formatFieldDisplay("description", "Description")}
       </div>
     );
   }
