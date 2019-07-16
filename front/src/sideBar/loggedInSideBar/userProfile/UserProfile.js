@@ -55,6 +55,7 @@ export default class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       person_id: { edit: false, value: "" },
       person_first_name: { edit: false, value: "" },
       person_last_name: { edit: false, value: "" },
@@ -69,13 +70,14 @@ export default class UserProfile extends Component {
   }
 
   async componentDidMount() {
+    this.state.loading = true;
     const url = `http://127.0.0.1:8000/users/${localStorage.getItem(
       "muzi_muzi_user_id"
     )}/`;
     const response = await fetch(url);
     let data = await response.json();
     data = this.formatFetchData(data);
-    this.setState(data);
+    this.setState({ ...data, loading: false });
   }
 
   formatFetchData(data) {
@@ -120,6 +122,14 @@ export default class UserProfile extends Component {
       );
     }
     return [<Row>{labelElement}</Row>, body];
+  }
+
+  showLoader() {
+    if (this.state.loading) {
+      return (
+        <Loader backdrop center size="md" content="Sending data..." vertical />
+      );
+    }
   }
 
   render() {
