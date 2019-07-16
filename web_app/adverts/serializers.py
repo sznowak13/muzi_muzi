@@ -21,7 +21,7 @@ class AdvertSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
     user_id = serializers.ReadOnlyField(source='user.user_id')
     band_name = serializers.StringRelatedField(source='band.name', read_only=True)
-    band = serializers.HyperlinkedRelatedField(view_name='band-detail', queryset=Band.objects.all())
+    band = serializers.HyperlinkedRelatedField(view_name='band-detail', queryset=Band.objects.all(), required=False)
     profession = serializers.SlugRelatedField(slug_field='name', queryset=Profession.objects.all())
     genre = serializers.SlugRelatedField(slug_field='name', queryset=Genre.objects.all())
     posted_on = serializers.DateTimeField(read_only=True)
