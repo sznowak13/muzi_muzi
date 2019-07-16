@@ -5,6 +5,7 @@ import {
   InputGroup,
   Icon,
   IconButton,
+  Loader,
   Col,
   Row,
   Tooltip,
@@ -13,6 +14,42 @@ import {
   TagGroup
 } from "rsuite";
 import { userProfileFiledMapping as fieldMapping } from "./mappings";
+
+const createTags = arr => {
+  let tags = [];
+  for (let v of arr) {
+    tags.push(<Tag color="cyan">{v}</Tag>);
+  }
+  return <TagGroup>{tags}</TagGroup>;
+};
+
+class EditableSection extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...this.props,
+      edit: false
+    };
+  }
+
+  formatFieldDisplay(fieldName, label) {
+    let field;
+    let labelSpan = <span className="field-label">{label + ": "}</span>;
+    let value = this.state[fieldName];
+    if (!value) {
+      value = "---";
+    } else if (Array.isArray(value)) {
+      value = createTags(value);
+    }
+    field = <div className="field-value">{value}</div>;
+    return (
+      <div className="field-group">
+        {labelSpan}
+        {field}
+      </div>
+    );
+  }
+}
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -47,32 +84,6 @@ export default class UserProfile extends Component {
       formated[entry[0]] = { ...this.state[entry[0]], value: data[entry[1]] };
     }
     return formated;
-  }
-
-  createTags(arr) {
-    let tags = [];
-    for (let v of arr) {
-      tags.push(<Tag color="cyan">{v}</Tag>);
-    }
-    return <TagGroup>{tags}</TagGroup>;
-  }
-
-  formatFieldDisplay(fieldName, label) {
-    let field;
-    let labelSpan = <span className="field-label">{label + ": "}</span>;
-    let value = this.state[fieldName].value;
-    if (!value) {
-      value = "---";
-    } else if (Array.isArray(value)) {
-      value = this.createTags(value);
-    }
-    field = <div className="field-value">{value}</div>;
-    return (
-      <div className="field-group">
-        {labelSpan}
-        {field}
-      </div>
-    );
   }
 
   toggleEdit(fieldName) {
