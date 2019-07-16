@@ -7,7 +7,9 @@ import {
   SelectPicker,
   Icon,
   HelpBlock,
-  Button
+  Button,
+  Schema,
+  Loader
 } from "rsuite";
 
 export default class AddMusicianAdvert extends Component {
@@ -24,11 +26,73 @@ export default class AddMusicianAdvert extends Component {
         city: "",
         profession: "",
         genre: ""
-      }
+      },
+      sendDataResult: {
+        result: "failed",
+        errors: {},
+        data: {}
+      },
+      loading: false
     };
     this.handleProfessionsUpdate = this.handleProfessionsUpdate.bind(this);
     this.handleGenresUpdate = this.handleGenresUpdate.bind(this);
+    this.submit = this.submit.bind(this);
   }
+
+  submit() {
+    this.setState({ loading: true });
+    this.sendMusicianAdvertData(fetch, this.state.formData).then(result => {
+      this.setState({ loading: false, sendDataResult: result });
+    });
+  }
+
+  showLoader() {
+    if (this.state.loading) {
+      return (
+        <Loader backdrop center size="md" content="Sending data..." vertical />
+      );
+    }
+  }
+
+  sendMusicianAdvertData = async (fetch, formData) => {
+    let result = {
+      success: true,
+      errors: {},
+      data: {
+        title: formData.title,
+        description: formData.description,
+        city: formData.city,
+        genre: formData.genre,
+        profession: formData.profession
+      }
+    };
+    let token = localStorage.getItem("muzi_muzi_token");
+    let response = await fetch("http://127.0.0.1:8000/adverts/", {
+      method: "POST",
+      body: JSON.stringify({
+        title: formData.title,
+        description: formData.description,
+        city: formData.city,
+        profession: formData.profession,
+        genre: formData.genre
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + token
+      }
+    });
+    let json;
+    if (response.status === 500) {
+      result.success = false;
+      result.errors = { serverError: "Failed to fetch resources" };
+    } else if (response.status === 400) {
+      result.success = false;
+      json = await response.json();
+      result.errors = json;
+    }
+    console.log(result);
+    return result;
+  };
 
   formatData(data) {
     for (let item of data) {
@@ -74,6 +138,7 @@ export default class AddMusicianAdvert extends Component {
         <Form
           layout="inline"
           className="add-advert-container"
+          model={musicianAdvertModel}
           formValue={formData}
           onChange={formValue => {
             this.setState({ formData: formValue });
@@ -100,6 +165,11 @@ export default class AddMusicianAdvert extends Component {
                 style={{ width: 224 }}
                 onOpen={this.handleProfessionsUpdate}
                 onSearch={this.handleProfessionsUpdate}
+                onChange={value =>
+                  this.setState({
+                    formData: { ...this.state.formData, profession: value }
+                  })
+                }
                 renderMenu={menu => {
                   if (professions.length === 0) {
                     return (
@@ -126,6 +196,11 @@ export default class AddMusicianAdvert extends Component {
                 style={{ width: 224 }}
                 onOpen={this.handleGenresUpdate}
                 onSearch={this.handleGenresUpdate}
+                onChange={value =>
+                  this.setState({
+                    formData: { ...this.state.formData, genre: value }
+                  })
+                }
                 renderMenu={menu => {
                   if (genres.length === 0) {
                     return (
@@ -165,3 +240,21 @@ export default class AddMusicianAdvert extends Component {
     );
   }
 }
+
+const { StringType } = Schema.Types;
+const musicianAdvertModel = Schema.Model({
+  title: StringType()
+    .minLength(10, "The field cannot be less than 10 characters")
+    .maxLength(100, "The field cannot be greater than 100 characters")
+    .isRequired("Title is required"),
+  description: StringType()
+    .minLength(10, "The field cannot be less than 10 characters")
+    .maxLength(1000, "The field cannot be greater than 1000 characters")
+    .isRequired("Description is required"),
+  city: StringType()
+    .minLength(1, "The field cannot be less than 1 characters")
+    .maxLength(100, "The field cannot be greater than 100 characters")
+    .isRequired("City is required"),
+  genre: StringType().isRequired("Genre is required"),
+  profession: StringType().isRequired("Profession is required")
+});
