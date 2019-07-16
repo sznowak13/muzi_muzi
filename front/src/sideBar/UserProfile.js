@@ -4,6 +4,7 @@ import {
   Input,
   InputGroup,
   Icon,
+  IconButton,
   Col,
   Row,
   Tooltip,
@@ -118,7 +119,11 @@ export default class UserProfile extends Component {
           <div className="main-profile-section section">
             <div className="edit-section">
               <Whisper placement="left" trigger="hover" speaker={tooltip}>
-                <Icon icon="edit2" className="edit-button" size="lg" />
+                <IconButton
+                  appearance="subtle"
+                  icon={<Icon icon="edit2" className="edit-button" size="lg" />}
+                  onClick={() => console.log("hej")}
+                />
               </Whisper>
             </div>
             <div className="flex-center">
@@ -137,7 +142,10 @@ export default class UserProfile extends Component {
           <div className="additional-profile-section section">
             <div className="edit-section">
               <Whisper placement="left" trigger="hover" speaker={tooltip}>
-                <Icon icon="edit2" className="edit-button" size="lg" />
+                <IconButton
+                  appearance="subtle"
+                  icon={<Icon icon="edit2" className="edit-button" size="lg" />}
+                />
               </Whisper>
             </div>
             {this.formatFieldDisplay("person_email", "Email")}
@@ -149,7 +157,10 @@ export default class UserProfile extends Component {
         <div className="desc-profile-section section">
           <div className="edit-section">
             <Whisper placement="left" trigger="hover" speaker={tooltip}>
-              <Icon icon="edit2" className="edit-button" size="lg" />
+              <IconButton
+                appearance="subtle"
+                icon={<Icon icon="edit2" className="edit-button" size="lg" />}
+              />
             </Whisper>
           </div>
           {this.formatFieldDisplay("person_description", "Description")}
