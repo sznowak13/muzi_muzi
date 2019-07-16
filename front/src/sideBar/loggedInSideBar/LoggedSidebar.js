@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Sidenav, Divider, Nav, Icon } from "rsuite";
-import AdvertChoiceModal from "../mainContent/AdvertChoiceModal";
+import AdvertChoiceModal from "./adverts/AdvertChoiceModal";
 import { Link } from "react-router-dom";
 
 export default class LoggedSidebar extends Component {

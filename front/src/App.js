@@ -3,14 +3,14 @@ import Header from "./header/Header";
 import HeaderSearch from "./header/HeaderSearch";
 import News from "./mainContent/News";
 import Footer from "./header/Footer";
-import LoggedSidebar from "./sideBar/LoggedSidebar";
+import LoggedSidebar from "./sideBar/loggedInSideBar/LoggedSidebar";
 import { Col, Row } from "react-bootstrap";
-import AdvertPage from "./sideBar/AdvertPage";
-import LoggedOutSidebar from "./sideBar/LoggedOutSidebar";
-import EmailVerification from "./sideBar/EmailVerification";
+import AdvertPage from "./sideBar/loggedInSideBar/adverts/AdvertPage";
+import LoggedOutSidebar from "./sideBar/loggedOutSideBar/LoggedOutSidebar";
+import EmailVerification from "./sideBar/loggedOutSideBar/EmailVerification";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import AddMusicianAdvert from "./mainContent/AddMusicianAdvert";
-import UserProfile from "./sideBar/UserProfile";
+import AddMusicianAdvert from "./sideBar/loggedInSideBar/adverts/AddMusicianAdvert";
+import UserProfile from "./sideBar/loggedInSideBar/userProfile/UserProfile";
 
 class App extends Component {
   checkAuthorizedRouting() {

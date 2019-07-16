@@ -12,7 +12,7 @@ import {
   Tag,
   TagGroup
 } from "rsuite";
-import { userProfileFiledMapping as fieldMapping } from "../sideBar/mappings";
+import { userProfileFiledMapping as fieldMapping } from "./mappings";
 
 export default class UserProfile extends Component {
   constructor(props) {

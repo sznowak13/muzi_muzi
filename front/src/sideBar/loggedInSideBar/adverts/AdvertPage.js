@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Container, Image } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Flexbox from "flexbox-react";
 import { Divider, Button } from "rsuite";
-import userphoto from "../resources/userphoto.png";
-import genericband from "../resources/generic-band.jpg";
+import userphoto from "../../../resources/userphoto.png";
+import genericband from "../../../resources/generic-band.jpg";
 import { Link } from "react-router-dom";
 import { Tag, TagGroup } from "rsuite";
 import moment from "moment";
