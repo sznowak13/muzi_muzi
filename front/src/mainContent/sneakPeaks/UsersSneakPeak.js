@@ -1,7 +1,7 @@
 /* eslint-disable eqeqeq */
 import React, { Component } from "react";
 import { Container, Button, Card, CardDeck } from "react-bootstrap";
-import userphoto from "../resources/userphoto.png";
+import userphoto from "../../resources/userphoto.png";
 
 export default class UsersSneakPeak extends Component {
   constructor(props) {

@@ -10,7 +10,7 @@ import {
   Divider,
   Loader
 } from "rsuite";
-import { sendRegisterData } from "../registerService";
+import { sendRegisterData } from "../../registerService";
 
 export default class RegisterModal extends Component {
   constructor(props) {

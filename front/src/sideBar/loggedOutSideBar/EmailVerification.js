@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Loader, Container, Content, Message } from "rsuite";
-import { sendVerificationToken } from "../registerService";
+import { sendVerificationToken } from "../../registerService";
 import queryString from "query-string";
 
 export default class EmailVerification extends Component {

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import { Tabs } from "antd";
-import UsersSneakPeak from "./UsersSneakPeak";
-import BandsSneakPeak from "./BandsSneakPeak";
-import AdvertsSneakPeak from "./AdvertsSneakPeak";
+import UsersSneakPeak from "./sneakPeaks/UsersSneakPeak";
+import BandsSneakPeak from "./sneakPeaks/BandsSneakPeak";
+import AdvertsSneakPeak from "./sneakPeaks/AdvertsSneakPeak";
 
 export default class News extends Component {
   render() {
