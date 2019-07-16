@@ -34,11 +34,15 @@ export default class LoggedSidebar extends Component {
               >
                 My Profile
               </Nav.Item>
-
               <Nav.Item eventKey="2" icon={<Icon icon="envelope" />}>
                 My messages
               </Nav.Item>
-              <Nav.Item eventKey="3" icon={<Icon icon="sticky-note" />}>
+              <Nav.Item
+                eventKey="3"
+                icon={<Icon icon="sticky-note" />}
+                componentClass={Link}
+                to="/my-adverts"
+              >
                 My adverts
               </Nav.Item>
               <Nav.Item eventKey="4" icon={<Icon icon="group" />}>
