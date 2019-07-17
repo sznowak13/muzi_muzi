@@ -41,10 +41,61 @@ class EditableSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...this.props,
-      edit: false
+      userData: this.props,
+      edit: false,
+      updating: false
     };
     this.toggleEdit = this.toggleEdit.bind(this);
+  }
+
+  showLoader() {
+    if (this.state.updating) {
+      return (
+        <Loader backdrop center size="md" content="Sending data..." vertical />
+      );
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    let diff = false;
+    for (let k in prevProps) {
+      if (this.props[k] !== prevProps[k]) {
+        diff = true;
+        break;
+      }
+    }
+    if (diff) {
+      this.setState({ userData: this.props });
+    }
+  }
+
+  updateUserProfile(data) {
+    this.setState({ edit: false, updating: true });
+    const token = localStorage.getItem("muzi_muzi_token");
+    const user_id = localStorage.getItem("muzi_muzi_user_id");
+    fetch(`http://127.0.0.1:8000/users/${user_id}/`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`
+      },
+      body: JSON.stringify(data)
+    }).then(res => {
+      this.setState({ updating: false });
+      let title, desc;
+      if (res.ok) {
+        title = "success";
+        desc = "Profile updated!";
+      } else {
+        title = "error";
+        desc = "Something went wrong...";
+      }
+      Notification[title]({
+        title: title.capitalize(),
+        description: <p>{desc}</p>,
+        style: { width: 1000 }
+      });
+    });
   }
 
   toggleEdit() {
@@ -62,7 +113,7 @@ class EditableSection extends Component {
   formatFieldDisplay(fieldName, label) {
     let field;
     let labelSpan = <span className="field-label">{label + ": "}</span>;
-    let value = this.state[fieldName];
+    let value = this.state.userData[fieldName];
     if (!value) {
       value = "---";
     } else if (Array.isArray(value)) {
@@ -83,34 +134,19 @@ class EditableSection extends Component {
     let labelSpan = (
       <ControlLabel className="field-label">{label + ": "}</ControlLabel>
     );
-    let value = this.state[fieldName];
-    if (Array.isArray(value)) {
-      field = (
-        <TagPicker
-          data={this.state.pickerItems[fieldName]}
-          cacheData={this.state.cacheData}
-          value={this.state[fieldName]}
-          style={{ width: 300 }}
-          labelKey={this.state.labelKey}
-          valueKey={this.state.valueKey}
-          onChange={this.handleChange}
-          onSearch={this.handleSearch}
-          onSelect={this.handleSelect}
-          renderMenu={menu => {
-            if (this.state.loading) {
-              return (
-                <p style={{ padding: 4, color: "#999", textAlign: "center" }}>
-                  <Icon icon="spinner" spin /> Loading...
-                </p>
-              );
-            }
-            return menu;
-          }}
-        />
-      );
-    } else {
-      field = <FormControl className="field-value" placeholder={value} />;
-    }
+    let value = this.state.userData[fieldName];
+    field = (
+      <Input
+        disabled={isDisabled}
+        onChange={value =>
+          this.setState({
+            userData: { ...this.state.userData, [fieldName]: value }
+          })
+        }
+        className="field-value"
+        defaultValue={value}
+      />
+    );
     return (
       <FormGroup>
         {labelSpan}
@@ -206,9 +242,9 @@ export default class UserProfile extends Component {
       <div className="profile-container">
         <div className="top-section">
           <GeneralSection
-            firstName={this.state.person_first_name.value}
-            lastName={this.state.person_last_name.value}
-            photoUrl={this.state.person_photo.value}
+            first_name={this.state.person_first_name.value}
+            last_name={this.state.person_last_name.value}
+            photo_url={this.state.person_photo.value}
             username={this.state.person_username.value}
           />
           <DetailSection
@@ -266,31 +302,31 @@ const CancelButton = props => (
 );
 
 class GeneralSection extends EditableSection {
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.firstName !== prevProps.firstName ||
-      this.props.lastName !== prevProps.lastName ||
-      this.props.username !== prevProps.username ||
-      this.props.photoUrl !== prevProps.photoUrl
-    ) {
-      this.setState({ ...this.props, edit: this.state.edit });
-    }
+  constructor(props) {
+    super(props);
+    console.log(this);
   }
 
   displayFields() {
     if (this.state.edit) {
       return (
         <Form fluid>
-          {this.formatFieldEdit("firstName", "First name")}
-          {this.formatFieldEdit("lastName", "Last name")}
+          {this.formatFieldEdit("first_name", "First name")}
+          {this.formatFieldEdit("last_name", "Last name")}
           {this.formatFieldEdit("username", "Username")}
+          <Button
+            onClick={this.updateUserProfile.bind(this, this.state.userData)}
+            appearance="primary"
+          >
+            Update
+          </Button>
         </Form>
       );
     } else {
       return (
         <div>
-          {this.formatFieldDisplay("firstName", "First name")}
-          {this.formatFieldDisplay("lastName", "Last name")}
+          {this.formatFieldDisplay("first_name", "First name")}
+          {this.formatFieldDisplay("last_name", "Last name")}
           {this.formatFieldDisplay("username", "Username")}
         </div>
       );
@@ -306,11 +342,12 @@ class GeneralSection extends EditableSection {
             width="200"
             height="200"
             className="person-photo"
-            src={this.state.photoUrl}
+            src={this.state.userData.photoUrl}
             roundedCircle
           />
         </div>
         {this.displayFields()}
+        {this.showLoader()}
       </div>
     );
   }
@@ -363,9 +400,15 @@ class DetailSection extends EditableSection {
               data={this.state.allGenres}
               style={{ justifyContent: "initial" }}
               className="field-value"
-              defaultValue={this.state.genres}
+              defaultValue={this.state.userData.genres}
               labelKey="name"
               valueKey="name"
+              onChange={value => {
+                console.log(value);
+                this.setState({
+                  userData: { ...this.state.userData, genres: value }
+                });
+              }}
               renderMenu={menu => {
                 if (this.state.allGenres.length === 0) {
                   return (
@@ -387,10 +430,15 @@ class DetailSection extends EditableSection {
           <div className="field-group">
             <ControlLabel className="field-label">Professions:</ControlLabel>
             <TagPicker
+              onChange={value =>
+                this.setState({
+                  userData: { ...this.state.userData, professions: value }
+                })
+              }
               data={this.state.allProfessions}
               style={{ justifyContent: "initial" }}
               className="field-value"
-              defaultValue={this.state.professions}
+              defaultValue={this.state.userData.professions}
               labelKey="name"
               valueKey="name"
               renderMenu={menu => {
@@ -411,6 +459,12 @@ class DetailSection extends EditableSection {
               }}
             />
           </div>
+          <Button
+            onClick={this.updateUserProfile.bind(this, this.state.userData)}
+            appearance="primary"
+          >
+            Update
+          </Button>
         </Form>
       );
     } else {
@@ -430,27 +484,36 @@ class DetailSection extends EditableSection {
       <div className="additional-profile-section section">
         <div className="edit-section">{this.displayIcon()}</div>
         {this.displayFields()}
+        {this.showLoader()}
       </div>
     );
   }
 }
 
 class DescSection extends EditableSection {
-  componentDidUpdate(prevProps) {
-    if (this.props.description !== prevProps.description) {
-      this.setState({ ...this.state, ...this.props });
-    }
-  }
-
   displayFields() {
     if (this.state.edit) {
       return (
         <Form fluid>
           <ControlLabel className="field-label">Description</ControlLabel>
-          <FormControl
-            componentClass="textarea"
-            defaultValue={this.state.description}
-          />
+          <FormGroup>
+            <FormControl
+              onChange={value =>
+                this.setState({
+                  userData: { ...this.state.userData, description: value }
+                })
+              }
+              componentClass="textarea"
+            >
+              {this.state.userData.description}
+            </FormControl>
+            <Button
+              onClick={this.updateUserProfile.bind(this, this.state.userData)}
+              appearance="primary"
+            >
+              Update
+            </Button>
+          </FormGroup>
         </Form>
       );
     } else {
@@ -463,6 +526,7 @@ class DescSection extends EditableSection {
       <div className="desc-profile-section section">
         <div className="edit-section">{this.displayIcon()}</div>
         {this.displayFields()}
+        {this.showLoader()}
       </div>
     );
   }
