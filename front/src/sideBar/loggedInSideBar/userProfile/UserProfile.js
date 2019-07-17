@@ -19,6 +19,11 @@ import {
 } from "rsuite";
 import { userProfileFiledMapping as fieldMapping } from "./mappings";
 
+// Adding capitalize function for utility
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+};
+
 const createTags = arr => {
   let tags = [];
   for (let v of arr) {
