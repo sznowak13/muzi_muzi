@@ -193,42 +193,6 @@ export default class UserProfile extends Component {
     return formated;
   }
 
-  toggleEdit(fieldName) {
-    return () => {
-      this.setState({
-        [fieldName]: {
-          ...this.state[fieldName],
-          edit: !this.state[fieldName].edit
-        }
-      });
-    };
-  }
-
-  checkIfEdit(fieldName, label) {
-    let body;
-    let labelElement = <Col className="person-info-title">{label}</Col>;
-    if (this.state[fieldName].edit) {
-      body = (
-        <InputGroup style={{ width: 300 }} onBlur={this.toggleEdit(fieldName)}>
-          <Input value={this.state[fieldName].value} />
-          <InputGroup.Button>
-            <Icon icon="check-square" />
-          </InputGroup.Button>
-        </InputGroup>
-      );
-    } else {
-      body = (
-        <Row>
-          <Col>{this.formatFieldDisplay(fieldName)}</Col>
-          <Col className="edit-button" onClick={this.toggleEdit(fieldName)}>
-            Edit
-          </Col>
-        </Row>
-      );
-    }
-    return [<Row>{labelElement}</Row>, body];
-  }
-
   showLoader() {
     if (this.state.loading) {
       return (
