@@ -321,32 +321,25 @@ class DetailSection extends EditableSection {
   constructor(props) {
     super(props);
     this.state = {
+      userData: props,
       allProfessions: [],
       allGenres: []
     };
     this.handlePickerUpdate = this.handlePickerUpdate.bind(this);
+  }
+  componentDidMount() {
     this.handlePickerUpdate("professions", "allProfessions");
     this.handlePickerUpdate("genres", "allGenres");
-  }
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.email !== prevProps.email ||
-      this.props.city !== prevProps.city ||
-      this.props.genres !== prevProps.genres ||
-      this.props.professions !== prevProps.professions
-    ) {
-      this.setState({ ...this.state, ...this.props });
-    }
   }
 
   handlePickerUpdate(resource, stateData) {
     if (this.state[stateData].length === 0) {
       this.setState({ [stateData]: [] });
-      fetch(`http://127.0.0.1:8000/${resource}/`)
+      fetch(`http://127.0.0.1:8000/${resource}/all`)
         .then(res => res.json())
         .then(json =>
           this.setState({
-            [stateData]: json.results
+            [stateData]: json
           })
         );
     }
