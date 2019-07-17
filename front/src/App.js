@@ -11,11 +11,17 @@ import EmailVerification from "./sideBar/loggedOutSideBar/EmailVerification";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import AddMusicianAdvert from "./sideBar/loggedInSideBar/adverts/AddMusicianAdvert";
 import UserProfile from "./sideBar/loggedInSideBar/userProfile/UserProfile";
+import UserAdverts from "./sideBar/loggedInSideBar/adverts/UserAdverts";
 
 class App extends Component {
   checkAuthorizedRouting() {
     if (localStorage.getItem("muzi_muzi_token")) {
-      return <Route path="/my-profile" component={UserProfile} />;
+      return (
+        <div>
+          <Route path="/my-adverts" component={UserAdverts} />
+          <Route path="/my-profile" component={UserProfile} />
+        </div>
+      );
     }
   }
 
