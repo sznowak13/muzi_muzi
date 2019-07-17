@@ -89,7 +89,7 @@ export default class AddMusicianAdvert extends Component {
           showIcon
           type="success"
           title="Success"
-          description="Yoohoo you added new advert"
+          description="Your advert was successfuly added"
         />
       );
     }
