@@ -193,7 +193,6 @@ div.item6 {
   font-size: 15px;
 }
 
-
 .advert-data {
   font-weight: 600;
   font-size: 1em;
@@ -304,7 +303,6 @@ div.row {
 }
 
 .advert-image {
-
 }
 
 .advert-description:hover,
@@ -330,12 +328,11 @@ div.row {
 .advert-photo {
   width: 50%;
   margin-left: 20%;
-
 }
 
 .links:visited,
 .links:hover,
-.links{
+.links {
   text-decoration: none;
   color: #3a4750;
 }
@@ -357,8 +354,8 @@ div.row {
 }
 
 .advert-flexbox {
-  flexDirection: "row";
-  justifyContent: "space-around";
+  flexdirection: "row";
+  justifycontent: "space-around";
   margin: 1%;
   padding: 3%;
 }
@@ -378,10 +375,18 @@ div.row {
   justify-content: center;
 }
 
-.edit-button {
+.icon-button {
   opacity: 0.5;
   cursor: pointer;
   color: green;
+}
+
+.edit-button {
+  color: green;
+}
+
+.cancel-button {
+  color: red;
 }
 
 .edit-section {
@@ -425,4 +430,3 @@ div.row {
   background-color: #3a4750;
   padding: 10px;
 }
-
