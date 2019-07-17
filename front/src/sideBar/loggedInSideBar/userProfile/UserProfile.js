@@ -11,7 +11,12 @@ import {
   Tooltip,
   Whisper,
   Tag,
-  TagGroup
+  TagGroup,
+  FormControl,
+  Form,
+  FormGroup,
+  ControlLabel,
+  TagPicker
 } from "rsuite";
 import { userProfileFiledMapping as fieldMapping } from "./mappings";
 
@@ -30,6 +35,19 @@ class EditableSection extends Component {
       ...this.props,
       edit: false
     };
+    this.toggleEdit = this.toggleEdit.bind(this);
+  }
+
+  toggleEdit() {
+    this.setState({ edit: !this.state.edit });
+  }
+
+  displayIcon() {
+    return this.state.edit ? (
+      <CancelButton onClick={this.toggleEdit} />
+    ) : (
+      <EditButton onClick={this.toggleEdit} />
+    );
   }
 
   formatFieldDisplay(fieldName, label) {
@@ -47,6 +65,47 @@ class EditableSection extends Component {
         {labelSpan}
         {field}
       </div>
+    );
+  }
+
+  formatFieldEdit(fieldName, label) {
+    let field;
+    let labelSpan = (
+      <ControlLabel className="field-label">{label + ": "}</ControlLabel>
+    );
+    let value = this.state[fieldName];
+    if (Array.isArray(value)) {
+      field = (
+        <TagPicker
+          data={this.state.pickerItems[fieldName]}
+          cacheData={this.state.cacheData}
+          value={this.state[fieldName]}
+          style={{ width: 300 }}
+          labelKey={this.state.labelKey}
+          valueKey={this.state.valueKey}
+          onChange={this.handleChange}
+          onSearch={this.handleSearch}
+          onSelect={this.handleSelect}
+          renderMenu={menu => {
+            if (this.state.loading) {
+              return (
+                <p style={{ padding: 4, color: "#999", textAlign: "center" }}>
+                  <Icon icon="spinner" spin /> Loading...
+                </p>
+              );
+            }
+            return menu;
+          }}
+        />
+      );
+    } else {
+      field = <FormControl className="field-value" placeholder={value} />;
+    }
+    return (
+      <FormGroup>
+        {labelSpan}
+        {field}
+      </FormGroup>
     );
   }
 }
@@ -164,7 +223,34 @@ const EditButton = props => (
   >
     <IconButton
       appearance="subtle"
-      icon={<Icon icon="edit2" className="edit-button" size="lg" />}
+      icon={
+        <Icon
+          icon="edit2"
+          className="icon-button edit-button"
+          size="lg"
+          onClick={props.onClick}
+        />
+      }
+    />
+  </Whisper>
+);
+
+const CancelButton = props => (
+  <Whisper
+    placement="left"
+    trigger="hover"
+    speaker={<Tooltip>Cancel editing</Tooltip>}
+  >
+    <IconButton
+      appearance="subtle"
+      icon={
+        <Icon
+          icon="close"
+          className="icon-button cancel-button"
+          size="lg"
+          onClick={props.onClick}
+        />
+      }
     />
   </Whisper>
 );
