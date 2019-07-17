@@ -9,7 +9,8 @@ import {
   HelpBlock,
   Button,
   Schema,
-  Loader
+  Loader,
+  Message
 } from "rsuite";
 
 export default class AddMusicianAdvert extends Component {
@@ -32,7 +33,8 @@ export default class AddMusicianAdvert extends Component {
         errors: {},
         data: {}
       },
-      loading: false
+      loading: false,
+      responseReceived: false
     };
     this.handleProfessionsUpdate = this.handleProfessionsUpdate.bind(this);
     this.handleGenresUpdate = this.handleGenresUpdate.bind(this);
@@ -43,6 +45,7 @@ export default class AddMusicianAdvert extends Component {
     this.setState({ loading: true });
     this.sendMusicianAdvertData(fetch, this.state.formData).then(result => {
       this.setState({
+        responseReceived: true,
         loading: false,
         sendDataResult: result,
         formData: {
@@ -54,6 +57,28 @@ export default class AddMusicianAdvert extends Component {
         }
       });
     });
+  }
+
+  showFeedbackMessage() {
+    if (this.state.sendDataResult === "failed") {
+      return (
+        <Message
+          showIcon
+          type="error"
+          title="Error"
+          description="Sending data failed"
+        />
+      );
+    } else {
+      return (
+        <Message
+          showIcon
+          type="success"
+          title="Success"
+          description="Yoohoo you added new advert"
+        />
+      );
+    }
   }
 
   showLoader() {
@@ -100,7 +125,6 @@ export default class AddMusicianAdvert extends Component {
       json = await response.json();
       result.errors = json;
     }
-    console.log(result);
     return result;
   };
 
@@ -144,6 +168,7 @@ export default class AddMusicianAdvert extends Component {
     const { formData } = this.state;
     return (
       <div>
+        {this.state.responseReceived ? this.showFeedbackMessage() : <div />}
         <h1 style={{ color: "#f6c90e" }}>Add Musician Advert</h1>
         <Form
           layout="inline"
