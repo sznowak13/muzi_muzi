@@ -56,6 +56,7 @@ export default class AddMusicianAdvert extends Component {
       this.setState({ loading: true });
       this.sendMusicianAdvertData(fetch, this.state.formData).then(result => {
         this.setState({
+          showError: false,
           responseReceived: true,
           loading: false,
           sendDataResult: result,
