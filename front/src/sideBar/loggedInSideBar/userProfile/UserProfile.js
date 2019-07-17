@@ -25,10 +25,13 @@ String.prototype.capitalize = function() {
 };
 
 const createTags = arr => {
-  let tags = [];
-  for (let v of arr) {
-    tags.push(<Tag color="cyan">{v}</Tag>);
-  }
+  let tags = arr.map((v, i) => {
+    return (
+      <Tag key={i} color="cyan">
+        {v}
+      </Tag>
+    );
+  });
   return <TagGroup>{tags}</TagGroup>;
 };
 
