@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
-import userphoto from "../../resources/userphoto.png";
-import moment from "moment";
-import { Link } from "react-router-dom";
+import { AdvBody } from "../../sideBar/loggedInSideBar/adverts/AdvertBody";
 
 export default class AdvertsSneakPeak extends Component {
   constructor(props) {
