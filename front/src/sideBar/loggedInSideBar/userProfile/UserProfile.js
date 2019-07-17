@@ -35,6 +35,8 @@ const createTags = arr => {
   return <TagGroup>{tags}</TagGroup>;
 };
 
+const noneditableFields = ["username", "email"];
+
 class EditableSection extends Component {
   constructor(props) {
     super(props);
@@ -77,6 +79,7 @@ class EditableSection extends Component {
 
   formatFieldEdit(fieldName, label) {
     let field;
+    let isDisabled = noneditableFields.includes(fieldName);
     let labelSpan = (
       <ControlLabel className="field-label">{label + ": "}</ControlLabel>
     );
