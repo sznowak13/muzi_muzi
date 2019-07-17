@@ -56,6 +56,7 @@ export default class AddMusicianAdvert extends Component {
       this.setState({ loading: true });
       this.sendMusicianAdvertData(fetch, this.state.formData).then(result => {
         this.setState({
+          responseReceived: true,
           loading: false,
           sendDataResult: result,
           formData: {
@@ -66,9 +67,6 @@ export default class AddMusicianAdvert extends Component {
             genre: ""
           }
         });
-        if (this.state.sendDataResult.result === "failed") {
-          this.setState({ responseReceived: true });
-        }
       });
     }
   }
