@@ -2,6 +2,7 @@ from .models import Users
 from rest_framework import serializers
 from adverts.models import Advert
 from bands.models import Band
+from muzi_muzi.models import Genre, Profession, City
 from rest_framework.serializers import ValidationError
 from django.contrib.auth.hashers import make_password
 
@@ -9,10 +10,12 @@ from django.contrib.auth.hashers import make_password
 class UsersSerializer(serializers.HyperlinkedModelSerializer):
     adverts = serializers.HyperlinkedRelatedField(view_name='advert-detail', many=True, queryset=Advert.objects.all())
     bands = serializers.HyperlinkedRelatedField(view_name='band-detail', many=True, queryset=Band.objects.all())
-    professions = serializers.StringRelatedField(many=True)
-    genres = serializers.StringRelatedField(many=True)
-    city = serializers.StringRelatedField()
+    professions = serializers.SlugRelatedField(many=True, queryset=Profession.objects.all(), slug_field="name")
+    genres = serializers.SlugRelatedField(many=True, queryset=Genre.objects.all(), slug_field="name")
+    city = serializers.SlugRelatedField(queryset=City.objects.all(), slug_field="name")
     role = serializers.StringRelatedField()
+    username = serializers.StringRelatedField()
+    email = serializers.StringRelatedField()
 
     class Meta:
         model = Users
