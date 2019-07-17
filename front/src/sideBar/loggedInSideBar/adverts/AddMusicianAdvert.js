@@ -34,7 +34,9 @@ export default class AddMusicianAdvert extends Component {
         data: {}
       },
       loading: false,
-      responseReceived: false
+      responseReceived: false,
+      errorPlacement: "topRight",
+      showError: false
     };
     this.handleProfessionsUpdate = this.handleProfessionsUpdate.bind(this);
     this.handleGenresUpdate = this.handleGenresUpdate.bind(this);
@@ -42,23 +44,33 @@ export default class AddMusicianAdvert extends Component {
   }
 
   submit() {
-    this.setState({ loading: true });
-    this.sendMusicianAdvertData(fetch, this.state.formData).then(result => {
-      this.setState({
-        loading: false,
-        sendDataResult: result,
-        formData: {
-          title: "",
-          description: "",
-          city: "",
-          profession: "",
-          genre: ""
+    if (
+      this.state.formData.title === "" ||
+      this.state.formData.description === "" ||
+      this.state.formData.city === "" ||
+      this.state.formData.profession === "" ||
+      this.state.formData.genre === ""
+    ) {
+      this.setState({ showError: true });
+    } else {
+      this.setState({ loading: true });
+      this.sendMusicianAdvertData(fetch, this.state.formData).then(result => {
+        this.setState({
+          loading: false,
+          sendDataResult: result,
+          formData: {
+            title: "",
+            description: "",
+            city: "",
+            profession: "",
+            genre: ""
+          }
+        });
+        if (this.state.sendDataResult.result === "failed") {
+          this.setState({ responseReceived: true });
         }
       });
-      if (this.state.sendDataResult.result === "failed") {
-        this.setState({ responseReceived: true });
-      }
-    });
+    }
   }
 
   showFeedbackMessage() {
@@ -185,10 +197,12 @@ export default class AddMusicianAdvert extends Component {
             <FormGroup>
               <ControlLabel>Title</ControlLabel>
               <FormControl name="title" />
+              <RequiredFieldMessage msgError={this.state.showError} />
             </FormGroup>
             <FormGroup>
               <ControlLabel>City</ControlLabel>
               <FormControl name="city" />
+              <RequiredFieldMessage msgError={this.state.showError} />
             </FormGroup>
           </div>
           <div className="flex-space">
@@ -224,6 +238,7 @@ export default class AddMusicianAdvert extends Component {
                   return menu;
                 }}
               />
+              <RequiredFieldMessage msgError={this.state.showError} />
             </FormGroup>
             <FormGroup>
               <ControlLabel style={{ marginRight: 15 }}>Genre</ControlLabel>
@@ -255,6 +270,7 @@ export default class AddMusicianAdvert extends Component {
                   return menu;
                 }}
               />
+              <RequiredFieldMessage msgError={this.state.showError} />
             </FormGroup>
           </div>
           <div className="flex-space">
@@ -267,6 +283,7 @@ export default class AddMusicianAdvert extends Component {
                 componentClass="textarea"
               />
               <HelpBlock tooltip>Write few sentences about you</HelpBlock>
+              <RequiredFieldMessage msgError={this.state.showError} />
             </FormGroup>
           </div>
           <Button color="green" onClick={this.submit}>
@@ -279,20 +296,31 @@ export default class AddMusicianAdvert extends Component {
   }
 }
 
+const RequiredFieldMessage = props => {
+  return (
+    <div
+      style={{
+        display: props.msgError ? "block" : "none",
+        color: "red",
+        marginTop: 6
+      }}
+    >
+      {props.msgError ? "This field is required" : null}
+    </div>
+  );
+};
+
 const { StringType } = Schema.Types;
 const musicianAdvertModel = Schema.Model({
   title: StringType()
     .minLength(10, "The field cannot be less than 10 characters")
-    .maxLength(100, "The field cannot be greater than 100 characters")
-    .isRequired("Title is required"),
+    .maxLength(100, "The field cannot be greater than 100 characters"),
   description: StringType()
     .minLength(10, "The field cannot be less than 10 characters")
-    .maxLength(1000, "The field cannot be greater than 1000 characters")
-    .isRequired("Description is required"),
+    .maxLength(1000, "The field cannot be greater than 1000 characters"),
   city: StringType()
     .minLength(1, "The field cannot be less than 1 characters")
-    .maxLength(100, "The field cannot be greater than 100 characters")
-    .isRequired("City is required"),
+    .maxLength(100, "The field cannot be greater than 100 characters"),
   genre: StringType().isRequired("Genre is required"),
   profession: StringType().isRequired("Profession is required")
 });
