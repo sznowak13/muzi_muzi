@@ -267,12 +267,30 @@ class GeneralSection extends EditableSection {
     }
   }
 
+  displayFields() {
+    if (this.state.edit) {
+      return (
+        <Form fluid>
+          {this.formatFieldEdit("firstName", "First name")}
+          {this.formatFieldEdit("lastName", "Last name")}
+          {this.formatFieldEdit("username", "Username")}
+        </Form>
+      );
+    } else {
+      return (
+        <div>
+          {this.formatFieldDisplay("firstName", "First name")}
+          {this.formatFieldDisplay("lastName", "Last name")}
+          {this.formatFieldDisplay("username", "Username")}
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div className="main-profile-section section">
-        <div className="edit-section">
-          <EditButton />
-        </div>
+        <div className="edit-section">{this.displayIcon()}</div>
         <div className="flex-center">
           <Image
             width="200"
@@ -282,15 +300,23 @@ class GeneralSection extends EditableSection {
             roundedCircle
           />
         </div>
-        {this.formatFieldDisplay("firstName", "First name")}
-        {this.formatFieldDisplay("lastName", "Last name")}
-        {this.formatFieldDisplay("username", "Username")}
+        {this.displayFields()}
       </div>
     );
   }
 }
 
 class DetailSection extends EditableSection {
+  constructor(props) {
+    super(props);
+    this.state = {
+      allProfessions: [],
+      allGenres: []
+    };
+    this.handlePickerUpdate = this.handlePickerUpdate.bind(this);
+    this.handlePickerUpdate("professions", "allProfessions");
+    this.handlePickerUpdate("genres", "allGenres");
+  }
   componentDidUpdate(prevProps) {
     if (
       this.props.email !== prevProps.email ||
@@ -298,20 +324,102 @@ class DetailSection extends EditableSection {
       this.props.genres !== prevProps.genres ||
       this.props.professions !== prevProps.professions
     ) {
-      this.setState({ ...this.props, edit: this.state.edit });
+      this.setState({ ...this.state, ...this.props });
+    }
+  }
+
+  handlePickerUpdate(resource, stateData) {
+    if (this.state[stateData].length === 0) {
+      this.setState({ [stateData]: [] });
+      fetch(`http://127.0.0.1:8000/${resource}/`)
+        .then(res => res.json())
+        .then(json =>
+          this.setState({
+            [stateData]: json.results
+          })
+        );
+    }
+  }
+
+  displayFields() {
+    if (this.state.edit) {
+      return (
+        <Form fluid>
+          {this.formatFieldEdit("email", "Email")}
+          {this.formatFieldEdit("city", "Location")}
+          <div className="field-group">
+            <ControlLabel className="field-label">Genres:</ControlLabel>
+            <TagPicker
+              data={this.state.allGenres}
+              style={{ justifyContent: "initial" }}
+              className="field-value"
+              defaultValue={this.state.genres}
+              labelKey="name"
+              valueKey="name"
+              renderMenu={menu => {
+                if (this.state.allGenres.length === 0) {
+                  return (
+                    <p
+                      style={{
+                        padding: 4,
+                        color: "#999",
+                        textAlign: "center"
+                      }}
+                    >
+                      <Icon icon="spinner" spin /> Please Wait...
+                    </p>
+                  );
+                }
+                return menu;
+              }}
+            />
+          </div>
+          <div className="field-group">
+            <ControlLabel className="field-label">Professions:</ControlLabel>
+            <TagPicker
+              data={this.state.allProfessions}
+              style={{ justifyContent: "initial" }}
+              className="field-value"
+              defaultValue={this.state.professions}
+              labelKey="name"
+              valueKey="name"
+              renderMenu={menu => {
+                if (this.state.allProfessions.length === 0) {
+                  return (
+                    <p
+                      style={{
+                        padding: 4,
+                        color: "#999",
+                        textAlign: "center"
+                      }}
+                    >
+                      <Icon icon="spinner" spin /> Please Wait...
+                    </p>
+                  );
+                }
+                return menu;
+              }}
+            />
+          </div>
+        </Form>
+      );
+    } else {
+      return (
+        <div>
+          {this.formatFieldDisplay("email", "Email")}
+          {this.formatFieldDisplay("city", "Location")}
+          {this.formatFieldDisplay("genres", "Genres")}
+          {this.formatFieldDisplay("professions", "Professions")}
+        </div>
+      );
     }
   }
 
   render() {
     return (
       <div className="additional-profile-section section">
-        <div className="edit-section">
-          <EditButton />
-        </div>
-        {this.formatFieldDisplay("email", "Email")}
-        {this.formatFieldDisplay("city", "City")}
-        {this.formatFieldDisplay("genres", "Genres")}
-        {this.formatFieldDisplay("professions", "Professions")}
+        <div className="edit-section">{this.displayIcon()}</div>
+        {this.displayFields()}
       </div>
     );
   }
@@ -320,16 +428,31 @@ class DetailSection extends EditableSection {
 class DescSection extends EditableSection {
   componentDidUpdate(prevProps) {
     if (this.props.description !== prevProps.description) {
-      this.setState({ ...this.props, edit: this.state.edit });
+      this.setState({ ...this.state, ...this.props });
     }
   }
+
+  displayFields() {
+    if (this.state.edit) {
+      return (
+        <Form fluid>
+          <ControlLabel className="field-label">Description</ControlLabel>
+          <FormControl
+            componentClass="textarea"
+            defaultValue={this.state.description}
+          />
+        </Form>
+      );
+    } else {
+      return <div>{this.formatFieldDisplay("description", "Description")}</div>;
+    }
+  }
+
   render() {
     return (
       <div className="desc-profile-section section">
-        <div className="edit-section">
-          <EditButton />
-        </div>
-        {this.formatFieldDisplay("description", "Description")}
+        <div className="edit-section">{this.displayIcon()}</div>
+        {this.displayFields()}
       </div>
     );
   }
