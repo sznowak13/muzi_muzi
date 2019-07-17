@@ -42,7 +42,17 @@ export default class AddMusicianAdvert extends Component {
   submit() {
     this.setState({ loading: true });
     this.sendMusicianAdvertData(fetch, this.state.formData).then(result => {
-      this.setState({ loading: false, sendDataResult: result });
+      this.setState({
+        loading: false,
+        sendDataResult: result,
+        formData: {
+          title: "",
+          description: "",
+          city: "",
+          profession: "",
+          genre: ""
+        }
+      });
     });
   }
 
@@ -235,6 +245,7 @@ export default class AddMusicianAdvert extends Component {
           <Button color="green" onClick={this.submit}>
             Submit
           </Button>
+          {this.showLoader()}
         </Form>
       </div>
     );
