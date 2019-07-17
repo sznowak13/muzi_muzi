@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import { Image } from "react-bootstrap";
 import {
   Input,
-  InputGroup,
   Icon,
   IconButton,
+  Button,
   Loader,
-  Col,
-  Row,
   Tooltip,
   Whisper,
   Tag,
@@ -16,7 +14,8 @@ import {
   Form,
   FormGroup,
   ControlLabel,
-  TagPicker
+  TagPicker,
+  Notification
 } from "rsuite";
 import { userProfileFiledMapping as fieldMapping } from "./mappings";
 
