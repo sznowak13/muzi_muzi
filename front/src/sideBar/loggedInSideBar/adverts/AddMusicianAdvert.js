@@ -12,6 +12,7 @@ import {
   Loader,
   Message
 } from "rsuite";
+import { Redirect } from "react-router-dom";
 
 export default class AddMusicianAdvert extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ export default class AddMusicianAdvert extends Component {
         errors: {},
         data: {}
       },
+      redirect: false,
       loading: false,
       responseReceived: false,
       errorPlacement: "topRight",
@@ -66,9 +68,11 @@ export default class AddMusicianAdvert extends Component {
             city: "",
             profession: "",
             genre: ""
-          }
+          },
+          redirect: true
         });
       });
+      return <Redirect to="/" />;
     }
   }
 
@@ -179,119 +183,125 @@ export default class AddMusicianAdvert extends Component {
     const { professions } = this.state;
     const { genres } = this.state;
     const { formData } = this.state;
-    return (
-      <div>
-        {this.state.responseReceived ? this.showFeedbackMessage() : <div />}
-        <h1 style={{ color: "#f6c90e" }}>Add Musician Advert</h1>
-        <Form
-          layout="inline"
-          className="add-advert-container"
-          model={musicianAdvertModel}
-          formValue={formData}
-          onChange={formValue => {
-            this.setState({ formData: formValue });
-          }}
-        >
-          <div className="flex-space">
-            <FormGroup>
-              <ControlLabel>Title</ControlLabel>
-              <FormControl name="title" />
-              <RequiredFieldMessage msgError={this.state.showError} />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>City</ControlLabel>
-              <FormControl name="city" />
-              <RequiredFieldMessage msgError={this.state.showError} />
-            </FormGroup>
-          </div>
-          <div className="flex-space">
-            <FormGroup>
-              <ControlLabel style={{ marginRight: 15 }}>
-                Profession
-              </ControlLabel>
-              <SelectPicker
-                data={professions}
-                placeholder="Select Profession"
-                style={{ width: 224 }}
-                onOpen={this.handleProfessionsUpdate}
-                onSearch={this.handleProfessionsUpdate}
-                onChange={value =>
-                  this.setState({
-                    formData: { ...this.state.formData, profession: value }
-                  })
-                }
-                renderMenu={menu => {
-                  if (professions.length === 0) {
-                    return (
-                      <p
-                        style={{
-                          padding: 4,
-                          color: "#999",
-                          textAlign: "center"
-                        }}
-                      >
-                        <Icon icon="spinner" spin /> Please Wait...
-                      </p>
-                    );
+    const { redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to="/" />;
+    } else {
+      return (
+        <div>
+          {this.state.responseReceived ? this.showFeedbackMessage() : <div />}
+          <h1 style={{ color: "#f6c90e" }}>Add Musician Advert</h1>
+          <Form
+            layout="inline"
+            className="add-advert-container"
+            model={musicianAdvertModel}
+            formValue={formData}
+            onChange={formValue => {
+              this.setState({ formData: formValue });
+            }}
+          >
+            <div className="flex-space">
+              <FormGroup>
+                <ControlLabel>Title</ControlLabel>
+                <FormControl name="title" />
+                <RequiredFieldMessage msgError={this.state.showError} />
+              </FormGroup>
+              <FormGroup>
+                <ControlLabel>City</ControlLabel>
+                <FormControl name="city" />
+                <RequiredFieldMessage msgError={this.state.showError} />
+              </FormGroup>
+            </div>
+            <div className="flex-space">
+              <FormGroup>
+                <ControlLabel style={{ marginRight: 15 }}>
+                  Profession
+                </ControlLabel>
+                <SelectPicker
+                  data={professions}
+                  placeholder="Select Profession"
+                  style={{ width: 224 }}
+                  onOpen={this.handleProfessionsUpdate}
+                  onSearch={this.handleProfessionsUpdate}
+                  onChange={value =>
+                    this.setState({
+                      formData: { ...this.state.formData, profession: value }
+                    })
                   }
-                  return menu;
-                }}
-              />
-              <RequiredFieldMessage msgError={this.state.showError} />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel style={{ marginRight: 15 }}>Genre</ControlLabel>
-              <SelectPicker
-                data={genres}
-                placeholder="Select Genre"
-                style={{ width: 224 }}
-                onOpen={this.handleGenresUpdate}
-                onSearch={this.handleGenresUpdate}
-                onChange={value =>
-                  this.setState({
-                    formData: { ...this.state.formData, genre: value }
-                  })
-                }
-                renderMenu={menu => {
-                  if (genres.length === 0) {
-                    return (
-                      <p
-                        style={{
-                          padding: 4,
-                          color: "#999",
-                          textAlign: "center"
-                        }}
-                      >
-                        <Icon icon="spinner" spin /> Please Wait...
-                      </p>
-                    );
+                  renderMenu={menu => {
+                    if (professions.length === 0) {
+                      return (
+                        <p
+                          style={{
+                            padding: 4,
+                            color: "#999",
+                            textAlign: "center"
+                          }}
+                        >
+                          <Icon icon="spinner" spin /> Please Wait...
+                        </p>
+                      );
+                    }
+                    return menu;
+                  }}
+                />
+                <RequiredFieldMessage msgError={this.state.showError} />
+              </FormGroup>
+              <FormGroup>
+                <ControlLabel style={{ marginRight: 15 }}>Genre</ControlLabel>
+                <SelectPicker
+                  data={genres}
+                  placeholder="Select Genre"
+                  style={{ width: 224 }}
+                  onOpen={this.handleGenresUpdate}
+                  onSearch={this.handleGenresUpdate}
+                  onChange={value =>
+                    this.setState({
+                      formData: { ...this.state.formData, genre: value }
+                    })
                   }
-                  return menu;
-                }}
-              />
-              <RequiredFieldMessage msgError={this.state.showError} />
-            </FormGroup>
-          </div>
-          <div className="flex-space">
-            <FormGroup>
-              <ControlLabel>Description</ControlLabel>
-              <FormControl
-                style={{ width: 600 }}
-                rows={4}
-                name="description"
-                componentClass="textarea"
-              />
-              <HelpBlock tooltip>Write few sentences about you</HelpBlock>
-              <RequiredFieldMessage msgError={this.state.showError} />
-            </FormGroup>
-          </div>
-          <Button color="green" onClick={this.submit}>
-            Submit
-          </Button>
-          {this.showLoader()}
-        </Form>
-      </div>
-    );
+                  renderMenu={menu => {
+                    if (genres.length === 0) {
+                      return (
+                        <p
+                          style={{
+                            padding: 4,
+                            color: "#999",
+                            textAlign: "center"
+                          }}
+                        >
+                          <Icon icon="spinner" spin /> Please Wait...
+                        </p>
+                      );
+                    }
+                    return menu;
+                  }}
+                />
+                <RequiredFieldMessage msgError={this.state.showError} />
+              </FormGroup>
+            </div>
+            <div className="flex-space">
+              <FormGroup>
+                <ControlLabel>Description</ControlLabel>
+                <FormControl
+                  style={{ width: 600 }}
+                  rows={4}
+                  name="description"
+                  componentClass="textarea"
+                />
+                <HelpBlock tooltip>Write few sentences about you</HelpBlock>
+                <RequiredFieldMessage msgError={this.state.showError} />
+              </FormGroup>
+            </div>
+            <Button color="green" onClick={this.submit}>
+              Submit
+            </Button>
+            {this.showLoader()}
+          </Form>
+        </div>
+      );
+    }
   }
 }
 
@@ -301,7 +311,8 @@ const RequiredFieldMessage = props => {
       style={{
         display: props.msgError ? "block" : "none",
         color: "red",
-        marginTop: 6
+        marginTop: 6,
+        fontSize: 12
       }}
     >
       {props.msgError ? "This field is required" : null}
