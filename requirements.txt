@@ -10,7 +10,7 @@ Django==2.2.3
 django-cors-headers==3.0.1
 django-rest-framework==0.1.0
 django-sites==0.10
-djangorestframework==3.9.4
+djangorestframework==3.11.2
 idna==2.8
 jedi==0.13.3
 more-itertools==7.0.0
