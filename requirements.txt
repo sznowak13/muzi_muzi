@@ -22,7 +22,7 @@ pluggy==0.11.0
 prompt-toolkit==2.0.9
 psycopg2==2.8.2
 ptyprocess==0.6.0
-py==1.8.0
+py==1.10.0
 pytest==4.5.0
 pytest-django==3.4.8
 python3-openid==3.1.0
