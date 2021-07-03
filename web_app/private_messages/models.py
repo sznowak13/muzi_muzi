@@ -17,6 +17,7 @@ class PrivateMessages(models.Model):
 
     class Meta:
         db_table = 'messages'
+        verbose_name_plural = "Private messages"
 
 
 #  --- Views ---

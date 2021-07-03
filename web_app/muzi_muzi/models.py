@@ -32,6 +32,7 @@ class City(models.Model):
 
     class Meta:
         db_table = 'city'
+        verbose_name_plural = "Cities"
 
 
 class Genre(models.Model):
@@ -54,6 +55,7 @@ class Videos(models.Model):
 
     class Meta:
         db_table = 'videos'
+        verbose_name_plural = "Videos"
 
 
 

@@ -23,6 +23,7 @@ class Users(AbstractUser):
 
     class Meta:
         db_table = 'users'
+        verbose_name_plural = "Users"
 
 
 class VerificationToken(TokenModel):
